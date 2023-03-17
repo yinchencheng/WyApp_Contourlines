@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<Specifications xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <SaveOrigalImage>true</SaveOrigalImage>
+  <SaveDefeatImage>true</SaveDefeatImage>
+  <SaveCropImage>false</SaveCropImage>
+  <CropImagelength>500</CropImagelength>
+  <MeanImageEnabled>false</MeanImageEnabled>
+  <DetectionRect2Num>55</DetectionRect2Num>
+  <PixelResolutionRow>0.1</PixelResolutionRow>
+  <PixelResolutionColum>0.1</PixelResolutionColum>
+  <meanImageEnum>0</meanImageEnum>
+</Specifications>

@@ -1,0 +1,77 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Windows.Forms;
+using WY_App.Utility;
+
+namespace WY_App
+{
+    public partial class 卡尺设置 : Form
+    {
+        public 卡尺设置()
+        {
+            InitializeComponent();
+        }
+
+        private void 卡尺工具设置_Load(object sender, EventArgs e)
+        {
+            //num_MeasureLength1.Value = Parameters.detectionSpec.MeasureLength1[MainForm.baseNum];
+            //num_MeasureLength2.Value = Parameters.detectionSpec.MeasureLength2[MainForm.baseNum];
+            //num_MeasureSigma.Value = (decimal)Parameters.detectionSpec.MeasureSigma[MainForm.baseNum];
+            //num_MeasureThreshold.Value = Parameters.detectionSpec.MeasureThreshold[MainForm.baseNum];
+            //num_MeasureTransition.Text = Parameters.detectionSpec.MeasureTransition[MainForm.baseNum];
+
+        }
+
+        private void btn_Close_System_Click(object sender, EventArgs e)
+        {
+            this.Close(); 
+        }
+
+        private void 保存_Click(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            switch (相机检测设置.baseNum)
+            {
+                case 0:
+                    {
+                        相机检测设置.showXBase(sender, e);
+                        break;
+                    }
+                case 1:
+                    {
+                        相机检测设置.showY1Base(sender, e);
+                        break;
+                    }
+                case 2:
+                    {
+                        相机检测设置.showY2Base(sender, e);
+                        break;
+                    }
+            }
+            
+        }
+        Point downPoint;
+        private void panel4_MouseDown(object sender, MouseEventArgs e)
+        {
+            downPoint = new Point(e.X, e.Y);
+        }
+
+        private void panel4_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                this.Location = new Point(this.Location.X + e.X - downPoint.X,
+                    this.Location.Y + e.Y - downPoint.Y);
+            }
+        }
+    }
+}
