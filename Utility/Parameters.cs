@@ -76,6 +76,11 @@ namespace WY_App.Utility
             public double Colum1;
             public double Row2;
             public double Colum2;
+            public int Length1;
+            public int Length2;
+            public int 阈值;
+            public string 极性;
+            public double simga;
         }
         public struct Location
         {
@@ -88,7 +93,7 @@ namespace WY_App.Utility
         }
         public class CursorLocation
         {
-            public Location[] Location = new Location[100];
+            public Location[] Location = new Location[204];
             public CursorLocation()
             {
                 for (int i = 0; i < 100; i++)
@@ -110,7 +115,14 @@ namespace WY_App.Utility
             public HTuple Row2;
             public HTuple Colum2;
         }
+        public struct Cricle
+        {
+            public double Row;
 
+            public double Colum;
+
+            public double Radius;
+        }
         public struct Rect2
         {
             public double Row;
@@ -127,6 +139,8 @@ namespace WY_App.Utility
         {
             public Rect1[] baseRect1 = new Rect1[3];
             public Rect2[] decetionRect2 = new Rect2[100];
+            public Cricle[] decetionCircle = new Cricle[4];
+            public Cricle BasePoint = new Cricle();
             public DetectionSpec()
             {                
                 for (int i = 0; i < 3; i++)
@@ -155,6 +169,8 @@ namespace WY_App.Utility
 
         public class Specifications
         {
+            public Rect1 检测矩形 = new Rect1();
+             
             public bool SaveOrigalImage;
 
             public bool SaveDefeatImage;
@@ -165,7 +181,11 @@ namespace WY_App.Utility
 
             public bool MeanImageEnabled;
 
+            public bool ImageVerifyEnabled;
+
             public int DetectionRect2Num;
+
+            public int DetectionCricleNum;
 
             /// <summary>
             ///Y方向放大比例
@@ -183,12 +203,14 @@ namespace WY_App.Utility
                 PixelResolutionRow = 1;
                 PixelResolutionColum = 1;
                 SaveOrigalImage = false;
+                ImageVerifyEnabled = false;
                 SaveDefeatImage = false;
                 SaveCropImage = false;
                 CropImagelength = 500;
                 MeanImageEnabled = false;
                 meanImageEnum = 0;
                 DetectionRect2Num = 40;
+                DetectionCricleNum = 0;
             }
         }
         public static Specifications specifications = new Specifications();
@@ -278,7 +300,7 @@ namespace WY_App.Utility
             /// path
             /// </summary>
             public string productName;
-
+            public string DeviceID;
             /// <summary>
             /// 联机参数设置
             /// </summary>
@@ -321,6 +343,7 @@ namespace WY_App.Utility
                 ImagePath = @"D:\VisionDetect\InspectImage\";
                 ImageSavePath = @"D:\Image\";
                 productName = "55";
+                DeviceID = "";
 ;           }
         }
 
@@ -332,14 +355,16 @@ namespace WY_App.Utility
             public string Completion;
             public string HeartBeatAdd;
             public string StartAdd;
-           
+            public string SNReadAdd;
+
             public PLCParams()
             {
                 Trigger_Detection = "D100";
                 Completion = "D100";
                 HeartBeatAdd = "D102";
-                HeartBeatAdd = "D104";                               
-            }
+                HeartBeatAdd = "D104";
+                SNReadAdd = "D106";
+        }
         }
 
         public class Counts

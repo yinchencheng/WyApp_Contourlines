@@ -2,7 +2,8 @@
 <Users>
   <User>
     <Name>开发员1</Name>
-    <Password></Password>
+    <Password>
+    </Password>
     <Permission>开发员</Permission>
   </User>
   <User>
@@ -20,5 +21,16 @@
     <Password>
     </Password>
     <Permission>访客</Permission>
+  </User>
+  <User>
+    <Name>1234</Name>
+    <Password>
+    </Password>
+    <Permission>访客</Permission>
+  </User>
+  <User>
+    <Name>开发员2</Name>
+    <Password>1234</Password>
+    <Permission>开发员</Permission>
   </User>
 </Users>

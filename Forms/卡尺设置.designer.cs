@@ -225,11 +225,6 @@
             0,
             0,
             0});
-            this.num_MeasureThreshold.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
             this.num_MeasureThreshold.Name = "num_MeasureThreshold";
             this.num_MeasureThreshold.Size = new System.Drawing.Size(101, 21);
             this.num_MeasureThreshold.TabIndex = 30;
@@ -248,11 +243,6 @@
             0,
             0});
             this.num_MeasureSigma.Location = new System.Drawing.Point(71, 74);
-            this.num_MeasureSigma.Minimum = new decimal(new int[] {
-            4,
-            0,
-            0,
-            65536});
             this.num_MeasureSigma.Name = "num_MeasureSigma";
             this.num_MeasureSigma.Size = new System.Drawing.Size(101, 21);
             this.num_MeasureSigma.TabIndex = 29;
@@ -275,11 +265,6 @@
             0,
             0,
             0});
-            this.num_MeasureLength2.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
             this.num_MeasureLength2.Name = "num_MeasureLength2";
             this.num_MeasureLength2.Size = new System.Drawing.Size(101, 21);
             this.num_MeasureLength2.TabIndex = 28;
@@ -299,11 +284,6 @@
             this.num_MeasureLength1.Location = new System.Drawing.Point(71, 20);
             this.num_MeasureLength1.Maximum = new decimal(new int[] {
             1000,
-            0,
-            0,
-            0});
-            this.num_MeasureLength1.Minimum = new decimal(new int[] {
-            1,
             0,
             0,
             0});

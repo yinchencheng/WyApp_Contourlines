@@ -167,12 +167,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Forms\相机配置界面.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\相机配置界面.designer.cs">
-      <DependentUpon>相机配置界面.cs</DependentUpon>
-    </Compile>
     <Compile Include="Forms\切换产品.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -184,6 +178,12 @@
     </Compile>
     <Compile Include="Forms\寻边设置.designer.cs">
       <DependentUpon>寻边设置.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\注册机器.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\注册机器.designer.cs">
+      <DependentUpon>注册机器.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\相机检测设置.cs">
       <SubType>Form</SubType>
@@ -238,14 +238,10 @@
     <Compile Include="UserControls\卡尺参数设置.Designer.cs">
       <DependentUpon>卡尺参数设置.cs</DependentUpon>
     </Compile>
-    <Compile Include="Utility\BalserCamera.cs" />
     <Compile Include="Utility\Constructor.cs" />
     <Compile Include="Utility\Halcon.cs" />
     <Compile Include="Utility\HalconTools.cs" />
     <Compile Include="Utility\HslCommunication.cs" />
-    <Compile Include="Utility\MV2DCam.cs" />
-    <Compile Include="Utility\MVCamera.cs" />
-    <Compile Include="Utility\MVLineScanCam.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -258,18 +254,17 @@
     </Compile>
     <Compile Include="Utility\LogHelper.cs" />
     <Compile Include="Utility\Parameters.cs" />
-    <Compile Include="Utility\ShortCutHelper.cs" />
     <Compile Include="Utility\TcpClient.cs" />
     <Compile Include="Utility\TcpServer.cs" />
     <Compile Include="Utility\XMLHelper.cs" />
-    <EmbeddedResource Include="Forms\相机配置界面.resx">
-      <DependentUpon>相机配置界面.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Forms\切换产品.resx">
       <DependentUpon>切换产品.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\寻边设置.resx">
       <DependentUpon>寻边设置.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\注册机器.resx">
+      <DependentUpon>注册机器.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\相机检测设置.resx">
       <DependentUpon>相机检测设置.cs</DependentUpon>

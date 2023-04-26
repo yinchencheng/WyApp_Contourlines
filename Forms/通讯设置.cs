@@ -91,6 +91,8 @@ namespace WY_App
             txt_HeartBeat_Add.Enabled = true;
             txt_StartAdd.Enabled = true;
             txt_Completion_Add.Enabled = true;
+            SNReadAdd.Enabled= true;
+
             num_LogSaveDays.Enabled = true;
 
             txt_ImageSavePath.Enabled = true;
@@ -121,6 +123,7 @@ namespace WY_App
             Parameters.plcParams.HeartBeatAdd = txt_HeartBeat_Add.Text;
             Parameters.plcParams.StartAdd = txt_StartAdd.Text;
             Parameters.plcParams.Completion = txt_Completion_Add.Text;
+            Parameters.plcParams.SNReadAdd = SNReadAdd.Text;
             XMLHelper.serialize<Parameters.PLCParams>(Parameters.plcParams, "Parameter/PLCParams.xml");
             MessageBox.Show("系统参数修改，请重启软件");
             this.Close();
@@ -150,22 +153,22 @@ namespace WY_App
 
         private void uiButton2_Click(object sender, EventArgs e)
         {
-            MainForm.HivCam.EnumInterface();
+           
         }
 
         private void uiButton3_Click(object sender, EventArgs e)
         {
-            MainForm.HivCam.OpenInterface();
+            
         }
 
         private void uiButton1_Click(object sender, EventArgs e)
         {
-            MainForm.HivCam.EnumDevice();
+            
         }
 
         private void uiButton4_Click(object sender, EventArgs e)
         {
-            MainForm.HivCam.OpenDevice();
+           
         }
     }
 }

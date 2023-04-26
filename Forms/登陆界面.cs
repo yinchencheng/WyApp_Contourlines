@@ -16,10 +16,10 @@ namespace WY_App
 {
     public partial class 登陆界面 : Form
     {
-        public delegate void TransfDelegate(String value);
+        public delegate void TransfDelegate(Users value);
         public event TransfDelegate TransfEvent;
         List<Users> userList = new List<Users>();
-        class Users
+        public class Users
         {
             private string name;
             /// <summary>
@@ -104,7 +104,7 @@ namespace WY_App
         {
            if( txt_Password.Text == userList[cmb_UserName.SelectedIndex].Password )
             {
-                TransfEvent(cmb_Permission.Text);  
+                TransfEvent(userList[cmb_UserName.SelectedIndex]);  
                 this.Close();
             }
             else
@@ -295,19 +295,6 @@ namespace WY_App
                 MessageBox.Show("密码修改成功！", "温馨提示");
             }        
         }
-        Point downPoint;
-        private void panel4_MouseDown(object sender, MouseEventArgs e)
-        {
-            downPoint = new Point(e.X, e.Y);
-        }
 
-        private void panel4_MouseMove(object sender, MouseEventArgs e)
-        {
-            if (e.Button == MouseButtons.Left)
-            {
-                this.Location = new Point(this.Location.X + e.X - downPoint.X,
-                    this.Location.Y + e.Y - downPoint.Y);
-            }
-        }
     }
 }

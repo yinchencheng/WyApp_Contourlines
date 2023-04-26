@@ -217,10 +217,10 @@
             0,
             0});
             this.num_Phi.Minimum = new decimal(new int[] {
-            1,
+            4,
             0,
             0,
-            0});
+            -2147483648});
             this.num_Phi.Name = "num_Phi";
             this.num_Phi.Size = new System.Drawing.Size(101, 21);
             this.num_Phi.TabIndex = 63;

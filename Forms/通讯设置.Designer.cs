@@ -100,6 +100,8 @@
             this.uiTextBox3 = new Sunny.UI.UITextBox();
             this.uiTextBox2 = new Sunny.UI.UITextBox();
             this.txt_PointMoveStepAdd = new Sunny.UI.UITextBox();
+            this.label36 = new System.Windows.Forms.Label();
+            this.SNReadAdd = new Sunny.UI.UITextBox();
             this.tableLayoutPanel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.panel6.SuspendLayout();
@@ -129,12 +131,13 @@
             this.tableLayoutPanel1.RowCount = 2;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(463, 414);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(463, 470);
             this.tableLayoutPanel1.TabIndex = 1;
             this.tableLayoutPanel1.Paint += new System.Windows.Forms.PaintEventHandler(this.tableLayoutPanel1_Paint);
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.num_LogSaveDays);
             this.groupBox1.Controls.Add(this.btn_Save);
             this.groupBox1.Controls.Add(this.panel6);
             this.groupBox1.Controls.Add(this.panel3);
@@ -142,12 +145,13 @@
             this.groupBox1.Controls.Add(this.btn_ChangePassword);
             this.groupBox1.Controls.Add(this.panel5);
             this.groupBox1.Controls.Add(this.panel7);
+            this.groupBox1.Controls.Add(this.label20);
             this.groupBox1.ForeColor = System.Drawing.Color.White;
             this.groupBox1.Location = new System.Drawing.Point(0, 50);
             this.groupBox1.Margin = new System.Windows.Forms.Padding(0);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Padding = new System.Windows.Forms.Padding(0);
-            this.groupBox1.Size = new System.Drawing.Size(455, 356);
+            this.groupBox1.Size = new System.Drawing.Size(455, 411);
             this.groupBox1.TabIndex = 10;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "参数设置";
@@ -158,7 +162,7 @@
             this.btn_Save.Enabled = false;
             this.btn_Save.FillColor = System.Drawing.Color.Black;
             this.btn_Save.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btn_Save.Location = new System.Drawing.Point(349, 284);
+            this.btn_Save.Location = new System.Drawing.Point(349, 306);
             this.btn_Save.MinimumSize = new System.Drawing.Size(1, 1);
             this.btn_Save.Name = "btn_Save";
             this.btn_Save.Size = new System.Drawing.Size(80, 39);
@@ -248,7 +252,8 @@
             // 
             // panel3
             // 
-            this.panel3.Controls.Add(this.num_LogSaveDays);
+            this.panel3.Controls.Add(this.label36);
+            this.panel3.Controls.Add(this.SNReadAdd);
             this.panel3.Controls.Add(this.txt_Completion_Add);
             this.panel3.Controls.Add(this.txt_StartAdd);
             this.panel3.Controls.Add(this.txt_Trigger_Detection);
@@ -257,7 +262,6 @@
             this.panel3.Controls.Add(this.label7);
             this.panel3.Controls.Add(this.label8);
             this.panel3.Controls.Add(this.label21);
-            this.panel3.Controls.Add(this.label20);
             this.panel3.Location = new System.Drawing.Point(12, 186);
             this.panel3.Margin = new System.Windows.Forms.Padding(0);
             this.panel3.Name = "panel3";
@@ -269,7 +273,7 @@
             this.num_LogSaveDays.Decimal = 0;
             this.num_LogSaveDays.DecimalPlaces = 0;
             this.num_LogSaveDays.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.num_LogSaveDays.Location = new System.Drawing.Point(89, 129);
+            this.num_LogSaveDays.Location = new System.Drawing.Point(293, 259);
             this.num_LogSaveDays.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.num_LogSaveDays.Maximum = 65535D;
             this.num_LogSaveDays.Minimum = 0D;
@@ -277,7 +281,7 @@
             this.num_LogSaveDays.Name = "num_LogSaveDays";
             this.num_LogSaveDays.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.num_LogSaveDays.ShowText = false;
-            this.num_LogSaveDays.Size = new System.Drawing.Size(112, 25);
+            this.num_LogSaveDays.Size = new System.Drawing.Size(136, 25);
             this.num_LogSaveDays.Step = 1D;
             this.num_LogSaveDays.Style = Sunny.UI.UIStyle.Custom;
             this.num_LogSaveDays.TabIndex = 46;
@@ -344,11 +348,11 @@
             // 
             this.label15.AutoSize = true;
             this.label15.ForeColor = System.Drawing.SystemColors.Control;
-            this.label15.Location = new System.Drawing.Point(11, 102);
+            this.label15.Location = new System.Drawing.Point(29, 103);
             this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(77, 12);
+            this.label15.Size = new System.Drawing.Size(53, 12);
             this.label15.TabIndex = 33;
-            this.label15.Text = "完成信号地址";
+            this.label15.Text = "完成信号";
             // 
             // label7
             // 
@@ -374,21 +378,21 @@
             // 
             this.label21.AutoSize = true;
             this.label21.ForeColor = System.Drawing.SystemColors.Control;
-            this.label21.Location = new System.Drawing.Point(11, 10);
+            this.label21.Location = new System.Drawing.Point(35, 10);
             this.label21.Name = "label21";
-            this.label21.Size = new System.Drawing.Size(77, 12);
+            this.label21.Size = new System.Drawing.Size(53, 12);
             this.label21.TabIndex = 44;
-            this.label21.Text = "触发检测地址";
+            this.label21.Text = "触发地址";
             // 
             // label20
             // 
             this.label20.AutoSize = true;
             this.label20.ForeColor = System.Drawing.SystemColors.Control;
-            this.label20.Location = new System.Drawing.Point(11, 133);
+            this.label20.Location = new System.Drawing.Point(233, 263);
             this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(77, 12);
+            this.label20.Size = new System.Drawing.Size(53, 12);
             this.label20.TabIndex = 45;
-            this.label20.Text = "日志保存天数";
+            this.label20.Text = "保存天数";
             // 
             // panel2
             // 
@@ -525,7 +529,7 @@
             this.btn_ChangePassword.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btn_ChangePassword.FillColor = System.Drawing.Color.Black;
             this.btn_ChangePassword.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btn_ChangePassword.Location = new System.Drawing.Point(241, 284);
+            this.btn_ChangePassword.Location = new System.Drawing.Point(241, 306);
             this.btn_ChangePassword.MinimumSize = new System.Drawing.Size(1, 1);
             this.btn_ChangePassword.Name = "btn_ChangePassword";
             this.btn_ChangePassword.Size = new System.Drawing.Size(81, 39);
@@ -1082,11 +1086,35 @@
             this.txt_PointMoveStepAdd.TabIndex = 58;
             this.txt_PointMoveStepAdd.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
             // 
+            // label36
+            // 
+            this.label36.AutoSize = true;
+            this.label36.ForeColor = System.Drawing.SystemColors.Control;
+            this.label36.Location = new System.Drawing.Point(19, 132);
+            this.label36.Name = "label36";
+            this.label36.Size = new System.Drawing.Size(65, 12);
+            this.label36.TabIndex = 75;
+            this.label36.Text = "SN读取地址";
+            // 
+            // SNReadAdd
+            // 
+            this.SNReadAdd.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.SNReadAdd.Enabled = false;
+            this.SNReadAdd.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.SNReadAdd.Location = new System.Drawing.Point(89, 129);
+            this.SNReadAdd.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.SNReadAdd.MinimumSize = new System.Drawing.Size(1, 16);
+            this.SNReadAdd.Name = "SNReadAdd";
+            this.SNReadAdd.ShowText = false;
+            this.SNReadAdd.Size = new System.Drawing.Size(112, 21);
+            this.SNReadAdd.TabIndex = 74;
+            this.SNReadAdd.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
             // 通讯设置
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(463, 414);
+            this.ClientSize = new System.Drawing.Size(463, 470);
             this.Controls.Add(this.tableLayoutPanel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "通讯设置";
@@ -1094,6 +1122,7 @@
             this.Load += new System.EventHandler(this.ParamSettings_Load);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.panel6.ResumeLayout(false);
             this.panel6.PerformLayout();
             this.panel3.ResumeLayout(false);
@@ -1182,5 +1211,7 @@
         private System.Windows.Forms.Label label5;
         private Sunny.UI.UIButton btn_Save;
         private Sunny.UI.UIButton btn_ChangePassword;
+        private System.Windows.Forms.Label label36;
+        private Sunny.UI.UITextBox SNReadAdd;
     }
 }

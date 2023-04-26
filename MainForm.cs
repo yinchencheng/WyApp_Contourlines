@@ -28,6 +28,8 @@ using static WY_App.Utility.Parameters;
 using OpenCvSharp.Dnn;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.TaskbarClock;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using static ODT.Common.LanguageTranslationConstants;
+using HslCommunication.BasicFramework;
 
 namespace WY_App
 {
@@ -38,9 +40,7 @@ namespace WY_App
         public static List<string> AlarmList = new List<string>();
         Thread myThread;
         Thread MainThread;
-        //Thread ImageThread;
-        public static MVLineScanCam HivCam = new MVLineScanCam(); 
-        public static Parameters.Rect1[] specifications;
+        Halcon halcon = new Halcon();
         HWindow hWindow=new HWindow();
 
         public static List<HObject> ho_Image = new List<HObject>();
@@ -56,13 +56,16 @@ namespace WY_App
         static HObject hObjectIn = new HObject();
         static HObject hObjectOut = new HObject();
         Location[] location;
-        public static HObject hoRegions = new HObject();      
+        public static HObject hoRegions = new HObject();
+
+        private delegate void SetTextValueCallBack(int i, HObject hObject, string path);
+        //声明回调
+        private SetTextValueCallBack setCallBack;
         public MainForm()
         {
             InitializeComponent();
             HOperatorSet.ReadImage(out hImage, Application.StartupPath + "/image/N1.bmp");
-            HOperatorSet.GetImageSize(MainForm.hImage, out Halcon.hv_Width, out Halcon.hv_Height);//获取图片大小规格
-            
+            HOperatorSet.GetImageSize(MainForm.hImage, out Halcon.hv_Width, out Halcon.hv_Height);//获取图片大小规格   
             hWindow = hWindowControl1.HalconWindow;
             hWindow.SetPart(0,0,-1,-1);
             HOperatorSet.DispObj(hImage, hWindow);
@@ -76,6 +79,17 @@ namespace WY_App
             {
                 Parameters.commministion = new Parameters.Commministion();
                 XMLHelper.serialize<Parameters.Commministion>(Parameters.commministion, "Parameter/Commministion.xml");
+            }
+            if (!EnumDivice(Parameters.commministion.DeviceID))
+            {
+                注册机器 flg = new 注册机器();
+                flg.TransfEvent += DeviceID_TransfEvent;
+                flg.ShowDialog();
+                if (!EnumDivice(DeviceID))
+                {
+                    this.Close();
+                    return;
+                }
             }
             try
             {
@@ -127,7 +141,29 @@ namespace WY_App
             myThread.IsBackground = true;
             myThread.Start();
         }
+        private bool EnumDivice(string DiviceSn)
+        {
+            SoftAuthorize softAuthorize = new SoftAuthorize();
+            if (!softAuthorize.CheckAuthorize(DiviceSn, AuthorizeEncrypted))
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
 
+        }
+        private string AuthorizeEncrypted(string origin)
+        {
+            return SoftSecurity.MD5Encrypt(origin, "12345678");
+        }
+
+        public static string DeviceID = "";
+        void DeviceID_TransfEvent(string value)
+        {
+            DeviceID = value;
+        }
         /// <summary>
         /// skinPictureBox1滚动缩放
         /// </summary>
@@ -232,10 +268,14 @@ namespace WY_App
                         }
                         if (AlarmList.Count > 0)
                         {
-                            lab_log.Text = AlarmList[0];
+                            lab_log.Items.Add(AlarmList[0]);
                             AlarmList.RemoveAt(0);
                         }
-                        if (HivCam.m_bIsDeviceOpen)
+                        if (lab_log.Items.Count > 20)
+                        {
+                            lab_log.Items.RemoveAt(0);
+                        }
+                        if (Halcon.CamConnect)
                         {
                             lab_Cam1.Text = "在线";
                             lab_Cam1.BackColor = Color.Green;
@@ -256,55 +296,85 @@ namespace WY_App
         }
         bool m_Pause = true;
         bool DetectionResult = true;
-        
+        public static string productSN = "0000";
         private void MainRun()
         {
             while (true)
             {
                 if (m_Pause)
                 {
-                    System.Diagnostics.Stopwatch stopwatch = new Stopwatch();
-                    stopwatch.Start(); //  开始监视代码运行时间
-                    if (HivCam.m_bIsDeviceOpen)
+                    //Int16 uInt16 = HslCommunication._NetworkTcpDevice.ReadInt16(Parameters.plcParams.Trigger_Detection).Content; // 读取寄存器100的ushort值             
+                    //if (uInt16 == 1)
                     {
-                        HivCam.ImageEvent.WaitOne();
-                        hImage = HivCam.hObject;
-                        HivCam.hObject.Dispose();
-                    }
-                    DetectionResult = true;
-                    HOperatorSet.GetImageSize(hImage, out Halcon.hv_Height, out Halcon.hv_Width);
-                    HOperatorSet.DispObj(hImage, hWindow);
-                    HOperatorSet.SetPart(hWindow, 0, 0, -1, -1);
-                    HOperatorSet.CopyImage(hImage, out hObjectIn);
-                    detection();
-                    HOperatorSet.DumpWindowImage(out hObjectOut, hWindow);
-                    DateTime dtNow = System.DateTime.Now;  // 获取系统当前时间
-                    strDateTime = dtNow.ToString("yyyyMMddHHmmss");
-                    strDateTimeDay = dtNow.ToString("yyyy-MM-dd");
-                    Push();
-                    Thread th = new Thread(new ThreadStart(ThreadWork));
-                    th.Start();
+                        DateTime dtNow = System.DateTime.Now;  // 获取系统当前时间
+                        strDateTime = dtNow.ToString("yyyyMMddHHmmss");
+                        strDateTimeDay = dtNow.ToString("yyyy-MM-dd");
+                        //productSN = HslCommunication._NetworkTcpDevice.ReadString(Parameters.plcParams.SNReadAdd, 2).Content;
+                        System.Diagnostics.Stopwatch stopwatch = new Stopwatch();
+                        stopwatch.Start(); //  开始监视代码运行时间
+                        if (Halcon.CamConnect)
+                        {
+                            HOperatorSet.GrabImage(out hImage, Halcon.hv_AcqHandle);
+                        }
 
-                    if (HslCommunication.plc_connect_result)
-                    {
-                        if (DetectionResult)
+                        if (Parameters.specifications.SaveOrigalImage)
                         {
-                            HslCommunication._NetworkTcpDevice.Write(Parameters.plcParams.Completion, 0);
+                            setCallBack = SaveImages;
+                            this.Invoke(setCallBack, 0, hImage, "IN-");
                         }
-                        else
+                        //HslCommunication._NetworkTcpDevice.Write(Parameters.plcParams.Trigger_Detection, 0);
+                        DetectionResult = true;
+                        HOperatorSet.GetImageSize(hImage, out Halcon.hv_Height, out Halcon.hv_Width);
+                        HOperatorSet.DispObj(hImage, hWindow);
+                        HOperatorSet.SetPart(hWindow, 0, 0, -1, -1);                        
+                        if(detection(hWindow, hImage))
                         {
-                            HslCommunication._NetworkTcpDevice.Write(Parameters.plcParams.Completion, 1);
+
                         }
+                        if (Parameters.specifications.SaveDefeatImage)
+                        {
+                            HOperatorSet.DumpWindowImage(out hObjectOut, hWindow);
+                            setCallBack = SaveImages;
+                            this.Invoke(setCallBack, 0, hObjectOut, "OUT-");
+                        }
+                        
+
+
+
+                        //DateTime dtNow = System.DateTime.Now;  // 获取系统当前时间
+                        //strDateTime = dtNow.ToString("yyyyMMddHHmmss");
+                        //strDateTimeDay = dtNow.ToString("yyyy-MM-dd");
+                        //Push();
+                        //Thread th = new Thread(new ThreadStart(ThreadWork));
+                        //th.Start();
+                        //if (DetectionResult)
+                        //{
+                        //    HslCommunication._NetworkTcpDevice.Write(Parameters.plcParams.Completion, 0);
+                        //}
+                        //else
+                        //{
+                        //    HslCommunication._NetworkTcpDevice.Write(Parameters.plcParams.Completion, 1);
+                        //}
+                        
+                        stopwatch.Stop(); //  停止监视
+                        TimeSpan timespan = stopwatch.Elapsed; //  获取当前实例测量得出的总时间
+                        double milliseconds = timespan.TotalMilliseconds;  //  总毫秒数           
+                        AlarmList.Add(System.DateTime.Now.ToString() + "检测时间:" + milliseconds.ToString());
                     }
-                    
-                    stopwatch.Stop(); //  停止监视
-                    TimeSpan timespan = stopwatch.Elapsed; //  获取当前实例测量得出的总时间
-                    double milliseconds = timespan.TotalMilliseconds;  //  总毫秒数           
-                    AlarmList.Add(System.DateTime.Now.ToString() + "检测时间:" + milliseconds.ToString());
                 }
             }
         }
-      
+
+        public static void SaveImages(int i, HObject hObject, string path)
+        {
+            string stfFileNameOut = path + i + "CAM-" + productSN + "-" + strDateTime;  // 默认的图像保存名称
+            string pathOut = Parameters.commministion.ImageSavePath + "/" + strDateTimeDay + "/" + productSN + "/";
+            if (!System.IO.Directory.Exists(pathOut))
+            {
+                System.IO.Directory.CreateDirectory(pathOut);//不存在就创建文件夹
+            }
+            HOperatorSet.WriteImage(hObject, "jpeg", 0, pathOut + stfFileNameOut + ".jpeg");
+        }
 
         private void btn_Close_System_Click(object sender, EventArgs e)
         {
@@ -315,8 +385,6 @@ namespace WY_App
                 //Parameter.specifications.右短端.value = 10;
                 //XMLHelper.serialize<Parameter.Specifications>(Parameter.specifications, "Specifications.xml");
                 myThread.Abort();
-                MainForm.HivCam.CloseDevice();
-                MainForm.HivCam.CloseInterface();
                 LogHelper.Log.WriteInfo(System.DateTime.Now.ToString() + "软件关闭。");
                 this.Close();
             }
@@ -465,6 +533,11 @@ namespace WY_App
 
         private void btn_Start_Click(object sender, EventArgs e)
         {
+            //if (!Halcon.CamConnect)
+            //{
+            //    MessageBox.Show("相机链接异常，请检查!");
+            //    return;
+            //}           
             //if (HslCommunication.plc_connect_result)
             //{
             //    HslCommunication._NetworkTcpDevice.Write(Parameters.plcParams.StartAdd, 1);
@@ -486,19 +559,13 @@ namespace WY_App
             //    MessageBox.Show("PLC链接异常，请检查!");
             //    return;
             //}
-                     
-            //if (HivCam.m_bIsDeviceOpen)
-            {
-                MainThread = new Thread(MainRun);
-                MainThread.IsBackground = true;
-                MainThread.Start();
-            }
-            //else
-            //{
-            //    MessageBox.Show("相机链接异常，请检查!");
-            //    return;
-            //}
+
+
+            MainThread = new Thread(MainRun);
+            MainThread.IsBackground = true;
+            MainThread.Start();
             
+
         }
 
 
@@ -524,9 +591,7 @@ namespace WY_App
             if (MainThread != null)
             {
                 MainThread.Abort();
-            }
-
-            HivCam.StopGrab();
+            }           
         }
 
         private void btn_Connutius_Click(object sender, EventArgs e)
@@ -612,14 +677,6 @@ namespace WY_App
         #endregion
         public static string strDateTime;
         public static string strDateTimeDay;
-        private int ImgSaveIn()
-        {
-            #region 保存图片            
-            // 文件命名规则
-
-            return 0;
-            #endregion
-        }
 
         private int ImgSaveOut()
         {
@@ -633,7 +690,7 @@ namespace WY_App
                 {
                     System.IO.Directory.CreateDirectory(pathOut);//不存在就创建文件夹
                 }
-                HOperatorSet.WriteImage(hObjectOut, "bmp", 0, pathOut + stfFileNameOut + ".bmp");
+                HOperatorSet.WriteImage(hObjectOut, "jpeg", 0, pathOut + stfFileNameOut + ".jpeg");
             }
             if (Parameters.specifications.SaveOrigalImage)
             {
@@ -643,7 +700,7 @@ namespace WY_App
                 {
                     System.IO.Directory.CreateDirectory(pathIn);//不存在就创建文件夹
                 }
-                HOperatorSet.WriteImage(hObjectIn, "bmp", 0, pathIn + stfFileNameIn + ".bmp");
+                HOperatorSet.WriteImage(hObjectIn, "jpeg", 0, pathIn + stfFileNameIn + ".jpeg");
             }
 
             return 0;
@@ -655,11 +712,12 @@ namespace WY_App
             相机检测设置 flg = new 相机检测设置();
             flg.ShowDialog();
         }
-
+        public static string User = "访客";
         public static string Permission = "访客";
-        void User_TransfEvent(string value)
+        void User_TransfEvent(登陆界面.Users value)
         {
-            Permission = value;
+            User= value.Name;
+            Permission = value.Permission;
         }
         private void UpdataUI()
         {
@@ -742,14 +800,13 @@ namespace WY_App
         private delegate void InvokeHandler();
         private void btn_SpecicationSetting_Click(object sender, EventArgs e)
         {
-            相机配置界面 flg=new 相机配置界面();
-            flg.ShowDialog();
+           
         }
 
-        private void detection()
+        private bool detection(HWindow hWindow,HObject hImage  )
         {
             string time = "";
-            相机检测设置.Detection(hWindow, ref location, ref time);
+            相机检测设置.Detection(hWindow, hImage, ref location, ref time);
             this.Invoke(new InvokeHandler(delegate ()
             {
                 DataGridViewRow[] dtRows = new DataGridViewRow[Parameters.specifications.DetectionRect2Num];
@@ -767,6 +824,7 @@ namespace WY_App
                 uiDataGridView1.Rows.AddRange(dtRows);
                 相机检测设置.WriteCsv(location);
             }));
+            return true;
         }
 
         private void uiDataGridView1_RowStateChanged(object sender, DataGridViewRowStateChangedEventArgs e)

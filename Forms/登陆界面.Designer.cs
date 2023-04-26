@@ -129,8 +129,6 @@
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(327, 32);
             this.panel4.TabIndex = 11;
-            this.panel4.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panel4_MouseDown);
-            this.panel4.MouseMove += new System.Windows.Forms.MouseEventHandler(this.panel4_MouseMove);
             // 
             // tableLayoutPanel3
             // 

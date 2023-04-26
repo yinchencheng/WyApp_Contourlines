@@ -44,11 +44,11 @@
             this.btn_Stop = new Sunny.UI.UIButton();
             this.btn_Minimizid_System = new Sunny.UI.UIButton();
             this.btn_Login = new Sunny.UI.UIButton();
-            this.btn_SpecicationSetting = new Sunny.UI.UIButton();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.btn_changeProduct = new Sunny.UI.UIButton();
-            this.btn_Connect = new Sunny.UI.UIButton();
             this.btn_Cam1 = new Sunny.UI.UIButton();
+            this.btn_Connect = new Sunny.UI.UIButton();
+            this.btn_SpecicationSetting = new Sunny.UI.UIButton();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel10 = new System.Windows.Forms.ToolStripStatusLabel();
             this.lab_Product = new System.Windows.Forms.ToolStripStatusLabel();
@@ -63,12 +63,18 @@
             this.lab_Server = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel6 = new System.Windows.Forms.ToolStripStatusLabel();
             this.lab_Cam1 = new System.Windows.Forms.ToolStripStatusLabel();
-            this.lab_log = new System.Windows.Forms.ToolStripStatusLabel();
             this.lab_Time = new System.Windows.Forms.ToolStripStatusLabel();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
             this.hWindowControl1 = new HalconDotNet.HWindowControl();
+            this.messageShow1 = new WY_App.UserControls.MessageShow();
+            this.messageShow2 = new WY_App.UserControls.MessageShow();
+            this.messageShow3 = new WY_App.UserControls.MessageShow();
+            this.messageShow4 = new WY_App.UserControls.MessageShow();
+            this.messageShow5 = new WY_App.UserControls.MessageShow();
+            this.messageShow6 = new WY_App.UserControls.MessageShow();
+            this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
             this.uiDataGridView1 = new Sunny.UI.UIDataGridView();
             this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -76,18 +82,14 @@
             this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.messageShow1 = new WY_App.UserControls.MessageShow();
-            this.messageShow2 = new WY_App.UserControls.MessageShow();
-            this.messageShow3 = new WY_App.UserControls.MessageShow();
-            this.messageShow4 = new WY_App.UserControls.MessageShow();
-            this.messageShow5 = new WY_App.UserControls.MessageShow();
-            this.messageShow6 = new WY_App.UserControls.MessageShow();
+            this.lab_log = new System.Windows.Forms.ListBox();
             this.tableLayoutPanel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.statusStrip1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
             this.tableLayoutPanel4.SuspendLayout();
+            this.tableLayoutPanel5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.uiDataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -119,11 +121,11 @@
             this.tableLayoutPanel2.Controls.Add(this.btn_Stop, 1, 0);
             this.tableLayoutPanel2.Controls.Add(this.btn_Minimizid_System, 12, 0);
             this.tableLayoutPanel2.Controls.Add(this.btn_Login, 3, 0);
-            this.tableLayoutPanel2.Controls.Add(this.btn_SpecicationSetting, 5, 0);
             this.tableLayoutPanel2.Controls.Add(this.pictureBox1, 11, 0);
             this.tableLayoutPanel2.Controls.Add(this.btn_changeProduct, 4, 0);
-            this.tableLayoutPanel2.Controls.Add(this.btn_Connect, 6, 0);
-            this.tableLayoutPanel2.Controls.Add(this.btn_Cam1, 7, 0);
+            this.tableLayoutPanel2.Controls.Add(this.btn_Cam1, 6, 0);
+            this.tableLayoutPanel2.Controls.Add(this.btn_Connect, 5, 0);
+            this.tableLayoutPanel2.Controls.Add(this.btn_SpecicationSetting, 7, 0);
             this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel2.Location = new System.Drawing.Point(0, 10);
             this.tableLayoutPanel2.Margin = new System.Windows.Forms.Padding(0, 10, 0, 0);
@@ -277,32 +279,6 @@
             this.btn_Login.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btn_Login.Click += new System.EventHandler(this.btn_Login_Click);
             // 
-            // btn_SpecicationSetting
-            // 
-            this.btn_SpecicationSetting.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btn_SpecicationSetting.Enabled = false;
-            this.btn_SpecicationSetting.FillColor = System.Drawing.Color.Black;
-            this.btn_SpecicationSetting.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(150)))), ((int)(((byte)(136)))));
-            this.btn_SpecicationSetting.FillDisableColor = System.Drawing.Color.Black;
-            this.btn_SpecicationSetting.FillHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(171)))), ((int)(((byte)(160)))));
-            this.btn_SpecicationSetting.FillPressColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(120)))), ((int)(((byte)(109)))));
-            this.btn_SpecicationSetting.FillSelectedColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(120)))), ((int)(((byte)(109)))));
-            this.btn_SpecicationSetting.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btn_SpecicationSetting.ForeDisableColor = System.Drawing.Color.Silver;
-            this.btn_SpecicationSetting.Location = new System.Drawing.Point(303, 3);
-            this.btn_SpecicationSetting.MinimumSize = new System.Drawing.Size(1, 1);
-            this.btn_SpecicationSetting.Name = "btn_SpecicationSetting";
-            this.btn_SpecicationSetting.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(150)))), ((int)(((byte)(136)))));
-            this.btn_SpecicationSetting.RectHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(171)))), ((int)(((byte)(160)))));
-            this.btn_SpecicationSetting.RectPressColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(120)))), ((int)(((byte)(109)))));
-            this.btn_SpecicationSetting.RectSelectedColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(120)))), ((int)(((byte)(109)))));
-            this.btn_SpecicationSetting.Size = new System.Drawing.Size(54, 50);
-            this.btn_SpecicationSetting.Style = Sunny.UI.UIStyle.Custom;
-            this.btn_SpecicationSetting.TabIndex = 12;
-            this.btn_SpecicationSetting.Text = "相机";
-            this.btn_SpecicationSetting.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btn_SpecicationSetting.Click += new System.EventHandler(this.btn_SpecicationSetting_Click);
-            // 
             // pictureBox1
             // 
             this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -341,32 +317,6 @@
             this.btn_changeProduct.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btn_changeProduct.Click += new System.EventHandler(this.btn_changeProduct_Click);
             // 
-            // btn_Connect
-            // 
-            this.btn_Connect.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btn_Connect.Enabled = false;
-            this.btn_Connect.FillColor = System.Drawing.Color.Black;
-            this.btn_Connect.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(102)))), ((int)(((byte)(58)))), ((int)(((byte)(183)))));
-            this.btn_Connect.FillDisableColor = System.Drawing.Color.Black;
-            this.btn_Connect.FillHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(133)))), ((int)(((byte)(97)))), ((int)(((byte)(198)))));
-            this.btn_Connect.FillPressColor = System.Drawing.Color.FromArgb(((int)(((byte)(82)))), ((int)(((byte)(46)))), ((int)(((byte)(147)))));
-            this.btn_Connect.FillSelectedColor = System.Drawing.Color.FromArgb(((int)(((byte)(82)))), ((int)(((byte)(46)))), ((int)(((byte)(147)))));
-            this.btn_Connect.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btn_Connect.ForeDisableColor = System.Drawing.Color.Silver;
-            this.btn_Connect.Location = new System.Drawing.Point(363, 3);
-            this.btn_Connect.MinimumSize = new System.Drawing.Size(1, 1);
-            this.btn_Connect.Name = "btn_Connect";
-            this.btn_Connect.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(102)))), ((int)(((byte)(58)))), ((int)(((byte)(183)))));
-            this.btn_Connect.RectHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(133)))), ((int)(((byte)(97)))), ((int)(((byte)(198)))));
-            this.btn_Connect.RectPressColor = System.Drawing.Color.FromArgb(((int)(((byte)(82)))), ((int)(((byte)(46)))), ((int)(((byte)(147)))));
-            this.btn_Connect.RectSelectedColor = System.Drawing.Color.FromArgb(((int)(((byte)(82)))), ((int)(((byte)(46)))), ((int)(((byte)(147)))));
-            this.btn_Connect.Size = new System.Drawing.Size(54, 50);
-            this.btn_Connect.Style = Sunny.UI.UIStyle.Custom;
-            this.btn_Connect.TabIndex = 6;
-            this.btn_Connect.Text = "通讯";
-            this.btn_Connect.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btn_Connect.Click += new System.EventHandler(this.btn_SettingMean_Click);
-            // 
             // btn_Cam1
             // 
             this.btn_Cam1.BackColor = System.Drawing.Color.White;
@@ -380,7 +330,7 @@
             this.btn_Cam1.FillSelectedColor = System.Drawing.Color.FromArgb(((int)(((byte)(112)))), ((int)(((byte)(112)))), ((int)(((byte)(112)))));
             this.btn_Cam1.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btn_Cam1.ForeDisableColor = System.Drawing.Color.Silver;
-            this.btn_Cam1.Location = new System.Drawing.Point(423, 3);
+            this.btn_Cam1.Location = new System.Drawing.Point(363, 3);
             this.btn_Cam1.MinimumSize = new System.Drawing.Size(1, 1);
             this.btn_Cam1.Name = "btn_Cam1";
             this.btn_Cam1.RectColor = System.Drawing.Color.DimGray;
@@ -393,6 +343,58 @@
             this.btn_Cam1.Text = "检测";
             this.btn_Cam1.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btn_Cam1.Click += new System.EventHandler(this.btn_检测设置1_Click);
+            // 
+            // btn_Connect
+            // 
+            this.btn_Connect.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btn_Connect.Enabled = false;
+            this.btn_Connect.FillColor = System.Drawing.Color.Black;
+            this.btn_Connect.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(102)))), ((int)(((byte)(58)))), ((int)(((byte)(183)))));
+            this.btn_Connect.FillDisableColor = System.Drawing.Color.Black;
+            this.btn_Connect.FillHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(133)))), ((int)(((byte)(97)))), ((int)(((byte)(198)))));
+            this.btn_Connect.FillPressColor = System.Drawing.Color.FromArgb(((int)(((byte)(82)))), ((int)(((byte)(46)))), ((int)(((byte)(147)))));
+            this.btn_Connect.FillSelectedColor = System.Drawing.Color.FromArgb(((int)(((byte)(82)))), ((int)(((byte)(46)))), ((int)(((byte)(147)))));
+            this.btn_Connect.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btn_Connect.ForeDisableColor = System.Drawing.Color.Silver;
+            this.btn_Connect.Location = new System.Drawing.Point(303, 3);
+            this.btn_Connect.MinimumSize = new System.Drawing.Size(1, 1);
+            this.btn_Connect.Name = "btn_Connect";
+            this.btn_Connect.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(102)))), ((int)(((byte)(58)))), ((int)(((byte)(183)))));
+            this.btn_Connect.RectHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(133)))), ((int)(((byte)(97)))), ((int)(((byte)(198)))));
+            this.btn_Connect.RectPressColor = System.Drawing.Color.FromArgb(((int)(((byte)(82)))), ((int)(((byte)(46)))), ((int)(((byte)(147)))));
+            this.btn_Connect.RectSelectedColor = System.Drawing.Color.FromArgb(((int)(((byte)(82)))), ((int)(((byte)(46)))), ((int)(((byte)(147)))));
+            this.btn_Connect.Size = new System.Drawing.Size(54, 50);
+            this.btn_Connect.Style = Sunny.UI.UIStyle.Custom;
+            this.btn_Connect.TabIndex = 6;
+            this.btn_Connect.Text = "通讯";
+            this.btn_Connect.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btn_Connect.Click += new System.EventHandler(this.btn_SettingMean_Click);
+            // 
+            // btn_SpecicationSetting
+            // 
+            this.btn_SpecicationSetting.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btn_SpecicationSetting.Enabled = false;
+            this.btn_SpecicationSetting.FillColor = System.Drawing.Color.Black;
+            this.btn_SpecicationSetting.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(150)))), ((int)(((byte)(136)))));
+            this.btn_SpecicationSetting.FillDisableColor = System.Drawing.Color.Black;
+            this.btn_SpecicationSetting.FillHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(171)))), ((int)(((byte)(160)))));
+            this.btn_SpecicationSetting.FillPressColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(120)))), ((int)(((byte)(109)))));
+            this.btn_SpecicationSetting.FillSelectedColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(120)))), ((int)(((byte)(109)))));
+            this.btn_SpecicationSetting.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btn_SpecicationSetting.ForeDisableColor = System.Drawing.Color.Silver;
+            this.btn_SpecicationSetting.Location = new System.Drawing.Point(423, 3);
+            this.btn_SpecicationSetting.MinimumSize = new System.Drawing.Size(1, 1);
+            this.btn_SpecicationSetting.Name = "btn_SpecicationSetting";
+            this.btn_SpecicationSetting.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(150)))), ((int)(((byte)(136)))));
+            this.btn_SpecicationSetting.RectHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(171)))), ((int)(((byte)(160)))));
+            this.btn_SpecicationSetting.RectPressColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(120)))), ((int)(((byte)(109)))));
+            this.btn_SpecicationSetting.RectSelectedColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(120)))), ((int)(((byte)(109)))));
+            this.btn_SpecicationSetting.Size = new System.Drawing.Size(54, 50);
+            this.btn_SpecicationSetting.Style = Sunny.UI.UIStyle.Custom;
+            this.btn_SpecicationSetting.TabIndex = 12;
+            this.btn_SpecicationSetting.Text = "相机";
+            this.btn_SpecicationSetting.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btn_SpecicationSetting.Click += new System.EventHandler(this.btn_SpecicationSetting_Click);
             // 
             // statusStrip1
             // 
@@ -412,9 +414,8 @@
             this.lab_Server,
             this.toolStripStatusLabel6,
             this.lab_Cam1,
-            this.lab_log,
             this.lab_Time});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 1058);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 1178);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Size = new System.Drawing.Size(1920, 22);
             this.statusStrip1.TabIndex = 3;
@@ -521,15 +522,6 @@
             this.lab_Cam1.Size = new System.Drawing.Size(20, 17);
             this.lab_Cam1.Text = "-1";
             // 
-            // lab_log
-            // 
-            this.lab_log.BackColor = System.Drawing.Color.Black;
-            this.lab_log.ForeColor = System.Drawing.Color.White;
-            this.lab_log.Name = "lab_log";
-            this.lab_log.Size = new System.Drawing.Size(1489, 17);
-            this.lab_log.Spring = true;
-            this.lab_log.Text = "log";
-            // 
             // lab_Time
             // 
             this.lab_Time.BackColor = System.Drawing.Color.Black;
@@ -555,7 +547,7 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 8F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(1920, 1080);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(1920, 1200);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // tableLayoutPanel3
@@ -568,25 +560,23 @@
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
             this.tableLayoutPanel3.RowCount = 1;
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel3.Size = new System.Drawing.Size(1914, 985);
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(1914, 1105);
             this.tableLayoutPanel3.TabIndex = 4;
             // 
             // tableLayoutPanel4
             // 
             this.tableLayoutPanel4.ColumnCount = 2;
             this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 576F));
-            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 520F));
             this.tableLayoutPanel4.Controls.Add(this.hWindowControl1, 0, 0);
-            this.tableLayoutPanel4.Controls.Add(this.uiDataGridView1, 1, 0);
+            this.tableLayoutPanel4.Controls.Add(this.tableLayoutPanel5, 1, 0);
             this.tableLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel4.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel4.Margin = new System.Windows.Forms.Padding(0);
             this.tableLayoutPanel4.Name = "tableLayoutPanel4";
             this.tableLayoutPanel4.RowCount = 1;
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel4.Size = new System.Drawing.Size(1914, 985);
+            this.tableLayoutPanel4.Size = new System.Drawing.Size(1914, 1105);
             this.tableLayoutPanel4.TabIndex = 7;
             // 
             // hWindowControl1
@@ -598,114 +588,9 @@
             this.hWindowControl1.Location = new System.Drawing.Point(0, 0);
             this.hWindowControl1.Margin = new System.Windows.Forms.Padding(0);
             this.hWindowControl1.Name = "hWindowControl1";
-            this.hWindowControl1.Size = new System.Drawing.Size(1338, 985);
+            this.hWindowControl1.Size = new System.Drawing.Size(1394, 1105);
             this.hWindowControl1.TabIndex = 4;
-            this.hWindowControl1.WindowSize = new System.Drawing.Size(1338, 985);
-            // 
-            // uiDataGridView1
-            // 
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(24)))), ((int)(((byte)(24)))));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.Black;
-            this.uiDataGridView1.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
-            this.uiDataGridView1.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
-            this.uiDataGridView1.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(24)))), ((int)(((byte)(24)))));
-            this.uiDataGridView1.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(45)))), ((int)(((byte)(92)))));
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(45)))), ((int)(((byte)(92)))));
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.uiDataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
-            this.uiDataGridView1.ColumnHeadersHeight = 32;
-            this.uiDataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            this.uiDataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Column2,
-            this.Column3,
-            this.Column4,
-            this.Column5,
-            this.Column6,
-            this.Column7});
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(24)))), ((int)(((byte)(24)))));
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(55)))), ((int)(((byte)(55)))));
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.uiDataGridView1.DefaultCellStyle = dataGridViewCellStyle3;
-            this.uiDataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.uiDataGridView1.EnableHeadersVisualStyles = false;
-            this.uiDataGridView1.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.uiDataGridView1.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(18)))), ((int)(((byte)(58)))), ((int)(((byte)(92)))));
-            this.uiDataGridView1.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.uiDataGridView1.Location = new System.Drawing.Point(1338, 0);
-            this.uiDataGridView1.Margin = new System.Windows.Forms.Padding(0);
-            this.uiDataGridView1.Name = "uiDataGridView1";
-            this.uiDataGridView1.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(18)))), ((int)(((byte)(58)))), ((int)(((byte)(92)))));
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(24)))), ((int)(((byte)(24)))));
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(18)))), ((int)(((byte)(58)))), ((int)(((byte)(92)))));
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.uiDataGridView1.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
-            dataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(24)))), ((int)(((byte)(24)))));
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle5.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(55)))), ((int)(((byte)(55)))));
-            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.Color.White;
-            this.uiDataGridView1.RowsDefaultCellStyle = dataGridViewCellStyle5;
-            this.uiDataGridView1.RowTemplate.Height = 23;
-            this.uiDataGridView1.SelectedIndex = -1;
-            this.uiDataGridView1.ShowGridLine = true;
-            this.uiDataGridView1.Size = new System.Drawing.Size(576, 985);
-            this.uiDataGridView1.StripeEvenColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(24)))), ((int)(((byte)(24)))));
-            this.uiDataGridView1.StripeOddColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(24)))), ((int)(((byte)(24)))));
-            this.uiDataGridView1.Style = Sunny.UI.UIStyle.Black;
-            this.uiDataGridView1.TabIndex = 5;
-            this.uiDataGridView1.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.uiDataGridView1_RowPostPaint);
-            this.uiDataGridView1.RowStateChanged += new System.Windows.Forms.DataGridViewRowStateChangedEventHandler(this.uiDataGridView1_RowStateChanged);
-            // 
-            // Column2
-            // 
-            this.Column2.HeaderText = "行";
-            this.Column2.Name = "Column2";
-            this.Column2.Width = 76;
-            // 
-            // Column3
-            // 
-            this.Column3.HeaderText = "列";
-            this.Column3.Name = "Column3";
-            this.Column3.Width = 76;
-            // 
-            // Column4
-            // 
-            this.Column4.HeaderText = "行距离";
-            this.Column4.Name = "Column4";
-            this.Column4.Width = 77;
-            // 
-            // Column5
-            // 
-            this.Column5.HeaderText = "列距离";
-            this.Column5.Name = "Column5";
-            this.Column5.Width = 76;
-            // 
-            // Column6
-            // 
-            this.Column6.HeaderText = "点距离";
-            this.Column6.Name = "Column6";
-            this.Column6.Width = 76;
-            // 
-            // Column7
-            // 
-            this.Column7.HeaderText = "线距离";
-            this.Column7.Name = "Column7";
-            this.Column7.Width = 76;
+            this.hWindowControl1.WindowSize = new System.Drawing.Size(1394, 1105);
             // 
             // messageShow1
             // 
@@ -755,11 +640,142 @@
             this.messageShow6.Size = new System.Drawing.Size(210, 89);
             this.messageShow6.TabIndex = 3;
             // 
+            // tableLayoutPanel5
+            // 
+            this.tableLayoutPanel5.ColumnCount = 1;
+            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel5.Controls.Add(this.uiDataGridView1, 0, 0);
+            this.tableLayoutPanel5.Controls.Add(this.lab_log, 0, 1);
+            this.tableLayoutPanel5.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel5.Location = new System.Drawing.Point(1397, 3);
+            this.tableLayoutPanel5.Name = "tableLayoutPanel5";
+            this.tableLayoutPanel5.RowCount = 2;
+            this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 77.61601F));
+            this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 22.38399F));
+            this.tableLayoutPanel5.Size = new System.Drawing.Size(514, 1099);
+            this.tableLayoutPanel5.TabIndex = 5;
+            // 
+            // uiDataGridView1
+            // 
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(24)))), ((int)(((byte)(24)))));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.Black;
+            this.uiDataGridView1.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            this.uiDataGridView1.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
+            this.uiDataGridView1.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(24)))), ((int)(((byte)(24)))));
+            this.uiDataGridView1.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(45)))), ((int)(((byte)(92)))));
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(45)))), ((int)(((byte)(92)))));
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.uiDataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            this.uiDataGridView1.ColumnHeadersHeight = 32;
+            this.uiDataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            this.uiDataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Column2,
+            this.Column3,
+            this.Column4,
+            this.Column5,
+            this.Column6,
+            this.Column7});
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(24)))), ((int)(((byte)(24)))));
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(55)))), ((int)(((byte)(55)))));
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.uiDataGridView1.DefaultCellStyle = dataGridViewCellStyle3;
+            this.uiDataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.uiDataGridView1.EnableHeadersVisualStyles = false;
+            this.uiDataGridView1.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.uiDataGridView1.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(18)))), ((int)(((byte)(58)))), ((int)(((byte)(92)))));
+            this.uiDataGridView1.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.uiDataGridView1.Location = new System.Drawing.Point(0, 0);
+            this.uiDataGridView1.Margin = new System.Windows.Forms.Padding(0);
+            this.uiDataGridView1.Name = "uiDataGridView1";
+            this.uiDataGridView1.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(18)))), ((int)(((byte)(58)))), ((int)(((byte)(92)))));
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(24)))), ((int)(((byte)(24)))));
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(18)))), ((int)(((byte)(58)))), ((int)(((byte)(92)))));
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.uiDataGridView1.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(24)))), ((int)(((byte)(24)))));
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle5.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(55)))), ((int)(((byte)(55)))));
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.Color.White;
+            this.uiDataGridView1.RowsDefaultCellStyle = dataGridViewCellStyle5;
+            this.uiDataGridView1.RowTemplate.Height = 23;
+            this.uiDataGridView1.SelectedIndex = -1;
+            this.uiDataGridView1.ShowGridLine = true;
+            this.uiDataGridView1.Size = new System.Drawing.Size(514, 853);
+            this.uiDataGridView1.StripeEvenColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(24)))), ((int)(((byte)(24)))));
+            this.uiDataGridView1.StripeOddColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(24)))), ((int)(((byte)(24)))));
+            this.uiDataGridView1.Style = Sunny.UI.UIStyle.Black;
+            this.uiDataGridView1.TabIndex = 6;
+            // 
+            // Column2
+            // 
+            this.Column2.HeaderText = "行";
+            this.Column2.Name = "Column2";
+            this.Column2.Width = 76;
+            // 
+            // Column3
+            // 
+            this.Column3.HeaderText = "列";
+            this.Column3.Name = "Column3";
+            this.Column3.Width = 76;
+            // 
+            // Column4
+            // 
+            this.Column4.HeaderText = "行距离";
+            this.Column4.Name = "Column4";
+            this.Column4.Width = 77;
+            // 
+            // Column5
+            // 
+            this.Column5.HeaderText = "列距离";
+            this.Column5.Name = "Column5";
+            this.Column5.Width = 76;
+            // 
+            // Column6
+            // 
+            this.Column6.HeaderText = "点距离";
+            this.Column6.Name = "Column6";
+            this.Column6.Width = 76;
+            // 
+            // Column7
+            // 
+            this.Column7.HeaderText = "线距离";
+            this.Column7.Name = "Column7";
+            this.Column7.Width = 76;
+            // 
+            // lab_log
+            // 
+            this.lab_log.BackColor = System.Drawing.Color.Black;
+            this.lab_log.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.lab_log.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lab_log.ForeColor = System.Drawing.Color.White;
+            this.lab_log.FormattingEnabled = true;
+            this.lab_log.ItemHeight = 12;
+            this.lab_log.Location = new System.Drawing.Point(3, 856);
+            this.lab_log.Name = "lab_log";
+            this.lab_log.Size = new System.Drawing.Size(508, 240);
+            this.lab_log.TabIndex = 7;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1920, 1080);
+            this.ClientSize = new System.Drawing.Size(1920, 1200);
             this.Controls.Add(this.tableLayoutPanel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -775,6 +791,7 @@
             this.tableLayoutPanel1.PerformLayout();
             this.tableLayoutPanel3.ResumeLayout(false);
             this.tableLayoutPanel4.ResumeLayout(false);
+            this.tableLayoutPanel5.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.uiDataGridView1)).EndInit();
             this.ResumeLayout(false);
 
@@ -801,13 +818,10 @@
         private Sunny.UI.UIButton btn_Cam1;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel5;
         private Sunny.UI.UIButton btn_Connutius;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel4;
         private Sunny.UI.UIButton btn_Login;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel10;
         private System.Windows.Forms.ToolStripStatusLabel lab_User;
         private System.Windows.Forms.ToolStripStatusLabel lab_Cam1;
-        private System.Windows.Forms.ToolStripStatusLabel lab_log;
         private System.Windows.Forms.ToolStripStatusLabel lab_Time;
         private UserControls.MessageShow messageShow1;
         private UserControls.MessageShow messageShow2;
@@ -817,10 +831,13 @@
         private UserControls.MessageShow messageShow6;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel6;
-        private HalconDotNet.HWindowControl hWindowControl1;
         private Sunny.UI.UIButton btn_changeProduct;
         private System.Windows.Forms.ToolStripStatusLabel lab_Product;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel9;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel4;
+        private HalconDotNet.HWindowControl hWindowControl1;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel5;
         private Sunny.UI.UIDataGridView uiDataGridView1;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
@@ -828,6 +845,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Column5;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column6;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column7;
+        private System.Windows.Forms.ListBox lab_log;
     }
 }
 

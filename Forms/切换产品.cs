@@ -73,7 +73,7 @@ namespace WY_App
         {
             Parameters.commministion.productName = cmb_ProductList.Text;
             TransfEvent(cmb_ProductList.Text);
-            #region 读取配置文件            
+            XMLHelper.serialize<Parameters.Commministion>(Parameters.commministion, "Parameter/Commministion.xml");
             try
             {
                 Parameters.counts = XMLHelper.BackSerialize<Parameters.Counts>(Parameters.commministion.productName + "/CountsParams.xml");
@@ -112,14 +112,13 @@ namespace WY_App
             }
             try
             {
-                Parameters.detectionSpec = XMLHelper.BackSerialize<Parameters.DetectionSpec>(Parameters.commministion.productName + "/DetectionSpec.xml");
+                Parameters.cursorLocation = XMLHelper.BackSerialize<Parameters.CursorLocation>(Parameters.commministion.productName + "/CursorLocation.xml");
             }
             catch
             {
                 Parameters.cursorLocation = new Parameters.CursorLocation();
                 XMLHelper.serialize<Parameters.CursorLocation>(Parameters.cursorLocation, Parameters.commministion.productName + "/CursorLocation.xml");
             }
-            #endregion
             this.Close();
         }
 
@@ -170,20 +169,6 @@ namespace WY_App
                     string newDir = destDir + "/" + directory.Name;
                     GetFilesAndDirs(path + "\\", newDir + "\\");
                 }
-            }
-        }
-        Point downPoint;
-        private void panel4_MouseDown(object sender, MouseEventArgs e)
-        {
-            downPoint = new Point(e.X, e.Y);
-        }
-
-        private void panel4_MouseMove(object sender, MouseEventArgs e)
-        {
-            if (e.Button == MouseButtons.Left)
-            {
-                this.Location = new Point(this.Location.X + e.X - downPoint.X,
-                    this.Location.Y + e.Y - downPoint.Y);
             }
         }
     }

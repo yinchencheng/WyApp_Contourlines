@@ -19,11 +19,11 @@ namespace WY_App
 
         private void 卡尺工具设置_Load(object sender, EventArgs e)
         {
-            //num_MeasureLength1.Value = Parameters.detectionSpec.MeasureLength1[MainForm.baseNum];
-            //num_MeasureLength2.Value = Parameters.detectionSpec.MeasureLength2[MainForm.baseNum];
-            //num_MeasureSigma.Value = (decimal)Parameters.detectionSpec.MeasureSigma[MainForm.baseNum];
-            //num_MeasureThreshold.Value = Parameters.detectionSpec.MeasureThreshold[MainForm.baseNum];
-            //num_MeasureTransition.Text = Parameters.detectionSpec.MeasureTransition[MainForm.baseNum];
+            num_MeasureLength1.Value = (decimal)Parameters.detectionSpec.baseRect1[相机检测设置.baseNum].Length1;
+            num_MeasureLength2.Value = (decimal)Parameters.detectionSpec.baseRect1[相机检测设置.baseNum].Length2;
+            num_MeasureSigma.Value = (decimal)Parameters.detectionSpec.baseRect1[相机检测设置.baseNum].simga;
+            num_MeasureThreshold.Value = (decimal)Parameters.detectionSpec.baseRect1[相机检测设置.baseNum].阈值;
+            num_MeasureTransition.Text = Parameters.detectionSpec.baseRect1[相机检测设置.baseNum].极性;
 
         }
 
@@ -34,7 +34,12 @@ namespace WY_App
 
         private void 保存_Click(object sender, EventArgs e)
         {
-            
+            Parameters.detectionSpec.baseRect1[相机检测设置.baseNum].Length1 = (int)num_MeasureLength1.Value;
+            Parameters.detectionSpec.baseRect1[相机检测设置.baseNum].Length2 = (int)num_MeasureLength2.Value;
+            Parameters.detectionSpec.baseRect1[相机检测设置.baseNum].simga = (double)num_MeasureSigma.Value;
+            Parameters.detectionSpec.baseRect1[相机检测设置.baseNum].阈值 = (int)num_MeasureThreshold.Value;
+            Parameters.detectionSpec.baseRect1[相机检测设置.baseNum].极性 = num_MeasureTransition.Text;
+            XMLHelper.serialize<Parameters.DetectionSpec>(Parameters.detectionSpec, Parameters.commministion.productName + "/DetectionSpec.xml");
         }
 
         private void button1_Click(object sender, EventArgs e)

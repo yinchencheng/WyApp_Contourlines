@@ -76,7 +76,6 @@ namespace WY_App
             Parameters.detectionSpec.decetionRect2[相机检测设置.decetionNum].阈值 = (double)num_Threshold.Value;
             Parameters.detectionSpec.decetionRect2[相机检测设置.decetionNum].极性   = num_Transition.Text;
             XMLHelper.serialize<Parameters.DetectionSpec>(Parameters.detectionSpec, Parameters.commministion.productName + "/DetectionSpec.xml");
-            this.Close();
         }
         Point downPoint;
         private void panel4_MouseDown(object sender, MouseEventArgs e)
