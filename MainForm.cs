@@ -303,7 +303,7 @@ namespace WY_App
             {
                 if (m_Pause)
                 {
-                    //Int16 uInt16 = HslCommunication._NetworkTcpDevice.ReadInt16(Parameters.plcParams.Trigger_Detection).Content; // 读取寄存器100的ushort值             
+                    Int16 uInt16 = HslCommunication._NetworkTcpDevice.ReadInt16(Parameters.plcParams.Trigger_Detection).Content; // 读取寄存器100的ushort值             
                     //if (uInt16 == 1)
                     {
                         DateTime dtNow = System.DateTime.Now;  // 获取系统当前时间
@@ -336,30 +336,12 @@ namespace WY_App
                             HOperatorSet.DumpWindowImage(out hObjectOut, hWindow);
                             setCallBack = SaveImages;
                             this.Invoke(setCallBack, 0, hObjectOut, "OUT-");
-                        }
-                        
-
-
-
-                        //DateTime dtNow = System.DateTime.Now;  // 获取系统当前时间
-                        //strDateTime = dtNow.ToString("yyyyMMddHHmmss");
-                        //strDateTimeDay = dtNow.ToString("yyyy-MM-dd");
-                        //Push();
-                        //Thread th = new Thread(new ThreadStart(ThreadWork));
-                        //th.Start();
-                        //if (DetectionResult)
-                        //{
-                        //    HslCommunication._NetworkTcpDevice.Write(Parameters.plcParams.Completion, 0);
-                        //}
-                        //else
-                        //{
-                        //    HslCommunication._NetworkTcpDevice.Write(Parameters.plcParams.Completion, 1);
-                        //}
-                        
+                        }                                               
                         stopwatch.Stop(); //  停止监视
                         TimeSpan timespan = stopwatch.Elapsed; //  获取当前实例测量得出的总时间
                         double milliseconds = timespan.TotalMilliseconds;  //  总毫秒数           
                         AlarmList.Add(System.DateTime.Now.ToString() + "检测时间:" + milliseconds.ToString());
+                        CleanFile(Parameters.commministion.ImageSavePath);
                     }
                 }
             }
@@ -375,7 +357,32 @@ namespace WY_App
             }
             HOperatorSet.WriteImage(hObject, "jpeg", 0, pathOut + stfFileNameOut + ".jpeg");
         }
+        private static void CleanFile(String dir)
+        {
+            DirectoryInfo di = new DirectoryInfo(dir);
+            FileSystemInfo[] fileinfo = di.GetFileSystemInfos();  //返回目录中所有文件和子目录
+            foreach (FileSystemInfo i in fileinfo)
+            {
+                if (i is DirectoryInfo)            //判断是否文件夹
+                {
+                    DirectoryInfo subdir = new DirectoryInfo(i.FullName);
+                    DateTime dates = Convert.ToDateTime(i.CreationTime);
+                    if (dates <= DateTime.Now.AddDays(-Parameters.commministion.LogFileExistDay))
+                    {
+                        subdir.Delete(true);          //删除子目录和文件
+                    }
+                }
+                else
+                {
+                    DateTime dates = Convert.ToDateTime(i.CreationTime);
+                    if (dates <= DateTime.Now.AddDays(-Parameters.commministion.LogFileExistDay))
+                    {
+                        File.Delete(i.FullName);      //删除指定文件
+                    }
 
+                }
+            }
+        }
         private void btn_Close_System_Click(object sender, EventArgs e)
         {
             if (MessageBox.Show("确定关闭程序吗？", "软件关闭提示", MessageBoxButtons.YesNo) == DialogResult.Yes)
