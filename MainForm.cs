@@ -57,37 +57,36 @@ namespace WY_App
         static HObject hObjectOut = new HObject();
         Location[] location;
         public static HObject hoRegions = new HObject();
-
+        public static AutoResetEvent ImageEvent = new AutoResetEvent(false);
+        public static AutoResetEvent ImageWait = new AutoResetEvent(false);
+        public static IKapLineCam grab;
+        bool CamConnectResult = false;
         private delegate void SetTextValueCallBack(int i, HObject hObject, string path);
         //声明回调
         private SetTextValueCallBack setCallBack;
         public MainForm()
         {
-            InitializeComponent();
-            HOperatorSet.ReadImage(out hImage, Application.StartupPath + "/image/N1.bmp");
-            HOperatorSet.GetImageSize(MainForm.hImage, out Halcon.hv_Width, out Halcon.hv_Height);//获取图片大小规格   
-            hWindow = hWindowControl1.HalconWindow;
-            hWindow.SetPart(0,0,-1,-1);
-            HOperatorSet.DispObj(hImage, hWindow);
+            InitializeComponent();  
             pictureBox1.Load(Application.StartupPath + "/image/logo.png");
             #region 读取配置文件
+           
             try
             {
-                Parameters.commministion = XMLHelper.BackSerialize<Parameters.Commministion>("Parameter/Commministion.xml");
+                Parameters.deviceName = XMLHelper.BackSerialize<Parameters.DeviceName>(@"D:\\DeviceName.xml");
             }
             catch
             {
-                Parameters.commministion = new Parameters.Commministion();
-                XMLHelper.serialize<Parameters.Commministion>(Parameters.commministion, "Parameter/Commministion.xml");
+                Parameters.deviceName = new Parameters.DeviceName();
+                XMLHelper.serialize<Parameters.DeviceName>(Parameters.deviceName, @"D:\\DeviceName.xml");
             }
-            if (!EnumDivice(Parameters.commministion.DeviceID))
+            if (!EnumDivice(Parameters.deviceName.DeviceID))
             {
                 注册机器 flg = new 注册机器();
                 flg.TransfEvent += DeviceID_TransfEvent;
                 flg.ShowDialog();
                 if (!EnumDivice(DeviceID))
                 {
-                    this.Close();
+                    Environment.Exit(1);
                     return;
                 }
             }
@@ -135,6 +134,29 @@ namespace WY_App
             {
                 Parameters.cursorLocation = new Parameters.CursorLocation();
                 XMLHelper.serialize<Parameters.CursorLocation>(Parameters.cursorLocation, Parameters.commministion.productName + "/CursorLocation.xml");
+            }
+            try
+            {
+                Parameters.commministion = XMLHelper.BackSerialize<Parameters.Commministion>("Parameter/Commministion.xml");
+            }
+            catch
+            {
+                Parameters.commministion = new Parameters.Commministion();
+                XMLHelper.serialize<Parameters.Commministion>(Parameters.commministion, "Parameter/Commministion.xml");
+            }
+            HOperatorSet.ReadImage(out hImage, Parameters.commministion.productName + "/N1.jpg");
+            HOperatorSet.GetImageSize(MainForm.hImage, out Halcon.hv_Width, out Halcon.hv_Height);//获取图片大小规格   
+            hWindow = hWindowControl1.HalconWindow;
+            hWindow.SetPart(0, 0, -1, -1);
+            HOperatorSet.DispObj(hImage, hWindow);
+            try
+            {
+                grab = new IKapLineCam();
+                CamConnectResult = IKapLineCam.OpenDevice(grab);
+            }
+            catch
+            {
+
             }
             #endregion
             myThread = new Thread(initAll);
@@ -275,7 +297,7 @@ namespace WY_App
                         {
                             lab_log.Items.RemoveAt(0);
                         }
-                        if (Halcon.CamConnect)
+                        if (Halcon.CamConnect || CamConnectResult)
                         {
                             lab_Cam1.Text = "在线";
                             lab_Cam1.BackColor = Color.Green;
@@ -316,7 +338,11 @@ namespace WY_App
                         {
                             HOperatorSet.GrabImage(out hImage, Halcon.hv_AcqHandle);
                         }
-
+                        if(CamConnectResult)
+                        {
+                            ImageWait.Set();
+                            ImageEvent.WaitOne();
+                        }
                         if (Parameters.specifications.SaveOrigalImage)
                         {
                             setCallBack = SaveImages;
@@ -324,7 +350,7 @@ namespace WY_App
                         }
                         //HslCommunication._NetworkTcpDevice.Write(Parameters.plcParams.Trigger_Detection, 0);
                         DetectionResult = true;
-                        HOperatorSet.GetImageSize(hImage, out Halcon.hv_Height, out Halcon.hv_Width);
+                        HOperatorSet.GetImageSize(hImage, out Halcon.hv_Width, out Halcon. hv_Height);
                         HOperatorSet.DispObj(hImage, hWindow);
                         HOperatorSet.SetPart(hWindow, 0, 0, -1, -1);                        
                         if(detection(hWindow, hImage))
@@ -489,11 +515,19 @@ namespace WY_App
                 lab_Server.Text = "禁用";
                 lab_Server.BackColor = Color.Gray;
             }
+            for (int i = 0; i < Parameters.specifications.DetectionRect2Num+ Parameters.specifications.DetectionCricleNum; i++)
+            {
+                uiDataGridView1.Rows.Add();
+            }
             lab_Product.Text = Parameters.commministion.productName;
             UpdataUI();
             hWindow.SetPart(0, 0, -1, -1);
             HOperatorSet.DispObj(hImage, hWindow);
             this.uiDataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            if (CamConnectResult)
+            {
+                IKapLineCam.StartGrabImage(grab);
+            }
             LogHelper.Log.WriteInfo(System.DateTime.Now.ToString() + "初始化完成");
             MainForm.AlarmList.Add(System.DateTime.Now.ToString() + "初始化完成");
         }
@@ -548,17 +582,6 @@ namespace WY_App
             //if (HslCommunication.plc_connect_result)
             //{
             //    HslCommunication._NetworkTcpDevice.Write(Parameters.plcParams.StartAdd, 1);
-            //    m_Pause = true;
-            //    Permission = "访客";
-            //    UpdataUI();
-            //    btn_Start.Enabled = false;
-            //    btn_Stop.Enabled = true;
-            //    btn_Connutius.Enabled = true;
-            //    btn_Connect.Enabled = false;
-            //    btn_SpecicationSetting.Enabled = false;
-            //    btn_Login.Enabled = false;
-            //    btn_Cam1.Enabled = false;
-            //    btn_Close_System.Enabled = false;
             //    HslCommunication._NetworkTcpDevice.Write(Parameters.plcParams.Trigger_Detection, 0);
             //}
             //else
@@ -566,13 +589,27 @@ namespace WY_App
             //    MessageBox.Show("PLC链接异常，请检查!");
             //    return;
             //}
-
-
+            if (!CamConnectResult)
+            {
+                if (MessageBox.Show("相机未连接，启动本地测试？", "开始检测提示", MessageBoxButtons.OKCancel) == DialogResult.Cancel)
+                {
+                    return;
+                }
+            }
+            m_Pause = true;
+            Permission = "访客";
+            btn_Start.Enabled = false;
+            btn_Stop.Enabled = true;
+            btn_Connutius.Enabled = true;
+            btn_Connect.Enabled = false;
+            btn_MotorSetting.Enabled = false;
+            btn_Login.Enabled = false;
+            btn_Cam1.Enabled = false;
+            btn_Close_System.Enabled = false;
+            btn_changeProduct.Enabled = false;          
             MainThread = new Thread(MainRun);
             MainThread.IsBackground = true;
-            MainThread.Start();
-            
-
+            MainThread.Start();       
         }
 
 
@@ -580,21 +617,21 @@ namespace WY_App
         {
             if (HslCommunication.plc_connect_result)
             {
-                HslCommunication._NetworkTcpDevice.Write(Parameters.plcParams.StartAdd, 0);
-                btn_Start.Enabled = true;
-                btn_Stop.Enabled = false;
-                btn_Connutius.Enabled = false;
-                btn_Connect.Enabled = false;
-                btn_SpecicationSetting.Enabled = false;
-                btn_Login.Enabled = true;
-                btn_Cam1.Enabled = false;
-                btn_Close_System.Enabled = false;
+                HslCommunication._NetworkTcpDevice.Write(Parameters.plcParams.StartAdd, 0);             
             }
             else
             {
                 MessageBox.Show("链接异常，请检查!");
+                return;
             }
-
+            btn_Start.Enabled = true;
+            btn_Stop.Enabled = false;
+            btn_Connutius.Enabled = false;
+            btn_Connect.Enabled = false;
+            btn_MotorSetting.Enabled = false;
+            btn_Login.Enabled = true;
+            btn_Cam1.Enabled = false;
+            btn_Close_System.Enabled = false;
             if (MainThread != null)
             {
                 MainThread.Abort();
@@ -613,74 +650,8 @@ namespace WY_App
                 m_Pause = true;
                 btn_Connutius.Text = "暂停";
             }
-
         }
-
-     
         #region 任务队列
-
-        public Func<int> Pop()
-        {
-            Monitor.Enter(m_obj);
-            //Action ac = null;
-            Func<int> ac = null;
-            try
-            {
-                if (m_List.Count > 0)
-                {
-                    ac = m_List.Dequeue();
-                }
-                else
-                {
-                    //Monitor.Wait(m_obj);
-                    //ac = m_List.Dequeue();
-                }
-            }
-            finally
-            {
-                Monitor.Exit(m_obj);
-            }
-            return ac;
-        }
-
-        public void Push()
-        {
-            Monitor.Enter(m_obj);
-
-            //Func<int> fuc = new Func<int>(ImgSaveIn);
-            Func<int> fuc1 = new Func<int>(ImgSaveOut);
-            //m_List.Enqueue(fuc);
-            m_List.Enqueue(fuc1);
-            Monitor.Pulse(m_obj);
-            Monitor.Exit(m_obj);
-        }
-
-        public void ThreadWork()
-        {
-            while (!isExit)
-            {
-                Func<int> work = Pop();
-
-                try
-                {
-                    if (work != null)
-                    {
-                        work();
-                    }
-                    else
-                    {
-                        break;
-                    }
-                }
-                catch (Exception)
-                {
-                    Console.WriteLine("error..");
-                    return;
-                }
-
-            }
-            Console.WriteLine("exit threadWork");
-        }
         #endregion
         public static string strDateTime;
         public static string strDateTimeDay;
@@ -735,12 +706,13 @@ namespace WY_App
                 btn_Connutius.Enabled = true;
                 btn_Login.Enabled = true;
                 btn_Connect.Enabled = true;
-                btn_SpecicationSetting.Enabled = true;
+                btn_MotorSetting.Enabled = true;
                 btn_Cam1.Enabled = true;
                 btn_Close_System.Enabled = true;
                 btn_Minimizid_System.Enabled = true;
                 lab_User.Text = Permission;
                 btn_changeProduct.Enabled = true;
+                btn_MotorSetting.Enabled= true;
             }
             else if (Permission == "管理员")
             {
@@ -749,12 +721,13 @@ namespace WY_App
                 btn_Connutius.Enabled = true;
                 btn_Login.Enabled = true;
                 btn_Connect.Enabled = true;
-                btn_SpecicationSetting.Enabled = true;
+                btn_MotorSetting.Enabled = true;
                 btn_Cam1.Enabled = true;
                 btn_Close_System.Enabled = true;
                 btn_Minimizid_System.Enabled = true;
                 lab_User.Text = Permission;
                  btn_changeProduct.Enabled = true;
+                btn_MotorSetting.Enabled = true;
             }
             else if (Permission == "操作员")
             {
@@ -763,12 +736,13 @@ namespace WY_App
                 btn_Connutius.Enabled = false;
                 btn_Login.Enabled = true;
                 btn_Connect.Enabled = false;
-                btn_SpecicationSetting.Enabled = false;
+                btn_MotorSetting.Enabled = false;
                 btn_Cam1.Enabled = false;
                 btn_Close_System.Enabled = false;
                 btn_Minimizid_System.Enabled = false;
                 lab_User.Text = Permission;
                 btn_changeProduct.Enabled = false;
+                btn_MotorSetting.Enabled = false;
             }
             else
             {
@@ -776,13 +750,14 @@ namespace WY_App
                 btn_Stop.Enabled = false;
                 btn_Connutius.Enabled = true;
                 btn_Connect.Enabled = false;
-                btn_SpecicationSetting.Enabled = false;
+                btn_MotorSetting.Enabled = false;
                 btn_Login.Enabled = true;
                 btn_Cam1.Enabled = false;
                 btn_Close_System.Enabled = false;
                 btn_Minimizid_System.Enabled = false;
                 lab_User.Text = Permission;
                 btn_changeProduct.Enabled = false;
+                btn_MotorSetting.Enabled = false;
             }
         }
         private void btn_Login_Click(object sender, EventArgs e)
@@ -792,7 +767,7 @@ namespace WY_App
             flg.ShowDialog();
             UpdataUI();
         }
-        public static string Product = "55";
+        public static string Product = "初始化";
         void Product_TransfEvent(string value)
         {
             Product = value;
@@ -807,7 +782,8 @@ namespace WY_App
         private delegate void InvokeHandler();
         private void btn_SpecicationSetting_Click(object sender, EventArgs e)
         {
-           
+            示教器 flg = new 示教器();
+            flg.ShowDialog();
         }
 
         private bool detection(HWindow hWindow,HObject hImage  )
@@ -821,12 +797,12 @@ namespace WY_App
                 {
                     dtRows[i] = new DataGridViewRow();
                     dtRows[i].CreateCells(uiDataGridView1);
-                    dtRows[i].Cells[0].Value = location[i].Row.ToString("0.0000");
-                    dtRows[i].Cells[1].Value = location[i].Colum.ToString("0.0000");
-                    dtRows[i].Cells[2].Value = location[i].Length1.ToString("0.0000");
-                    dtRows[i].Cells[3].Value = location[i].Length2.ToString("0.0000");
-                    dtRows[i].Cells[4].Value = location[i].Length3.ToString("0.0000");
-                    dtRows[i].Cells[5].Value = location[i].Length4.ToString("0.0000");
+                    dtRows[i].Cells[0].Value = location[i].Length1.ToString("0.0000");
+                    dtRows[i].Cells[1].Value = location[i].Length2.ToString("0.0000");
+                    dtRows[i].Cells[2].Value = location[i].Length3.ToString("0.0000");
+                    dtRows[i].Cells[3].Value = location[i].Length4.ToString("0.0000");
+                    
+                    
                 }
                 uiDataGridView1.Rows.AddRange(dtRows);
                 相机检测设置.WriteCsv(location);
@@ -836,7 +812,7 @@ namespace WY_App
 
         private void uiDataGridView1_RowStateChanged(object sender, DataGridViewRowStateChangedEventArgs e)
         {
-            
+            e.Row.HeaderCell.Value = string.Format("{0}", e.Row.Index + 1);
         }
 
         private void uiDataGridView1_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)

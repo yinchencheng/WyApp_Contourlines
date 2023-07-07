@@ -1,10 +1,10 @@
 <?xml version="1.0"?>
 <Specifications xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <检测矩形>
-    <Row1>627.64070351758789</Row1>
-    <Colum1>4998.09793814433</Colum1>
-    <Row2>14949.248743718594</Row2>
-    <Colum2>15079.747422680412</Colum2>
+    <Row1>306.3140703517588</Row1>
+    <Colum1>944.32474226804129</Colum1>
+    <Row2>13817.711055276382</Row2>
+    <Colum2>15544.242268041236</Colum2>
     <Length1>0</Length1>
     <Length2>0</Length2>
     <阈值>0</阈值>
@@ -15,9 +15,11 @@
   <SaveCropImage>false</SaveCropImage>
   <CropImagelength>500</CropImagelength>
   <MeanImageEnabled>false</MeanImageEnabled>
-  <ImageVerifyEnabled>false</ImageVerifyEnabled>
+  <ImageVerifyEnabled>true</ImageVerifyEnabled>
   <DetectionRect2Num>40</DetectionRect2Num>
   <DetectionCricleNum>0</DetectionCricleNum>
+  <ContourLineEnabled>true</ContourLineEnabled>
+  <DefectionEnabled>true</DefectionEnabled>
   <PixelResolutionRow>1</PixelResolutionRow>
   <PixelResolutionColum>1</PixelResolutionColum>
   <meanImageEnum>0</meanImageEnum>

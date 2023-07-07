@@ -22,6 +22,8 @@ using System.Data.Common;
 using OpenCvSharp;
 using static System.Windows.Forms.MonthCalendar;
 using System.Data.SqlTypes;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using SevenZip.Compression.LZ;
 
 namespace WY_App
 {
@@ -93,17 +95,22 @@ namespace WY_App
             {
                 uiComboBox1.Items.Add(i + 1);
             }
+            for (int i = 0; i < Parameters.specifications.DetectionRect2Num + Parameters.specifications.DetectionCricleNum; i++)
+            {
+                uiDataGridView2.Rows.Add();
+            }
             chk_MeanImageEnabled.Checked = Parameters.specifications.MeanImageEnabled;
             cmb_MeanImageList.DataSource = Enum.GetNames(typeof(Parameters.MeanImageEnum));
             cmb_MeanImageList.SelectedIndex = Parameters.specifications.meanImageEnum;
             cmb_Indication.SelectedIndex = 0;
             chk_SaveOrigalImage.Checked = Parameters.specifications.SaveOrigalImage;
             chk_SaveDefeatImage.Checked = Parameters.specifications.SaveDefeatImage;
-
+            checkBox2.Checked = Parameters.specifications.ContourLineEnabled;
+            checkBox3.Checked = Parameters.specifications.DefectionEnabled;
             num_DetectionRect2Num.Value = Parameters.specifications.DetectionRect2Num;
             txt_PixelResolutionRow.Value = Parameters.specifications.PixelResolutionRow;
             txt_PixelResolutionColumn.Value = Parameters.specifications.PixelResolutionColum;
-
+            checkBox1.Checked = Parameters.specifications.ImageVerifyEnabled;
 
             DataGridViewRow row0 = new DataGridViewRow();
             uiDataGridView1.Rows.Add(row0);
@@ -119,12 +126,12 @@ namespace WY_App
             DataGridViewRow row5 = new DataGridViewRow();
             uiDataGridView1.Rows.Add(row5);
 
-            uiDataGridView1.Rows[0].Cells[0].Value = "行(Y)坐标";
-            uiDataGridView1.Rows[1].Cells[0].Value = "列(X)坐标";
-            uiDataGridView1.Rows[2].Cells[0].Value = "行(Y)绝对值";
-            uiDataGridView1.Rows[3].Cells[0].Value = "列(X)绝对值";
-            uiDataGridView1.Rows[4].Cells[0].Value = "基准点距离";
-            uiDataGridView1.Rows[5].Cells[0].Value = "基准线距离";
+            uiDataGridView1.Rows[0].Cells[0].Value = "Y";
+            uiDataGridView1.Rows[1].Cells[0].Value = "X";
+            uiDataGridView1.Rows[2].Cells[0].Value = "Y距离";
+            uiDataGridView1.Rows[3].Cells[0].Value = "X距离";
+            uiDataGridView1.Rows[4].Cells[0].Value = "点距离";
+            uiDataGridView1.Rows[5].Cells[0].Value = "线距离";
         }
 
         private void btn_OpenTestimage_Click(object sender, EventArgs e)
@@ -230,8 +237,15 @@ namespace WY_App
             DateTime dtNow = System.DateTime.Now;  // 获取系统当前时间
             MainForm.strDateTime = dtNow.ToString("yyyyMMddHHmmss");
             MainForm.strDateTimeDay = dtNow.ToString("yyyy-MM-dd");
+            HOperatorSet.DispObj(MainForm.hImage, hWindow);
             Detection(hWindow,MainForm.hImage, ref locationsResult, ref detectionTime);
-            WriteCsv(locationsResult);
+            for(int i=0;i< locationsResult.Count();i++)
+            {
+                uiDataGridView2.Rows[i].Cells[0].Value = locationsResult[i].Length1.ToString("0.000");
+                uiDataGridView2.Rows[i].Cells[1].Value = locationsResult[i].Length2.ToString("0.000");
+                uiDataGridView2.Rows[i].Cells[2].Value = locationsResult[i].Length3.ToString("0.000");
+                uiDataGridView2.Rows[i].Cells[3].Value = locationsResult[i].Length4.ToString("0.000");
+            }    
             lab_detectionTime.Text = detectionTime;
         }
 
@@ -252,23 +266,29 @@ namespace WY_App
                 StreamWriter sw = new StreamWriter(fileName, true, Encoding.UTF8);
                 string str1 = "序号" + "," + "行(Y)坐标" + "," + "列(X)坐标" + "," + "行(Y)绝对值" + "," + "列(X)绝对值" + "," + "基准点距离" + "," + "基准线距离" + "\t\n";
                 sw.Write(str1);
-                sw.Close();
-
-               
+                sw.Close();             
             }
             StreamWriter swl = new StreamWriter(fileName, true, Encoding.UTF8);
-            for (int i = 0; i < Parameters.specifications.DetectionRect2Num; i++)
+            try
             {
-                string result;  
-                result = location[i].Row.ToString("0.0000") + "," +
-                location[i].Colum.ToString("0.0000") + "," +
-                location[i].Length1.ToString("0.0000") + "," +
-                location[i].Length2.ToString("0.0000") + "," +
-                location[i].Length3.ToString("0.0000") + "," +
-                location[i].Length4.ToString("0.0000");
-                string str = (i+1) + "," + result + "\t\n";
-                swl.Write(str);
+                for (int i = 0; i < Parameters.specifications.DetectionRect2Num; i++)
+                {
+                    string result;
+                    result = location[i].Row.ToString("0.0000") + "," +
+                    location[i].Colum.ToString("0.0000") + "," +
+                    location[i].Length1.ToString("0.0000") + "," +
+                    location[i].Length2.ToString("0.0000") + "," +
+                    location[i].Length3.ToString("0.0000") + "," +
+                    location[i].Length4.ToString("0.0000");
+                    string str = (i + 1) + "," + result + "\t\n";
+                    swl.Write(str);
+                }
             }
+            catch(Exception ex)
+            {
+
+            }
+           
             swl.Close();
         }
 
@@ -290,83 +310,120 @@ namespace WY_App
             }
             
         }
-        static Location[] locationsResult; 
-        public static void Detection(HWindow hwindow,HObject hImage ,ref Location[] locations,  ref string detectionTime)
+        static Location[] locationsResult;
+        public static void Detection(HWindow hwindow, HObject hImage, ref Location[] locations, ref string detectionTime)
         {
-            locations = new Location[Parameters.specifications.DetectionRect2Num+ Parameters.specifications.DetectionCricleNum];
             System.Diagnostics.Stopwatch stopwatch = new Stopwatch();
             stopwatch.Start(); //  开始监视代码运行时间
-
-            HOperatorSet.DispObj(hImage, hwindow);
-
-            HTuple IsOverlapping1 = new HTuple();
-            HTuple IsOverlapping2 = new HTuple();
-            try
+            HObject ho_Rectangle = new HObject();
+            HObject ho_RectangleReduce = new HObject();
+            HObject ho_Region = new HObject();
+            HObject ho_ConnectedRegions = new HObject();
+            HObject ho_SelectedRegions = new HObject();
+            ho_Rectangle.Dispose();
+            HOperatorSet.GenRectangle1(out ho_Rectangle, Parameters.specifications.检测矩形.Row1, Parameters.specifications.检测矩形.Colum1, Parameters.specifications.检测矩形.Row2, Parameters.specifications.检测矩形.Colum2);
+            HOperatorSet.SetDraw(hwindow, "margin");
+            HOperatorSet.SetColor(hwindow, "green");
+            HOperatorSet.DispObj(ho_Rectangle, hwindow);          
+            HOperatorSet.ReduceDomain(hImage, ho_Rectangle,out ho_RectangleReduce);
+            HObject ho_Contours, ho_SmoothedContours;
+            HOperatorSet.SetLineWidth(hwindow, 1);
+            HOperatorSet.Threshold(ho_RectangleReduce, out ho_Region, 0, 150);
+            ho_ConnectedRegions.Dispose();
+            HOperatorSet.Connection(ho_Region, out ho_ConnectedRegions);
+            ho_SelectedRegions.Dispose();
+            HOperatorSet.SelectShape(ho_ConnectedRegions, out ho_SelectedRegions, "area","and", 300000, 9999999);
+            HOperatorSet.GenContourRegionXld(ho_SelectedRegions, out ho_Contours, "border");
+            HOperatorSet.SmoothContoursXld(ho_Contours, out ho_SmoothedContours, 5);
+            HOperatorSet.DispObj(ho_SmoothedContours, hwindow);
+            ho_Rectangle.Dispose();
+            ho_Region.Dispose();
+            ho_ConnectedRegions.Dispose();
+            ho_SelectedRegions.Dispose();
+            ho_Contours.Dispose();
+            ho_Rectangle.Dispose();
+            ho_Region.Dispose();
+            if (Parameters.specifications.ContourLineEnabled)
             {
-                Halcon.DetectionHalconLine(0, hwindow, hImage, Parameters.detectionSpec, 200, ref BaseReault[0]);
-                Halcon.DetectionHalconLine(1, hwindow, hImage, Parameters.detectionSpec, 200, ref BaseReault[1]);
-                Halcon.DetectionHalconLine(2, hwindow, hImage, Parameters.detectionSpec, 200, ref BaseReault[2]);
-
-                HOperatorSet.SetColor(hWindow, "red");
-                HOperatorSet.IntersectionLines(BaseReault[0].Row1, BaseReault[0].Colum1, BaseReault[0].Row2, BaseReault[0].Colum2, BaseReault[1].Row1, BaseReault[1].Colum1, BaseReault[1].Row2, BaseReault[1].Colum2, out BaseReault[3].Row1, out BaseReault[3].Colum1, out IsOverlapping1);
-                HOperatorSet.DispCross(hWindow, BaseReault[3].Row1, BaseReault[3].Colum1, 60, 0);
-                HOperatorSet.IntersectionLines(BaseReault[0].Row1, BaseReault[0].Colum1, BaseReault[0].Row2, BaseReault[0].Colum2, BaseReault[2].Row1, BaseReault[2].Colum1, BaseReault[2].Row2, BaseReault[2].Colum2, out BaseReault[3].Row2, out BaseReault[3].Colum2, out IsOverlapping2);
-                HOperatorSet.DispCross(hWindow, BaseReault[3].Row2, BaseReault[3].Colum2, 60, 0);
-            }
-            catch
-            {
-                IsOverlapping1.Dispose();
-                IsOverlapping2.Dispose();
-                MessageBox.Show("基准检测失败，请确认");
-                return;
-            }
-            if (Parameters.specifications.ImageVerifyEnabled)
-            {              
+                locations = new Location[Parameters.specifications.DetectionRect2Num + Parameters.specifications.DetectionCricleNum];         
+                HTuple IsOverlapping1 = new HTuple();
+                HTuple IsOverlapping2 = new HTuple();
                 try
                 {
-                    for (uint i = 0; i < Parameters.specifications.DetectionRect2Num; i++)
-                    {
-                        Halcon.DetectionMeasurePos(i + 1, hwindow, hImage, BaseReault[3], Parameters.detectionSpec.decetionRect2[i], ref locations[i]);
-                    }
-                    for (uint i = 0; i < Parameters.specifications.DetectionCricleNum; i++)
-                    {
-                        Halcon.DetectionHalconCricle(hwindow, hImage, Parameters.detectionSpec.decetionCircle[i], Parameters.detectionSpec.decetionCircle[i].Row, Parameters.detectionSpec.decetionCircle[i].Colum, 50, ref pointReaultCricle);
-                        Halcon.DetectionCriclePos((uint)(i + 1), hWindow, hImage, BaseReault[3], pointReaultCricle, ref locations[Parameters.specifications.DetectionRect2Num + i]);
-                    }
+                    Halcon.DetectionHalconLine(0, hwindow, ho_RectangleReduce, Parameters.detectionSpec, 200, ref BaseReault[0]);
+                    Halcon.DetectionHalconLine(1, hwindow, ho_RectangleReduce, Parameters.detectionSpec, 200, ref BaseReault[1]);
+                    Halcon.DetectionHalconLine(2, hwindow, ho_RectangleReduce, Parameters.detectionSpec, 200, ref BaseReault[2]);
+
+                    HOperatorSet.SetColor(hWindow, "red");
+                    HOperatorSet.IntersectionLines(BaseReault[0].Row1, BaseReault[0].Colum1, BaseReault[0].Row2, BaseReault[0].Colum2, BaseReault[1].Row1, BaseReault[1].Colum1, BaseReault[1].Row2, BaseReault[1].Colum2, out BaseReault[3].Row1, out BaseReault[3].Colum1, out IsOverlapping1);
+                    HOperatorSet.DispCross(hWindow, BaseReault[3].Row1, BaseReault[3].Colum1, 600, 0);
+                    HOperatorSet.IntersectionLines(BaseReault[0].Row1, BaseReault[0].Colum1, BaseReault[0].Row2, BaseReault[0].Colum2, BaseReault[2].Row1, BaseReault[2].Colum1, BaseReault[2].Row2, BaseReault[2].Colum2, out BaseReault[3].Row2, out BaseReault[3].Colum2, out IsOverlapping2);
+                    HOperatorSet.DispCross(hWindow, BaseReault[3].Row2, BaseReault[3].Colum2, 600, 0);
+
+
+
                 }
                 catch
                 {
                     IsOverlapping1.Dispose();
                     IsOverlapping2.Dispose();
-                    MessageBox.Show("检测失败，请确认");
+                    MessageBox.Show("基准检测失败，请确认");
                     return;
                 }
-            }
-            else
-            {
-                try
+                if (Parameters.specifications.ImageVerifyEnabled)
                 {
-                    for (uint i = 0; i < Parameters.specifications.DetectionCricleNum; i++)
+                    try
                     {
-                        Halcon.DetectionHalconCricle(hwindow, hImage, Parameters.detectionSpec.decetionCircle[i], Parameters.detectionSpec.decetionCircle[i].Row, Parameters.detectionSpec.decetionCircle[i].Colum, 50, ref pointReaultCricle);
-                        Halcon.DetectionCriclePos((uint)(i + 1), hWindow, hImage, BaseReault[3], pointReaultCricle, ref locations[Parameters.specifications.DetectionRect2Num + i]);
+                        for (uint i = 0; i < Parameters.specifications.DetectionRect2Num; i++)
+                        {
+                            Halcon.DetectionMeasurePos (i + 1, hwindow, hImage, BaseReault[3], Parameters.detectionSpec.decetionRect2[i], ref locations[i]);
+                        }
+                        for (uint i = 0; i < Parameters.specifications.DetectionCricleNum; i++)
+                        {
+                            Halcon.DetectionHalconCricle(hwindow, ho_RectangleReduce, Parameters.detectionSpec.decetionCircle[i], Parameters.detectionSpec.decetionCircle[i].Row, Parameters.detectionSpec.decetionCircle[i].Colum, 50, ref pointReaultCricle);
+                            Halcon.DetectionCriclePos((uint)(i + 1), hWindow, ho_RectangleReduce, BaseReault[3], pointReaultCricle, ref locations[Parameters.specifications.DetectionRect2Num + i]);
+                        }
+                    }
+                    catch
+                    {
+                        IsOverlapping1.Dispose();
+                        IsOverlapping2.Dispose();
+                        MessageBox.Show("检测失败，请确认");
+                        return;
                     }
                 }
-                catch
+                else
                 {
-                    MessageBox.Show("检测失败，请确认");
-                    return;
+                    try
+                    {
+                        for (uint i = 0; i < Parameters.specifications.DetectionCricleNum; i++)
+                        {
+                            Halcon.DetectionHalconCricle(hwindow, ho_RectangleReduce, Parameters.detectionSpec.decetionCircle[i], Parameters.detectionSpec.decetionCircle[i].Row, Parameters.detectionSpec.decetionCircle[i].Colum, 50, ref pointReaultCricle);
+                            Halcon.DetectionCriclePos((uint)(i + 1), hWindow, ho_RectangleReduce, BaseReault[3], pointReaultCricle, ref locations[Parameters.specifications.DetectionRect2Num + i]);
+                        }
+                    }
+                    catch
+                    {
+                        MessageBox.Show("检测失败，请确认");
+                        return;
+                    }
+                    Halcon.DetectionLinePos(hWindow,hImage, ho_SmoothedContours, BaseReault[3], ref locations);
                 }
-                Halcon.DetectionLinePos(hWindow, hImage, BaseReault[3], Parameters.specifications.检测矩形, ref locations);
+                IsOverlapping1.Dispose();
+                IsOverlapping2.Dispose();
+                WriteCsv(locationsResult);
             }
-            IsOverlapping1.Dispose();
-            IsOverlapping2.Dispose();
+            if (Parameters.specifications.DefectionEnabled)
+            {
+                Halcon.DetectionMeasure(hwindow, hImage, ho_SmoothedContours);
+            }
+            ho_SmoothedContours.Dispose();
+            ho_RectangleReduce.Dispose();
             stopwatch.Stop(); //  停止监视
             TimeSpan timespan = stopwatch.Elapsed; //  获取当前实例测量得出的总时间
             detectionTime = timespan.TotalMilliseconds.ToString();  //  总毫秒数           
             
         }
-
         private void btn_DrawAOI_Click(object sender, EventArgs e)
         {
             HOperatorSet.DispObj(MainForm.hImage, hWindow);
@@ -414,11 +471,37 @@ namespace WY_App
         {
             HOperatorSet.DispObj(MainForm.hImage, hWindow);
             HObject ho_Rectangle=new HObject();
+            HObject ho_RectangleReduce = new HObject();
+            HObject ho_Region = new HObject();
+            HObject ho_ConnectedRegions = new HObject();
+            HObject ho_SelectedRegions = new HObject();
             ho_Rectangle.Dispose();
             HOperatorSet.GenRectangle1(out ho_Rectangle,Parameters.specifications.检测矩形.Row1, Parameters.specifications.检测矩形.Colum1, Parameters.specifications.检测矩形.Row2, Parameters.specifications.检测矩形.Colum2);
             //显示一下看效果
-            HOperatorSet.DispObj(ho_Rectangle, hWindow);;
-           
+            HOperatorSet.DispObj(ho_Rectangle, hWindow);
+
+            HOperatorSet.GenRectangle1(out ho_Rectangle, Parameters.specifications.检测矩形.Row1, Parameters.specifications.检测矩形.Colum1, Parameters.specifications.检测矩形.Row2, Parameters.specifications.检测矩形.Colum2);
+            HOperatorSet.SetDraw(hWindow, "margin");
+            HOperatorSet.SetColor(hWindow, "green");
+            HOperatorSet.ReduceDomain(MainForm.hImage, ho_Rectangle, out ho_RectangleReduce);
+            HObject ho_Contours, ho_SmoothedContours;
+            HOperatorSet.SetLineWidth(hWindow, 1);
+            HOperatorSet.Threshold(ho_RectangleReduce, out ho_Region, 0, 150);
+            ho_ConnectedRegions.Dispose();
+            HOperatorSet.Connection(ho_Region, out ho_ConnectedRegions);
+            ho_SelectedRegions.Dispose();
+            HOperatorSet.SelectShape(ho_ConnectedRegions, out ho_SelectedRegions, "area", "and", 300000, 9999999);
+            HOperatorSet.GenContourRegionXld(ho_SelectedRegions, out ho_Contours, "border");
+            HOperatorSet.SmoothContoursXld(ho_Contours, out ho_SmoothedContours, 5);
+            HOperatorSet.DispObj(ho_SmoothedContours, hWindow);
+            ho_Rectangle.Dispose();
+            ho_Region.Dispose();
+            ho_ConnectedRegions.Dispose();
+            ho_SelectedRegions.Dispose();
+            ho_Contours.Dispose();
+            ho_Rectangle.Dispose();
+            ho_Region.Dispose();
+
         }
 
 
@@ -565,6 +648,10 @@ namespace WY_App
         private void btn_CursorLocation_Click(object sender, EventArgs e)
         {
             Parameters.cursorLocation.Location = locationsResult;
+            Parameters.detectionSpec.BasePoint.Row = basePoint.Row;
+            Parameters.detectionSpec.BasePoint.Colum = basePoint.Colum;
+            Parameters.detectionSpec.BasePoint.Radius = basePoint.Radius;
+            XMLHelper.serialize<Parameters.DetectionSpec>(Parameters.detectionSpec, Parameters.commministion.productName + "/DetectionSpec.xml");
             XMLHelper.serialize<Parameters.CursorLocation>(Parameters.cursorLocation, Parameters.commministion.productName + "/CursorLocation.xml");
         }
 
@@ -591,11 +678,16 @@ namespace WY_App
 
         private void uiButton4_Click(object sender, EventArgs e)
         {
-            HOperatorSet.DispObj(MainForm.hImage, hWindow);
-            Halcon.DetectionDrawCriclaAOI(hWindow, MainForm.hImage, ref Parameters.detectionSpec.decetionCircle[uiComboBox1.SelectedIndex]);
+            try
+            {
+                HOperatorSet.DispObj(MainForm.hImage, hWindow);
+                Halcon.DetectionDrawCriclaAOI(hWindow, MainForm.hImage, ref Parameters.detectionSpec.decetionCircle[uiComboBox1.SelectedIndex]);
+            }
+            catch { }
+            
         }
-
-        private void uiButton6_Click(object sender, EventArgs e)
+        Cricle basePoint=new Cricle();
+        private void getMeasureBase()
         {
             HOperatorSet.DispObj(MainForm.hImage, hWindow);
             HTuple IsOverlapping = new HTuple();
@@ -608,26 +700,30 @@ namespace WY_App
                 HOperatorSet.SetColor(hWindow, "red");
                 HOperatorSet.IntersectionLines(BaseReault[0].Row1, BaseReault[0].Colum1, BaseReault[0].Row2, BaseReault[0].Colum2,
                     BaseReault[1].Row1, BaseReault[1].Colum1, BaseReault[1].Row2, BaseReault[1].Colum2, out BaseReault[3].Row1, out BaseReault[3].Colum1, out IsOverlapping);
-                HOperatorSet.DispCross(hWindow, BaseReault[3].Row1, BaseReault[3].Colum1, 60, 0);
+                HOperatorSet.DispCross(hWindow, BaseReault[3].Row1, BaseReault[3].Colum1, 600, 0);
 
                 HOperatorSet.IntersectionLines(BaseReault[0].Row1, BaseReault[0].Colum1, BaseReault[0].Row2, BaseReault[0].Colum2,
                     BaseReault[2].Row1, BaseReault[2].Colum1, BaseReault[2].Row2, BaseReault[2].Colum2, out BaseReault[3].Row2, out BaseReault[3].Colum2, out IsOverlapping);
-                HOperatorSet.DispCross(hWindow, BaseReault[3].Row2, BaseReault[3].Colum2, 60, 0);
-
-                Parameters.detectionSpec.BasePoint.Row = BaseReault[3].Row1;
-                Parameters.detectionSpec.BasePoint.Colum = BaseReault[3].Colum1;
+                HOperatorSet.DispCross(hWindow, BaseReault[3].Row2, BaseReault[3].Colum2, 600, 0);
+                basePoint.Row = BaseReault[3].Row1;
+                basePoint.Colum = BaseReault[3].Colum1;                
                 HTuple hv_Angle;
                 HOperatorSet.AngleLx(BaseReault[1].Row1, BaseReault[1].Colum1, BaseReault[1].Row2, BaseReault[1].Colum2, out hv_Angle);
-                Parameters.detectionSpec.BasePoint.Radius = 0;
-                hv_Angle.Dispose(); 
+                basePoint.Radius = hv_Angle;
+                hv_Angle.Dispose();
                 IsOverlapping.Dispose();
             }
             catch
             {
-                IsOverlapping.Dispose();             
+                IsOverlapping.Dispose();
                 MessageBox.Show("基准检测失败，请确认");
                 return;
             }
+        }
+
+        private void uiButton6_Click(object sender, EventArgs e)
+        {
+            getMeasureBase();
             XMLHelper.serialize<Parameters.Specifications>(Parameters.specifications, Parameters.commministion.productName + "/Specifications.xml");
         }
 
@@ -685,34 +781,6 @@ namespace WY_App
             decetionCricleNum = uiComboBox1.SelectedIndex;
         }
 
-        private void uiButton7_Click(object sender, EventArgs e)
-        {
-            locationsResult = new Location[100];
-            HOperatorSet.DispObj(MainForm.hImage, hWindow);
-            HTuple IsOverlapping1 = new HTuple();
-            HTuple IsOverlapping2 = new HTuple();
-            try
-            {
-                Halcon.DetectionHalconLine(0, hWindow, MainForm.hImage, Parameters.detectionSpec, 200, ref BaseReault[0]);
-                Halcon.DetectionHalconLine(1, hWindow, MainForm.hImage, Parameters.detectionSpec, 200, ref BaseReault[1]);
-                Halcon.DetectionHalconLine(2, hWindow, MainForm.hImage, Parameters.detectionSpec, 200, ref BaseReault[2]);
-
-                HOperatorSet.SetColor(hWindow, "red");
-                HOperatorSet.IntersectionLines(BaseReault[0].Row1, BaseReault[0].Colum1, BaseReault[0].Row2, BaseReault[0].Colum2, BaseReault[1].Row1, BaseReault[1].Colum1, BaseReault[1].Row2, BaseReault[1].Colum2, out BaseReault[3].Row1, out BaseReault[3].Colum1, out IsOverlapping1);
-                HOperatorSet.DispCross(hWindow, BaseReault[3].Row1, BaseReault[3].Colum1, 60, 0);
-                HOperatorSet.IntersectionLines(BaseReault[0].Row1, BaseReault[0].Colum1, BaseReault[0].Row2, BaseReault[0].Colum2, BaseReault[2].Row1, BaseReault[2].Colum1, BaseReault[2].Row2, BaseReault[2].Colum2, out BaseReault[3].Row2, out BaseReault[3].Colum2, out IsOverlapping2);
-                HOperatorSet.DispCross(hWindow, BaseReault[3].Row2, BaseReault[3].Colum2, 60, 0);
-            }
-            catch
-            {
-                IsOverlapping1.Dispose();
-                IsOverlapping2.Dispose();
-
-                return;
-            }
-            Halcon.DetectionLinePos(hWindow, MainForm.hImage, BaseReault[3], Parameters.specifications.检测矩形, ref locationsResult);
-        }
-
         private void PixelResolutionRow_Paint(object sender, PaintEventArgs e)
         {
 
@@ -726,6 +794,30 @@ namespace WY_App
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
             Parameters.specifications.ImageVerifyEnabled = checkBox1.Checked;
+        }
+
+        private void checkBox2_CheckedChanged(object sender, EventArgs e)
+        {
+            Parameters.specifications.ContourLineEnabled = checkBox2.Checked;
+        }
+
+        private void checkBox3_CheckedChanged(object sender, EventArgs e)
+        {
+            Parameters.specifications.DefectionEnabled = checkBox3.Checked;
+        }
+
+        private void hWindowControl1_HMouseDown(object sender, HMouseEventArgs e)
+        {
+            if (e.Clicks == 2)
+            {
+                HOperatorSet.SetPart(hWindow, 0, 0, -1, -1);//设置窗体的规格
+                HOperatorSet.DispObj(MainForm.hImage, hWindow);//显示图片
+            }
+        }
+
+        private void uiDataGridView2_RowStateChanged(object sender, DataGridViewRowStateChangedEventArgs e)
+        {
+            e.Row.HeaderCell.Value = string.Format("{0}", e.Row.Index + 1);
         }
     }
 }

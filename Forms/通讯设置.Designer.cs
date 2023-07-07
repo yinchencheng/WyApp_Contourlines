@@ -32,6 +32,7 @@
             this.bunifuElipse1 = new Bunifu.Framework.UI.BunifuElipse(this.components);
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.num_LogSaveDays = new Sunny.UI.UIDoubleUpDown();
             this.btn_Save = new Sunny.UI.UIButton();
             this.panel6 = new System.Windows.Forms.Panel();
             this.chk_ClientEnabled = new System.Windows.Forms.CheckBox();
@@ -40,7 +41,8 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
-            this.num_LogSaveDays = new Sunny.UI.UIDoubleUpDown();
+            this.label36 = new System.Windows.Forms.Label();
+            this.SNReadAdd = new Sunny.UI.UITextBox();
             this.txt_Completion_Add = new Sunny.UI.UITextBox();
             this.txt_StartAdd = new Sunny.UI.UITextBox();
             this.txt_Trigger_Detection = new Sunny.UI.UITextBox();
@@ -49,7 +51,6 @@
             this.label7 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.label21 = new System.Windows.Forms.Label();
-            this.label20 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             this.chk_PLCEnabled = new System.Windows.Forms.CheckBox();
             this.num_PLCPort = new Sunny.UI.UIDoubleUpDown();
@@ -70,6 +71,7 @@
             this.panel7 = new System.Windows.Forms.Panel();
             this.txt_ImageSavePath = new Sunny.UI.UITextBox();
             this.label10 = new System.Windows.Forms.Label();
+            this.label20 = new System.Windows.Forms.Label();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.btn_Close_System = new Sunny.UI.UIButton();
             this.panel4 = new System.Windows.Forms.Panel();
@@ -100,8 +102,6 @@
             this.uiTextBox3 = new Sunny.UI.UITextBox();
             this.uiTextBox2 = new Sunny.UI.UITextBox();
             this.txt_PointMoveStepAdd = new Sunny.UI.UITextBox();
-            this.label36 = new System.Windows.Forms.Label();
-            this.SNReadAdd = new Sunny.UI.UITextBox();
             this.tableLayoutPanel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.panel6.SuspendLayout();
@@ -131,7 +131,7 @@
             this.tableLayoutPanel1.RowCount = 2;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(463, 470);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(1200, 900);
             this.tableLayoutPanel1.TabIndex = 1;
             this.tableLayoutPanel1.Paint += new System.Windows.Forms.PaintEventHandler(this.tableLayoutPanel1_Paint);
             // 
@@ -151,10 +151,30 @@
             this.groupBox1.Margin = new System.Windows.Forms.Padding(0);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Padding = new System.Windows.Forms.Padding(0);
-            this.groupBox1.Size = new System.Drawing.Size(455, 411);
+            this.groupBox1.Size = new System.Drawing.Size(1191, 841);
             this.groupBox1.TabIndex = 10;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "参数设置";
+            // 
+            // num_LogSaveDays
+            // 
+            this.num_LogSaveDays.Decimal = 0;
+            this.num_LogSaveDays.DecimalPlaces = 0;
+            this.num_LogSaveDays.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.num_LogSaveDays.Location = new System.Drawing.Point(76, 572);
+            this.num_LogSaveDays.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.num_LogSaveDays.Maximum = 65535D;
+            this.num_LogSaveDays.Minimum = 0D;
+            this.num_LogSaveDays.MinimumSize = new System.Drawing.Size(100, 0);
+            this.num_LogSaveDays.Name = "num_LogSaveDays";
+            this.num_LogSaveDays.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.num_LogSaveDays.ShowText = false;
+            this.num_LogSaveDays.Size = new System.Drawing.Size(136, 25);
+            this.num_LogSaveDays.Step = 1D;
+            this.num_LogSaveDays.Style = Sunny.UI.UIStyle.Custom;
+            this.num_LogSaveDays.TabIndex = 46;
+            this.num_LogSaveDays.Text = "uiDoubleUpDown4";
+            this.num_LogSaveDays.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // btn_Save
             // 
@@ -162,7 +182,7 @@
             this.btn_Save.Enabled = false;
             this.btn_Save.FillColor = System.Drawing.Color.Black;
             this.btn_Save.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btn_Save.Location = new System.Drawing.Point(349, 306);
+            this.btn_Save.Location = new System.Drawing.Point(132, 619);
             this.btn_Save.MinimumSize = new System.Drawing.Size(1, 1);
             this.btn_Save.Name = "btn_Save";
             this.btn_Save.Size = new System.Drawing.Size(80, 39);
@@ -179,7 +199,7 @@
             this.panel6.Controls.Add(this.txt_ClientIP);
             this.panel6.Controls.Add(this.label1);
             this.panel6.Controls.Add(this.label2);
-            this.panel6.Location = new System.Drawing.Point(226, 123);
+            this.panel6.Location = new System.Drawing.Point(9, 436);
             this.panel6.Margin = new System.Windows.Forms.Padding(0);
             this.panel6.Name = "panel6";
             this.panel6.Size = new System.Drawing.Size(214, 90);
@@ -262,31 +282,35 @@
             this.panel3.Controls.Add(this.label7);
             this.panel3.Controls.Add(this.label8);
             this.panel3.Controls.Add(this.label21);
-            this.panel3.Location = new System.Drawing.Point(12, 186);
+            this.panel3.Location = new System.Drawing.Point(12, 184);
             this.panel3.Margin = new System.Windows.Forms.Padding(0);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(214, 159);
             this.panel3.TabIndex = 46;
             // 
-            // num_LogSaveDays
+            // label36
             // 
-            this.num_LogSaveDays.Decimal = 0;
-            this.num_LogSaveDays.DecimalPlaces = 0;
-            this.num_LogSaveDays.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.num_LogSaveDays.Location = new System.Drawing.Point(293, 259);
-            this.num_LogSaveDays.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.num_LogSaveDays.Maximum = 65535D;
-            this.num_LogSaveDays.Minimum = 0D;
-            this.num_LogSaveDays.MinimumSize = new System.Drawing.Size(100, 0);
-            this.num_LogSaveDays.Name = "num_LogSaveDays";
-            this.num_LogSaveDays.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.num_LogSaveDays.ShowText = false;
-            this.num_LogSaveDays.Size = new System.Drawing.Size(136, 25);
-            this.num_LogSaveDays.Step = 1D;
-            this.num_LogSaveDays.Style = Sunny.UI.UIStyle.Custom;
-            this.num_LogSaveDays.TabIndex = 46;
-            this.num_LogSaveDays.Text = "uiDoubleUpDown4";
-            this.num_LogSaveDays.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            this.label36.AutoSize = true;
+            this.label36.ForeColor = System.Drawing.SystemColors.Control;
+            this.label36.Location = new System.Drawing.Point(19, 132);
+            this.label36.Name = "label36";
+            this.label36.Size = new System.Drawing.Size(65, 12);
+            this.label36.TabIndex = 75;
+            this.label36.Text = "SN读取地址";
+            // 
+            // SNReadAdd
+            // 
+            this.SNReadAdd.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.SNReadAdd.Enabled = false;
+            this.SNReadAdd.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.SNReadAdd.Location = new System.Drawing.Point(89, 129);
+            this.SNReadAdd.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.SNReadAdd.MinimumSize = new System.Drawing.Size(1, 16);
+            this.SNReadAdd.Name = "SNReadAdd";
+            this.SNReadAdd.ShowText = false;
+            this.SNReadAdd.Size = new System.Drawing.Size(112, 21);
+            this.SNReadAdd.TabIndex = 74;
+            this.SNReadAdd.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // txt_Completion_Add
             // 
@@ -383,16 +407,6 @@
             this.label21.Size = new System.Drawing.Size(53, 12);
             this.label21.TabIndex = 44;
             this.label21.Text = "触发地址";
-            // 
-            // label20
-            // 
-            this.label20.AutoSize = true;
-            this.label20.ForeColor = System.Drawing.SystemColors.Control;
-            this.label20.Location = new System.Drawing.Point(233, 263);
-            this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(53, 12);
-            this.label20.TabIndex = 45;
-            this.label20.Text = "保存天数";
             // 
             // panel2
             // 
@@ -529,7 +543,7 @@
             this.btn_ChangePassword.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btn_ChangePassword.FillColor = System.Drawing.Color.Black;
             this.btn_ChangePassword.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btn_ChangePassword.Location = new System.Drawing.Point(241, 306);
+            this.btn_ChangePassword.Location = new System.Drawing.Point(24, 619);
             this.btn_ChangePassword.MinimumSize = new System.Drawing.Size(1, 1);
             this.btn_ChangePassword.Name = "btn_ChangePassword";
             this.btn_ChangePassword.Size = new System.Drawing.Size(81, 39);
@@ -546,7 +560,7 @@
             this.panel5.Controls.Add(this.txt_ServerIP);
             this.panel5.Controls.Add(this.label3);
             this.panel5.Controls.Add(this.label11);
-            this.panel5.Location = new System.Drawing.Point(226, 30);
+            this.panel5.Location = new System.Drawing.Point(9, 343);
             this.panel5.Margin = new System.Windows.Forms.Padding(0);
             this.panel5.Name = "panel5";
             this.panel5.Size = new System.Drawing.Size(214, 90);
@@ -621,7 +635,7 @@
             // 
             this.panel7.Controls.Add(this.txt_ImageSavePath);
             this.panel7.Controls.Add(this.label10);
-            this.panel7.Location = new System.Drawing.Point(226, 213);
+            this.panel7.Location = new System.Drawing.Point(9, 526);
             this.panel7.Margin = new System.Windows.Forms.Padding(0);
             this.panel7.Name = "panel7";
             this.panel7.Size = new System.Drawing.Size(214, 41);
@@ -652,6 +666,16 @@
             this.label10.TabIndex = 18;
             this.label10.Text = "保存路径";
             // 
+            // label20
+            // 
+            this.label20.AutoSize = true;
+            this.label20.ForeColor = System.Drawing.SystemColors.Control;
+            this.label20.Location = new System.Drawing.Point(16, 576);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(53, 12);
+            this.label20.TabIndex = 45;
+            this.label20.Text = "保存天数";
+            // 
             // tableLayoutPanel2
             // 
             this.tableLayoutPanel2.ColumnCount = 2;
@@ -670,7 +694,7 @@
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 1;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(463, 40);
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(1200, 40);
             this.tableLayoutPanel2.TabIndex = 0;
             // 
             // btn_Close_System
@@ -682,7 +706,7 @@
             this.btn_Close_System.FillPressColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
             this.btn_Close_System.FillSelectedColor = System.Drawing.Color.Red;
             this.btn_Close_System.Font = new System.Drawing.Font("楷体", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btn_Close_System.Location = new System.Drawing.Point(426, 3);
+            this.btn_Close_System.Location = new System.Drawing.Point(1163, 3);
             this.btn_Close_System.MinimumSize = new System.Drawing.Size(1, 1);
             this.btn_Close_System.Name = "btn_Close_System";
             this.btn_Close_System.RectColor = System.Drawing.Color.Red;
@@ -703,7 +727,7 @@
             this.panel4.Location = new System.Drawing.Point(0, 0);
             this.panel4.Margin = new System.Windows.Forms.Padding(0);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(423, 40);
+            this.panel4.Size = new System.Drawing.Size(1160, 40);
             this.panel4.TabIndex = 11;
             this.panel4.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panel4_MouseDown);
             this.panel4.MouseMove += new System.Windows.Forms.MouseEventHandler(this.panel4_MouseMove);
@@ -1086,35 +1110,11 @@
             this.txt_PointMoveStepAdd.TabIndex = 58;
             this.txt_PointMoveStepAdd.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // label36
-            // 
-            this.label36.AutoSize = true;
-            this.label36.ForeColor = System.Drawing.SystemColors.Control;
-            this.label36.Location = new System.Drawing.Point(19, 132);
-            this.label36.Name = "label36";
-            this.label36.Size = new System.Drawing.Size(65, 12);
-            this.label36.TabIndex = 75;
-            this.label36.Text = "SN读取地址";
-            // 
-            // SNReadAdd
-            // 
-            this.SNReadAdd.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.SNReadAdd.Enabled = false;
-            this.SNReadAdd.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.SNReadAdd.Location = new System.Drawing.Point(89, 129);
-            this.SNReadAdd.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.SNReadAdd.MinimumSize = new System.Drawing.Size(1, 16);
-            this.SNReadAdd.Name = "SNReadAdd";
-            this.SNReadAdd.ShowText = false;
-            this.SNReadAdd.Size = new System.Drawing.Size(112, 21);
-            this.SNReadAdd.TabIndex = 74;
-            this.SNReadAdd.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
             // 通讯设置
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(463, 470);
+            this.ClientSize = new System.Drawing.Size(1200, 900);
             this.Controls.Add(this.tableLayoutPanel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "通讯设置";

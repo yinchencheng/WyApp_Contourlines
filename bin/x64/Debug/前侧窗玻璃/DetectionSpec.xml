@@ -2,33 +2,33 @@
 <DetectionSpec xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <baseRect1>
     <Rect1>
-      <Row1>9873.8718592964833</Row1>
-      <Colum1>14562.469072164948</Colum1>
-      <Row2>11130.153266331658</Row2>
-      <Colum2>14467.458762886597</Colum2>
-      <Length1>500</Length1>
-      <Length2>2</Length2>
-      <阈值>10</阈值>
-      <极性 />
-      <simga>1</simga>
-    </Rect1>
-    <Rect1>
-      <Row1>1364.6591289782245</Row1>
-      <Colum1>7056.6546391752581</Colum1>
-      <Row2>1666.1666666666667</Row2>
-      <Colum2>10276.448453608247</Colum2>
-      <Length1>500</Length1>
+      <Row1>5620.5653266331656</Row1>
+      <Colum1>3467.3762886597938</Colum1>
+      <Row2>8642.39447236181</Row2>
+      <Colum2>3456.819587628866</Colum2>
+      <Length1>200</Length1>
       <Length2>10</Length2>
-      <阈值>10</阈值>
+      <阈值>30</阈值>
+      <极性 />
+      <simga>3</simga>
+    </Rect1>
+    <Rect1>
+      <Row1>2216.6658291457288</Row1>
+      <Colum1>4259.1288659793818</Colum1>
+      <Row2>1429.3693467336684</Row2>
+      <Colum2>5905.9742268041236</Colum2>
+      <Length1>200</Length1>
+      <Length2>10</Length2>
+      <阈值>20</阈值>
       <极性 />
       <simga>1</simga>
     </Rect1>
     <Rect1>
-      <Row1>13960.974036850921</Row1>
-      <Colum1>10962.634020618556</Colum1>
-      <Row2>14161.97906197655</Row2>
-      <Colum2>13496.242268041236</Colum2>
-      <Length1>500</Length1>
+      <Row1>12474.675879396986</Row1>
+      <Colum1>3910.7577319587631</Colum1>
+      <Row2>12752.545226130653</Row2>
+      <Colum2>6328.2422680412374</Colum2>
+      <Length1>200</Length1>
       <Length2>10</Length2>
       <阈值>10</阈值>
       <极性 />
@@ -37,9 +37,9 @@
   </baseRect1>
   <decetionRect2>
     <Rect2>
-      <Row>6185.84840871022</Row>
-      <Colum>13084.5309278351</Colum>
-      <Phi>-2.70480774554779</Phi>
+      <Row>10729.087939698493</Row>
+      <Colum>5001.0612113402058</Colum>
+      <Phi>1.7561501067248488</Phi>
       <Length1>100</Length1>
       <Length2>20</Length2>
       <阈值>20</阈值>
@@ -1060,8 +1060,8 @@
     </Cricle>
   </decetionCircle>
   <BasePoint>
-    <Row>4578.0942744237382</Row>
-    <Colum>5438.6524671317047</Colum>
+    <Row>143.76778307905244</Row>
+    <Colum>5363.6967775505336</Colum>
     <Radius>0</Radius>
   </BasePoint>
 </DetectionSpec>

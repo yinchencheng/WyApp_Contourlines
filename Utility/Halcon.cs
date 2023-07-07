@@ -1,5 +1,6 @@
 ﻿using HalconDotNet;
 using OpenCvSharp;
+using OpenCvSharp.Flann;
 using SevenZip.Compression.LZ;
 using System;
 using System.Collections.Generic;
@@ -375,7 +376,7 @@ namespace WY_App.Utility
                 HOperatorSet.DispCross(hWindow, hv_RowEdge1, hv_ColumnEdge1, 60, Decetionrect2.Phi);
                 
                 HOperatorSet.SetColor(hWindow, "green");
-                HOperatorSet.SetFont(hWindow, "-黑体-8-*-1-*-*-1-");
+                HOperatorSet.SetFont(hWindow, "-黑体-6-*-1-*-*-1-");
                 HOperatorSet.SetTposition(hWindow, hv_RowEdge1, hv_ColumnEdge1);
                 HOperatorSet.WriteString(hWindow, "点:" + i);
                 HOperatorSet.SetTposition(hWindow, 200 * i, 100);
@@ -406,191 +407,257 @@ namespace WY_App.Utility
             return true;
         }
 
-        public static bool DetectionLinePos( HWindow hWindow, HObject hImage, HRect1 hRect1,Rect1 Decetionrect2, ref Location[] rect2Result)
+        public static bool DetectionLinePos( HWindow hv_ExpDefaultWinHandle, HObject ho_Image, HObject ho_SmoothedContours, HRect1 hRect1, ref Location[] rect2Result)
         {
-
-            HOperatorSet.SetColor(hWindow, "green");
-            HOperatorSet.SetDraw(hWindow, "margin");
-
-            HObject ho_Rectangle, ho_ImageReduced1;
-            HObject ho_Region, ho_RegionFillUp, ho_ConnectedRegions;
-            HObject ho_SelectedRegions, ho_ImageReduced, ho_Contours;
-            HObject ho_Cross = null, ho_Contour = null;
-
-            // Local control variables 
-
-            HTuple hv_WindowHandle = new HTuple(), hv_Width = new HTuple();
-            HTuple hv_Height = new HTuple(), hv_Row11 = new HTuple();
-            HTuple hv_Column1 = new HTuple(), hv_Row2 = new HTuple();
-            HTuple hv_Column2 = new HTuple(), hv_Area = new HTuple();
-            HTuple hv_Row = new HTuple(), hv_Column = new HTuple();
-            HTuple hv_len = new HTuple(), hv_num_1 = new HTuple();
-            HTuple hv_Row1 = new HTuple(), hv_Col1 = new HTuple();
-            HTuple hv_Length = new HTuple(), hv_index = new HTuple();
-            HTuple hv_shapeParam = new HTuple(), hv_MetrologyHandle = new HTuple();
-            HTuple hv_Index = new HTuple(), hv_Parameter = new HTuple();
-            // Initialize local and output iconic variables 
-            HOperatorSet.GenEmptyObj(out ho_Rectangle);
-            HOperatorSet.GenEmptyObj(out ho_ImageReduced1);
-            HOperatorSet.GenEmptyObj(out ho_Region);
-            HOperatorSet.GenEmptyObj(out ho_RegionFillUp);
-            HOperatorSet.GenEmptyObj(out ho_ConnectedRegions);
-            HOperatorSet.GenEmptyObj(out ho_SelectedRegions);
-            HOperatorSet.GenEmptyObj(out ho_ImageReduced);
-            HOperatorSet.GenEmptyObj(out ho_Contours);
-            HOperatorSet.GenEmptyObj(out ho_Cross);
-            HOperatorSet.GenEmptyObj(out ho_Contour);
-            //dev_close_window(...);
+            HOperatorSet.SetColor(hv_ExpDefaultWinHandle, "green");
+            HOperatorSet.SetDraw(hv_ExpDefaultWinHandle, "margin");
+            HObject ho_ObjectSelected;
+            HObject ho_Rectangle=new HObject();
+            HTuple hv_Row1 = new HTuple();
+            HTuple hv_Column1 = new HTuple(), hv_Row21 = new HTuple();
+            HTuple hv_Column21 = new HTuple(), hv_Number = new HTuple();
+            HTuple hv_Row = new HTuple(), hv_Col = new HTuple(), hv_Angles = new HTuple();
+            HTuple hv_Index = new HTuple(), hv_MeasureHandle = new HTuple();
+            HTuple hv_RowEdge = new HTuple(), hv_ColumnEdge = new HTuple();
+            HTuple hv_Amplitude = new HTuple(), hv_Distance = new HTuple();
+            HOperatorSet.GenEmptyObj(out ho_ObjectSelected);
             //dev_open_window(...);
-
-            hv_Width.Dispose(); hv_Height.Dispose();
-            HOperatorSet.GetImageSize(hImage, out hv_Width, out hv_Height);
-            ho_Rectangle.Dispose();
-            HOperatorSet.GenRectangle1(out ho_Rectangle, Decetionrect2.Row1, Decetionrect2.Colum1, Decetionrect2.Row2, Decetionrect2.Colum2);
-            ho_ImageReduced1.Dispose();
-            HOperatorSet.ReduceDomain(hImage, ho_Rectangle, out ho_ImageReduced1);
-            ho_Region.Dispose();
-
-
-            HOperatorSet.FastThreshold(ho_ImageReduced1, out ho_Region, 0, 140, 5);
-
-            //Segment a region containing the edges
-            //基于全局阈值的图像快速阈值化
-            //填充区域中的洞
-            ho_RegionFillUp.Dispose();
-            HOperatorSet.FillUp(ho_Region, out ho_RegionFillUp);
-            hv_Area.Dispose(); hv_Row.Dispose(); hv_Column.Dispose();
-            HOperatorSet.AreaCenter(ho_RegionFillUp, out hv_Area, out hv_Row, out hv_Column);
-            //连接区域，连在一起的作为一个区域，这样就将不连接的区域打散
-            ho_ConnectedRegions.Dispose();
-            HOperatorSet.Connection(ho_RegionFillUp, out ho_ConnectedRegions);
-            //按区域面积（以象素为单位的）选择目标区域
-            //这里我们要找到设备操作书的位置
-            ho_SelectedRegions.Dispose();
-            HOperatorSet.SelectShape(ho_ConnectedRegions, out ho_SelectedRegions, "area",
-                "and", 5000, 1000000000);
-            //提取操作书区域的图像
-            ho_ImageReduced.Dispose();
-            HOperatorSet.ReduceDomain(hImage, ho_SelectedRegions, out ho_ImageReduced);
-            HOperatorSet.SetDraw(hWindow, "margin");
-
-            //显示一下看效果
-            
-            //HOperatorSet.DispObj(ho_ImageReduced, hWindow);
-            HOperatorSet.DispCross(hWindow, hv_Row, hv_Column, 60, 0);
-            ho_Contours.Dispose();
-            HOperatorSet.GenContourRegionXld(ho_ImageReduced, out ho_Contours, "border");
-            HOperatorSet.DispObj(ho_Contours,hWindow);
-            hv_len.Dispose();
-            HOperatorSet.LengthXld(ho_Contours, out hv_len);
-            hv_num_1.Dispose();
-            HOperatorSet.ContourPointNumXld(ho_Contours, out hv_num_1);
-            hv_Row1.Dispose(); hv_Col1.Dispose();
-            HOperatorSet.GetContourXld(ho_Contours, out hv_Row1, out hv_Col1);
-            hv_Length.Dispose();
-            HOperatorSet.TupleLength(hv_Row1, out hv_Length);
-            HTuple end_val32 = hv_Length;
-            HTuple step_val32 = hv_Length/ Parameters.specifications.DetectionRect2Num;
-            rect2Result = new Location[100];
-            for (hv_index = 1; hv_index.Continue(end_val32- step_val32, step_val32); hv_index = hv_index.TupleAdd(step_val32))
+            HOperatorSet.SetDraw(hv_ExpDefaultWinHandle, "margin");
+            HOperatorSet.SetLineWidth(hv_ExpDefaultWinHandle, 1);
+            hv_Number.Dispose();
+            hv_Number = 1000;
+            hv_Row.Dispose(); hv_Col.Dispose();
+            HOperatorSet.GetContourXld(ho_SmoothedContours, out hv_Row, out hv_Col);
+            hv_Angles.Dispose();
+            HOperatorSet.GetContourAngleXld(ho_SmoothedContours, "abs", "range", 3, out hv_Angles);
+            //HOperatorSet.DispObj(ho_Image, hv_ExpDefaultWinHandle);
+            HOperatorSet.DispObj(ho_SmoothedContours, hv_ExpDefaultWinHandle);
+            HOperatorSet.SetDraw(hv_ExpDefaultWinHandle, "margin");
+            HTuple end_val23 = Parameters.specifications.DetectionRect2Num;
+            HTuple step_val23 = 1;
+            rect2Result = new Location[end_val23+1];
+            try
             {
-                int index = hv_index / step_val32;
-                hv_shapeParam.Dispose();
-                using (HDevDisposeHelper dh = new HDevDisposeHelper())
+                for (hv_Index = 0; hv_Index.Continue(end_val23, step_val23); hv_Index = hv_Index.TupleAdd(step_val23))
                 {
-                    hv_shapeParam = new HTuple();
-                    hv_shapeParam = hv_shapeParam.TupleConcat((hv_Row1.TupleSelect(hv_index)) - 10);
-                    hv_shapeParam = hv_shapeParam.TupleConcat((hv_Col1.TupleSelect(hv_index)) - 10);
-                    hv_shapeParam = hv_shapeParam.TupleConcat((hv_Row1.TupleSelect(hv_index)) + 10);
-                    hv_shapeParam = hv_shapeParam.TupleConcat((hv_Col1.TupleSelect(hv_index)) + 10);
-                }
+                    using (HDevDisposeHelper dh = new HDevDisposeHelper())
+                    {
+                        ho_Rectangle.Dispose();
+                        HOperatorSet.GenRectangle2(out ho_Rectangle, hv_Row.TupleSelect(hv_Number * hv_Index),hv_Col.TupleSelect(hv_Number * hv_Index), (hv_Angles.TupleSelect(hv_Number * hv_Index)) + ((new HTuple(90)).TupleRad()), 50, 10);
+                        HOperatorSet.SetColor(hv_ExpDefaultWinHandle, "yellow");
+                        HOperatorSet.DispObj(ho_Rectangle, hv_ExpDefaultWinHandle);
+                    }
+                    using (HDevDisposeHelper dh = new HDevDisposeHelper())
+                    {
+                        hv_MeasureHandle.Dispose();
+                        HOperatorSet.GenMeasureRectangle2(hv_Row.TupleSelect(hv_Number * hv_Index), hv_Col.TupleSelect(hv_Number * hv_Index), (hv_Angles.TupleSelect(hv_Number * hv_Index)) + ((new HTuple(90)).TupleRad()), 20, 10, hv_Width, hv_Height, "nearest_neighbor", out hv_MeasureHandle);
+                        Parameters.detectionSpec.decetionRect2[hv_Index].Row = hv_Row.TupleSelect(hv_Number * hv_Index);
+                        Parameters.detectionSpec.decetionRect2[hv_Index].Colum = hv_Col.TupleSelect(hv_Number * hv_Index);
+                        Parameters.detectionSpec.decetionRect2[hv_Index].Phi = (hv_Angles.TupleSelect(hv_Number * hv_Index)) + ((new HTuple(90)).TupleRad());
+                        Parameters.detectionSpec.decetionRect2[hv_Index].Length1 = 20;
+                        Parameters.detectionSpec.decetionRect2[hv_Index].Length2 = 10;
+                    }
+                    hv_RowEdge.Dispose(); hv_ColumnEdge.Dispose(); hv_Amplitude.Dispose(); hv_Distance.Dispose();
+                    HOperatorSet.MeasurePos(ho_Image, hv_MeasureHandle, Parameters.detectionSpec.decetionRect2[0].simga, Parameters.detectionSpec.decetionRect2[0].阈值, Parameters.detectionSpec.decetionRect2[0].极性, "first",
+                        out hv_RowEdge, out hv_ColumnEdge, out hv_Amplitude, out hv_Distance);
+                    
 
-                //创建测量句柄
-                hv_MetrologyHandle.Dispose();
-                HOperatorSet.CreateMetrologyModel(out hv_MetrologyHandle);
-                //添加测量对象
-                HOperatorSet.SetMetrologyModelImageSize(hv_MetrologyHandle, hv_Width, hv_Height);
-                hv_Index.Dispose();
-                HOperatorSet.AddMetrologyObjectGeneric(hv_MetrologyHandle, "line", hv_shapeParam,100, 2, 1, 20, new HTuple(), new HTuple(), out hv_Index);
-
-                //执行测量，获取边缘点集
-                HOperatorSet.SetColor(hWindow, "yellow");
-                HOperatorSet.ApplyMetrologyModel(hImage, hv_MetrologyHandle);
-                ho_Contours.Dispose(); hv_Row.Dispose(); hv_Column.Dispose();
-                HOperatorSet.GetMetrologyObjectMeasures(out ho_Contours, hv_MetrologyHandle,"all", "all", out hv_Row, out hv_Column);
-                HOperatorSet.DispObj(ho_Contours, hWindow);
-                HOperatorSet.SetColor(hWindow, "red");
-                ho_Cross.Dispose();
-                HOperatorSet.GenCrossContourXld(out ho_Cross, hv_Row, hv_Column, 6, 0.785398);
-                HOperatorSet.DispObj(ho_Cross, hWindow);
-                //获取最终测量数据和轮廓线
-                HOperatorSet.SetColor(hWindow, "green");
-                HOperatorSet.SetLineWidth(hWindow, 1);
-                hv_Parameter.Dispose();
-                HOperatorSet.GetMetrologyObjectResult(hv_MetrologyHandle, "all", "all", "result_type","all_param", out hv_Parameter);
-                if(hv_Parameter.Length==4)
-                {
-                    rect2Result[index].Row = (hv_Parameter[0] + hv_Parameter[2]) / 2;
-                    rect2Result[index].Colum = (hv_Parameter[1] + hv_Parameter[3]) / 2;
-                    HOperatorSet.DispCross(hWindow, rect2Result[index].Row, rect2Result[index].Colum, 200, 0);
-                    rect2Result[index].Row = rect2Result[index].Row * Parameters.specifications.PixelResolutionRow;
-                    rect2Result[index].Colum = rect2Result[index].Colum * Parameters.specifications.PixelResolutionColum;
-                    rect2Result[index].Length1 = Math.Abs(rect2Result[index].Row - hRect1.Row1.D) * Parameters.specifications.PixelResolutionRow;
-                    rect2Result[index].Length2 = Math.Abs(rect2Result[index].Colum - hRect1.Colum1.D) * Parameters.specifications.PixelResolutionColum;
-                    rect2Result[index].Length3 = Math.Sqrt(rect2Result[index].Length1 * rect2Result[index].Length1 + rect2Result[index].Length2 * rect2Result[index].Length2);
+                    rect2Result[hv_Index].Row = hv_RowEdge.D * Parameters.specifications.PixelResolutionRow;
+                    rect2Result[hv_Index].Colum = hv_ColumnEdge.D * Parameters.specifications.PixelResolutionColum;
+                    rect2Result[hv_Index].Length1 = Math.Abs(hv_RowEdge.D - hRect1.Row1.D) * Parameters.specifications.PixelResolutionRow;
+                    rect2Result[hv_Index].Length2 = Math.Abs(hv_ColumnEdge.D - hRect1.Colum1.D) * Parameters.specifications.PixelResolutionColum;
+                    rect2Result[hv_Index].Length3 = Math.Sqrt(rect2Result[hv_Index].Length1 * rect2Result[hv_Index].Length1 + rect2Result[hv_Index].Length2 * rect2Result[hv_Index].Length2);
                     HTuple Length4 = new HTuple();
-                    HOperatorSet.DistancePl(rect2Result[index].Row, rect2Result[index].Colum, hRect1.Row1, hRect1.Colum1, hRect1.Row2, hRect1.Colum2, out Length4);
-                    rect2Result[index].Length4 = Length4.D * Parameters.specifications.PixelResolutionColum;
-                    HOperatorSet.SetColor(hWindow, "green");
-                    HOperatorSet.SetFont(hWindow, "-黑体-8-*-1-*-*-1-");
-                    HOperatorSet.SetTposition(hWindow, rect2Result[index].Row, rect2Result[index].Colum);
-                    HOperatorSet.WriteString(hWindow, "点:" + index);
-                    HOperatorSet.SetTposition(hWindow, 200 * index, 100);
-                    HOperatorSet.WriteString(hWindow, "点:" + index+ "DY:" + rect2Result[index].Length1.ToString("0.000")+ "DX:" + rect2Result[index].Length2.ToString("0.000")+ "PO:" + rect2Result[index].Length3.ToString("0.000")+ "PL:" + rect2Result[index].Length4.ToString("0.000"));                  
+                    HOperatorSet.DistancePl(hv_RowEdge, hv_ColumnEdge, hRect1.Row1, hRect1.Colum1, hRect1.Row2, hRect1.Colum2, out Length4);
+                    rect2Result[hv_Index].Length4 = Length4.D * Parameters.specifications.PixelResolutionColum;
+                    using (HDevDisposeHelper dh = new HDevDisposeHelper())
+                    {
+                        HOperatorSet.SetColor(hv_ExpDefaultWinHandle, "red");
+                        HOperatorSet.DispCross(hv_ExpDefaultWinHandle, hv_RowEdge, hv_ColumnEdge, 60,
+                            (hv_Angles.TupleSelect(hv_Number * hv_Index)) + ((new HTuple(90)).TupleRad()
+                            ));
+                    }
+                    HOperatorSet.SetColor(hv_ExpDefaultWinHandle, "green");
+                    HOperatorSet.SetFont(hv_ExpDefaultWinHandle, "-黑体-6-*-1-*-*-1-");
+                    HOperatorSet.SetTposition(hv_ExpDefaultWinHandle, hv_RowEdge, hv_ColumnEdge);
+                    HOperatorSet.WriteString(hv_ExpDefaultWinHandle, "点:" + hv_Index);
+                    HOperatorSet.SetTposition(hv_ExpDefaultWinHandle, 250 * (hv_Index+1), 100);
+                    HOperatorSet.WriteString(hv_ExpDefaultWinHandle, "点:" + hv_Index + "DY:" + rect2Result[hv_Index].Length1.ToString("0.000") + "DX:" + rect2Result[hv_Index].Length2.ToString("0.000") + "PO:" + rect2Result[hv_Index].Length3.ToString("0.000") + "PL:" + rect2Result[hv_Index].Length4.ToString("0.000"));
                 }
-                else
-                {
-                    rect2Result[index].Row = 0;
-                    rect2Result[index].Colum = 0;
-                }
-                ho_Contour.Dispose();
-                HOperatorSet.GetMetrologyObjectResultContour(out ho_Contour, hv_MetrologyHandle,"all", "all", 1.5);
-                HOperatorSet.DispObj(ho_Contour, hWindow);
-                //释放测量句柄
-                HOperatorSet.ClearMetrologyModel(hv_MetrologyHandle);
-
             }
-            ho_Rectangle.Dispose();
-            ho_ImageReduced1.Dispose();
-            ho_Region.Dispose();
-            ho_RegionFillUp.Dispose();
-            ho_ConnectedRegions.Dispose();
-            ho_SelectedRegions.Dispose();
-            ho_ImageReduced.Dispose();
-            ho_Contours.Dispose();
-            ho_Cross.Dispose();
-            ho_Contour.Dispose();
-
-            hv_WindowHandle.Dispose();
-            hv_Width.Dispose();
-            hv_Height.Dispose();
-            hv_Row11.Dispose();
-            hv_Column1.Dispose();
-            hv_Row2.Dispose();
-            hv_Column2.Dispose();
-            hv_Area.Dispose();
-            hv_Row.Dispose();
-            hv_Column.Dispose();
-            hv_len.Dispose();
-            hv_num_1.Dispose();
+            catch (Exception ex)
+            { 
+           
+            }            
+            //ho_SmoothedContours.Dispose();
+            ho_ObjectSelected.Dispose();
             hv_Row1.Dispose();
-            hv_Col1.Dispose();
-            hv_Length.Dispose();
-            hv_index.Dispose();
-            hv_shapeParam.Dispose();
-            hv_MetrologyHandle.Dispose();
+            hv_Column1.Dispose();
+            hv_Row21.Dispose();
+            hv_Column21.Dispose();
+            hv_Number.Dispose();
+            hv_Row.Dispose();
+            hv_Col.Dispose();
+            hv_Angles.Dispose();
             hv_Index.Dispose();
-            hv_Parameter.Dispose();
+            hv_MeasureHandle.Dispose();
+            hv_RowEdge.Dispose();
+            hv_ColumnEdge.Dispose();
+            hv_Amplitude.Dispose();
+            hv_Distance.Dispose();
+
+
+
+            //HObject ho_ConnectedRegions;
+            //HObject ho_SelectedRegions, ho_ImageReduced, ho_Contours;
+            //HObject ho_Cross = null, ho_Contour = null;
+
+            //// Local control variables 
+
+            //HTuple hv_WindowHandle = new HTuple(), hv_Row11 = new HTuple();
+            //HTuple hv_Column1 = new HTuple(), hv_Row2 = new HTuple();
+            //HTuple hv_Column2 = new HTuple(), hv_Area = new HTuple();
+            //HTuple hv_Row = new HTuple(), hv_Column = new HTuple();
+            //HTuple hv_len = new HTuple(), hv_num_1 = new HTuple();
+            //HTuple hv_Row1 = new HTuple(), hv_Col1 = new HTuple();
+            //HTuple hv_Length = new HTuple(), hv_index = new HTuple();
+            //HTuple hv_shapeParam = new HTuple(), hv_MetrologyHandle = new HTuple();
+            //HTuple hv_Index = new HTuple(), hv_Parameter = new HTuple();
+            //// Initialize local and output iconic variables 
+
+            //HOperatorSet.GenEmptyObj(out ho_ConnectedRegions);
+            //HOperatorSet.GenEmptyObj(out ho_SelectedRegions);
+            //HOperatorSet.GenEmptyObj(out ho_ImageReduced);
+            //HOperatorSet.GenEmptyObj(out ho_Contours);
+            //HOperatorSet.GenEmptyObj(out ho_Cross);
+            //HOperatorSet.GenEmptyObj(out ho_Contour);
+
+            //HOperatorSet.AreaCenter(hObject, out hv_Area, out hv_Row, out hv_Column);
+            ////连接区域，连在一起的作为一个区域，这样就将不连接的区域打散
+            //ho_ConnectedRegions.Dispose();
+            //HOperatorSet.Connection(hObject, out ho_ConnectedRegions);
+            ////按区域面积（以象素为单位的）选择目标区域
+            ////这里我们要找到设备操作书的位置
+            //ho_SelectedRegions.Dispose();
+            //HOperatorSet.SelectShape(ho_ConnectedRegions, out ho_SelectedRegions, "area","and", 500000, 1000000000);
+            ////提取操作书区域的图像
+            //ho_ImageReduced.Dispose();
+            //HOperatorSet.ReduceDomain(hImage, ho_SelectedRegions, out ho_ImageReduced);
+            //HOperatorSet.SetDraw(hWindow, "margin");
+
+            ////显示一下看效果
+
+            ////HOperatorSet.DispObj(ho_ImageReduced, hWindow);
+            //HOperatorSet.DispCross(hWindow, hv_Row, hv_Column, 60, 0);
+            //ho_Contours.Dispose();
+            //HOperatorSet.GenContourRegionXld(ho_ImageReduced, out ho_Contours, "border");
+            //HOperatorSet.DispObj(ho_Contours,hWindow);
+            //hv_len.Dispose();
+            //HOperatorSet.LengthXld(ho_Contours, out hv_len);
+            //hv_num_1.Dispose();
+            //HOperatorSet.ContourPointNumXld(ho_Contours, out hv_num_1);
+            //hv_Row1.Dispose(); hv_Col1.Dispose();
+            //HOperatorSet.GetContourXld(ho_Contours, out hv_Row1, out hv_Col1);
+            //hv_Length.Dispose();
+            //HOperatorSet.TupleLength(hv_Row1, out hv_Length);
+            //HTuple end_val32 = hv_Length;
+            //HTuple step_val32 = hv_Length/ Parameters.specifications.DetectionRect2Num;
+            //rect2Result = new Location[100];
+            //for (hv_index = 1; hv_index.Continue(end_val32- step_val32, step_val32); hv_index = hv_index.TupleAdd(step_val32))
+            //{
+            //    int index = hv_index / step_val32;
+            //    hv_shapeParam.Dispose();
+            //    using (HDevDisposeHelper dh = new HDevDisposeHelper())
+            //    {
+            //        hv_shapeParam = new HTuple();
+            //        hv_shapeParam = hv_shapeParam.TupleConcat((hv_Row1.TupleSelect(hv_index)) - 10);
+            //        hv_shapeParam = hv_shapeParam.TupleConcat((hv_Col1.TupleSelect(hv_index)) - 10);
+            //        hv_shapeParam = hv_shapeParam.TupleConcat((hv_Row1.TupleSelect(hv_index)) + 10);
+            //        hv_shapeParam = hv_shapeParam.TupleConcat((hv_Col1.TupleSelect(hv_index)) + 10);
+            //    }
+
+            //    //创建测量句柄
+            //    hv_MetrologyHandle.Dispose();
+            //    HOperatorSet.CreateMetrologyModel(out hv_MetrologyHandle);
+            //    //添加测量对象
+            //    HOperatorSet.SetMetrologyModelImageSize(hv_MetrologyHandle, hv_Width, hv_Height);
+            //    hv_Index.Dispose();
+            //    HOperatorSet.AddMetrologyObjectGeneric(hv_MetrologyHandle, "line", hv_shapeParam,100, 2, 1, 20, new HTuple(), new HTuple(), out hv_Index);
+
+            //    //执行测量，获取边缘点集
+            //    HOperatorSet.SetColor(hWindow, "yellow");
+            //    HOperatorSet.ApplyMetrologyModel(hImage, hv_MetrologyHandle);
+            //    ho_Contours.Dispose(); hv_Row.Dispose(); hv_Column.Dispose();
+            //    HOperatorSet.GetMetrologyObjectMeasures(out ho_Contours, hv_MetrologyHandle,"all", "all", out hv_Row, out hv_Column);
+            //    HOperatorSet.DispObj(ho_Contours, hWindow);
+            //    HOperatorSet.SetColor(hWindow, "red");
+            //    ho_Cross.Dispose();
+            //    HOperatorSet.GenCrossContourXld(out ho_Cross, hv_Row, hv_Column, 6, 0.785398);
+            //    HOperatorSet.DispObj(ho_Cross, hWindow);
+            //    //获取最终测量数据和轮廓线
+            //    HOperatorSet.SetColor(hWindow, "green");
+            //    HOperatorSet.SetLineWidth(hWindow, 1);
+            //    hv_Parameter.Dispose();
+            //    HOperatorSet.GetMetrologyObjectResult(hv_MetrologyHandle, "all", "all", "result_type","all_param", out hv_Parameter);
+            //    if(hv_Parameter.Length==4)
+            //    {
+            //        rect2Result[index].Row = (hv_Parameter[0] + hv_Parameter[2]) / 2;
+            //        rect2Result[index].Colum = (hv_Parameter[1] + hv_Parameter[3]) / 2;
+            //        HOperatorSet.DispCross(hWindow, rect2Result[index].Row, rect2Result[index].Colum, 200, 0);
+            //        rect2Result[index].Row = rect2Result[index].Row * Parameters.specifications.PixelResolutionRow;
+            //        rect2Result[index].Colum = rect2Result[index].Colum * Parameters.specifications.PixelResolutionColum;
+            //        rect2Result[index].Length1 = Math.Abs(rect2Result[index].Row - hRect1.Row1.D) * Parameters.specifications.PixelResolutionRow;
+            //        rect2Result[index].Length2 = Math.Abs(rect2Result[index].Colum - hRect1.Colum1.D) * Parameters.specifications.PixelResolutionColum;
+            //        rect2Result[index].Length3 = Math.Sqrt(rect2Result[index].Length1 * rect2Result[index].Length1 + rect2Result[index].Length2 * rect2Result[index].Length2);
+            //        HTuple Length4 = new HTuple();
+            //        HOperatorSet.DistancePl(rect2Result[index].Row, rect2Result[index].Colum, hRect1.Row1, hRect1.Colum1, hRect1.Row2, hRect1.Colum2, out Length4);
+            //        rect2Result[index].Length4 = Length4.D * Parameters.specifications.PixelResolutionColum;
+            //        HOperatorSet.SetColor(hWindow, "green");
+            //        HOperatorSet.SetFont(hWindow, "-黑体-8-*-1-*-*-1-");
+            //        HOperatorSet.SetTposition(hWindow, rect2Result[index].Row, rect2Result[index].Colum);
+            //        HOperatorSet.WriteString(hWindow, "点:" + index);
+            //        HOperatorSet.SetTposition(hWindow, 200 * index, 100);
+            //        HOperatorSet.WriteString(hWindow, "点:" + index+ "DY:" + rect2Result[index].Length1.ToString("0.000")+ "DX:" + rect2Result[index].Length2.ToString("0.000")+ "PO:" + rect2Result[index].Length3.ToString("0.000")+ "PL:" + rect2Result[index].Length4.ToString("0.000"));                  
+            //    }
+            //    else
+            //    {
+            //        rect2Result[index].Row = 0;
+            //        rect2Result[index].Colum = 0;
+            //    }
+            //    ho_Contour.Dispose();
+            //    HOperatorSet.GetMetrologyObjectResultContour(out ho_Contour, hv_MetrologyHandle,"all", "all", 1.5);
+            //    HOperatorSet.DispObj(ho_Contour, hWindow);
+            //    //释放测量句柄
+            //    HOperatorSet.ClearMetrologyModel(hv_MetrologyHandle);
+
+            //}
+            //ho_ConnectedRegions.Dispose();
+            //ho_SelectedRegions.Dispose();
+            //ho_ImageReduced.Dispose();
+            //ho_Contours.Dispose();
+            //ho_Cross.Dispose();
+            //ho_Contour.Dispose();
+
+            //hv_WindowHandle.Dispose();
+            //hv_Width.Dispose();
+            //hv_Height.Dispose();
+            //hv_Row11.Dispose();
+            //hv_Column1.Dispose();
+            //hv_Row2.Dispose();
+            //hv_Column2.Dispose();
+            //hv_Area.Dispose();
+            //hv_Row.Dispose();
+            //hv_Column.Dispose();
+            //hv_len.Dispose();
+            //hv_num_1.Dispose();
+            //hv_Row1.Dispose();
+            //hv_Col1.Dispose();
+            //hv_Length.Dispose();
+            //hv_index.Dispose();
+            //hv_shapeParam.Dispose();
+            //hv_MetrologyHandle.Dispose();
+            //hv_Index.Dispose();
+            //hv_Parameter.Dispose();
             return true;
         }
         /// <summary>
@@ -684,7 +751,7 @@ namespace WY_App.Utility
 
         public static void DetectionSaveAOI(string pathName,HObject hv_Region)
         {
-            HOperatorSet.WriteRegion(hv_Region, pathName);
+            //HOperatorSet.WriteRegion(hv_Region, pathName);
         }
 
         public static void DetectionDrawRect2AOI(HWindow hWindow,ref Rect2 rect2)
@@ -822,7 +889,147 @@ namespace WY_App.Utility
             HOperatorSet.GetMposition(Hwindow, out oldRow, out oldColumn, out Button);
 
         }
+        public static void DetectionMeasure(HWindow hv_ExpDefaultWinHandle, HObject ho_Image, HObject hObject)
+        {
+            HObject ho_ImageReduced1;
+            HObject ho_Region, ho_RegionFillUp0, ho_RegionDilation1;
+            HObject ho_ConnectedRegions1, ho_SelectedRegions1, ho_RegionFillUp1;
+            HObject ho_RegionErosion, ho_differenceRegion, ho_ConnectedRegions2;
+            HObject ho_SelectedRegions2, ho_ImageReduced, ho_Shift;
+            HObject ho_Region3, ho_Region4, ho_ConnectedRegions4, ho_SelectedRegions4;
+            HObject ho_RegionDilation3, ho_SelectedRegions3;
 
+            // Local control variables 
+
+            HTuple hv_Area = new HTuple();
+            HTuple hv_Row = new HTuple(), hv_Column = new HTuple();
+            HTuple hv_Area2 = new HTuple(), hv_Row2 = new HTuple();
+            HTuple hv_Column2 = new HTuple(), hv_Length = new HTuple();
+            HTuple hv_Index = new HTuple();
+            // Initialize local and output iconic variables 
+            HOperatorSet.GenEmptyObj(out ho_ImageReduced1);
+            HOperatorSet.GenEmptyObj(out ho_Region);
+            HOperatorSet.GenEmptyObj(out ho_RegionFillUp0);
+            HOperatorSet.GenEmptyObj(out ho_RegionDilation1);
+            HOperatorSet.GenEmptyObj(out ho_ConnectedRegions1);
+            HOperatorSet.GenEmptyObj(out ho_SelectedRegions1);
+            HOperatorSet.GenEmptyObj(out ho_RegionFillUp1);
+            HOperatorSet.GenEmptyObj(out ho_RegionErosion);
+            HOperatorSet.GenEmptyObj(out ho_differenceRegion);
+            HOperatorSet.GenEmptyObj(out ho_ConnectedRegions2);
+            HOperatorSet.GenEmptyObj(out ho_SelectedRegions2);
+            HOperatorSet.GenEmptyObj(out ho_ImageReduced);
+            HOperatorSet.GenEmptyObj(out ho_Shift);
+            HOperatorSet.GenEmptyObj(out ho_Region3);
+            HOperatorSet.GenEmptyObj(out ho_Region4);
+            HOperatorSet.GenEmptyObj(out ho_ConnectedRegions4);
+            HOperatorSet.GenEmptyObj(out ho_SelectedRegions4);
+            HOperatorSet.GenEmptyObj(out ho_RegionDilation3);
+            HOperatorSet.GenEmptyObj(out ho_SelectedRegions3);
+            //dev_open_window(...);
+            HOperatorSet.SetDraw(hv_ExpDefaultWinHandle, "margin");
+            HOperatorSet.SetLineWidth(hv_ExpDefaultWinHandle, 1);
+            //HOperatorSet.DispObj(ho_Image, hv_ExpDefaultWinHandle);
+            //阈值分割提取边缘轮廓
+            ho_ImageReduced1.Dispose();
+            HOperatorSet.GenRegionContourXld(hObject,out ho_ImageReduced1, "margin");
+            HOperatorSet.ReduceDomain(ho_Image, ho_ImageReduced1, out ho_ImageReduced1);
+            ho_Region.Dispose();
+            HOperatorSet.Threshold(ho_ImageReduced1, out ho_Region, 0, 30);
+            ho_RegionFillUp0.Dispose();
+            HOperatorSet.FillUp(ho_Region, out ho_RegionFillUp0);
+            ho_RegionDilation1.Dispose();
+            HOperatorSet.ErosionCircle(ho_RegionFillUp0, out ho_RegionDilation1, 50);
+            ho_ConnectedRegions1.Dispose();
+            HOperatorSet.Connection(ho_RegionDilation1, out ho_ConnectedRegions1);
+            ho_SelectedRegions1.Dispose();
+            HOperatorSet.SelectShape(ho_ConnectedRegions1, out ho_SelectedRegions1, "area", "and", 300000, 9999999999);
+            ho_RegionFillUp1.Dispose();
+            HOperatorSet.FillUp(ho_SelectedRegions1, out ho_RegionFillUp1);
+            //腐蚀去除面积按区域
+            ho_RegionErosion.Dispose();
+            HOperatorSet.ErosionCircle(ho_RegionFillUp1, out ho_RegionErosion, 40);
+            //筛选最大的AOI
+            ho_differenceRegion.Dispose();
+            HOperatorSet.Difference(ho_RegionErosion, ho_RegionDilation1, out ho_differenceRegion);
+            ho_ConnectedRegions2.Dispose();
+            HOperatorSet.Connection(ho_differenceRegion, out ho_ConnectedRegions2);
+            hv_Area.Dispose(); hv_Row.Dispose(); hv_Column.Dispose();
+            HOperatorSet.AreaCenter(ho_ConnectedRegions2, out hv_Area, out hv_Row, out hv_Column);
+            ho_SelectedRegions2.Dispose();
+            HOperatorSet.SelectShape(ho_ConnectedRegions2, out ho_SelectedRegions2, "area", "and", 3000000, 999999999);
+            ho_ImageReduced.Dispose();
+            HOperatorSet.ReduceDomain(ho_Image, ho_RegionErosion, out ho_ImageReduced);
+            ho_Shift.Dispose();
+            HOperatorSet.TextureLaws(ho_ImageReduced, out ho_Shift, "ss", 2, 7);
+            ho_Region3.Dispose();
+            HOperatorSet.Threshold(ho_Shift, out ho_Region3, 90, 255);
+            ho_Region4.Dispose();
+            HOperatorSet.Threshold(ho_ImageReduced, out ho_Region4, 0, 35);
+            ho_ConnectedRegions4.Dispose();
+            HOperatorSet.Connection(ho_Region4, out ho_ConnectedRegions4);
+            ho_SelectedRegions4.Dispose();
+            HOperatorSet.SelectShape(ho_ConnectedRegions4, out ho_SelectedRegions4, "area", "and", 10, 999999);
+            ho_RegionDilation3.Dispose();
+            HOperatorSet.DilationCircle(ho_Region3, out ho_RegionDilation3, 20);
+            HOperatorSet.DispObj(ho_Region3, hv_ExpDefaultWinHandle);
+            ho_ConnectedRegions2.Dispose();
+            HOperatorSet.Connection(ho_RegionDilation3, out ho_ConnectedRegions2);
+            ho_SelectedRegions3.Dispose();
+            HOperatorSet.SelectShape(ho_ConnectedRegions2, out ho_SelectedRegions3, "area", "and", 10, 999999999);
+            //HOperatorSet.ClearWindow(hv_ExpDefaultWinHandle);
+            //HOperatorSet.DispObj(ho_Image, hv_ExpDefaultWinHandle);
+            HOperatorSet.SetDraw(hv_ExpDefaultWinHandle, "margin");
+            HOperatorSet.SetColor(hv_ExpDefaultWinHandle, "green");
+            HOperatorSet.DispObj(ho_RegionErosion, hv_ExpDefaultWinHandle);
+            HOperatorSet.SetColor(hv_ExpDefaultWinHandle, "green");
+            HOperatorSet.SetColor(hv_ExpDefaultWinHandle, "red");
+            HOperatorSet.DispObj(ho_SelectedRegions3, hv_ExpDefaultWinHandle);
+            HOperatorSet.DispObj(ho_SelectedRegions4, hv_ExpDefaultWinHandle);
+            hv_Area2.Dispose(); hv_Row2.Dispose(); hv_Column2.Dispose();
+            HOperatorSet.AreaCenter(ho_SelectedRegions3, out hv_Area2, out hv_Row2, out hv_Column2);
+            hv_Length.Dispose();
+            HOperatorSet.TupleLength(hv_Area2, out hv_Length);
+            HTuple end_val45 = hv_Length - 1;
+            HTuple step_val45 = 1;
+            for (hv_Index = 0; hv_Index.Continue(end_val45, step_val45); hv_Index = hv_Index.TupleAdd(step_val45))
+            {
+                using (HDevDisposeHelper dh = new HDevDisposeHelper())
+                {
+                    HOperatorSet.SetTposition(hv_ExpDefaultWinHandle, hv_Row2.TupleSelect(hv_Index),
+                        hv_Column2.TupleSelect(hv_Index));
+                }
+            }
+            ho_ImageReduced1.Dispose();
+            ho_Region.Dispose();
+            ho_RegionFillUp0.Dispose();
+            ho_RegionDilation1.Dispose();
+            ho_ConnectedRegions1.Dispose();
+            ho_SelectedRegions1.Dispose();
+            ho_RegionFillUp1.Dispose();
+            ho_RegionErosion.Dispose();
+            ho_differenceRegion.Dispose();
+            ho_ConnectedRegions2.Dispose();
+            ho_SelectedRegions2.Dispose();
+            ho_ImageReduced.Dispose();
+            ho_Shift.Dispose();
+            ho_Region3.Dispose();
+            ho_Region4.Dispose();
+            ho_ConnectedRegions4.Dispose();
+            ho_SelectedRegions4.Dispose();
+            ho_RegionDilation3.Dispose();
+            ho_SelectedRegions3.Dispose();
+            hv_Width.Dispose();
+            hv_Height.Dispose();
+            hv_Area.Dispose();
+            hv_Row.Dispose();
+            hv_Column.Dispose();
+            hv_Area2.Dispose();
+            hv_Row2.Dispose();
+            hv_Column2.Dispose();
+            hv_Length.Dispose();
+            hv_Index.Dispose();
+        }
         public static void set_display_font(HTuple hv_WindowHandle, HTuple hv_Size, HTuple hv_Font,HTuple hv_Bold, HTuple hv_Slant)
         {
 

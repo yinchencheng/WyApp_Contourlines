@@ -1997,3 +1997,4 @@ D:\Toptics\WyApp_Contourlines\obj\x64\Debug\WY-App.csproj.CopyComplete
 D:\Toptics\WyApp_Contourlines\obj\x64\Debug\WY-App.exe
 D:\Toptics\WyApp_Contourlines\obj\x64\Debug\WY-App.pdb
 D:\Toptics\WyApp_Contourlines\obj\x64\Debug\WY_App.注册机器.resources
+D:\Toptics\WyApp_Contourlines\obj\x64\Debug\WY_App.示教器.resources

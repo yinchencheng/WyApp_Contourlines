@@ -99,6 +99,14 @@
     <Reference Include="HslCommunication, Version=10.6.1.0, Culture=neutral, PublicKeyToken=3d72ad3b6b5ec0e3, processorArchitecture=MSIL">
       <HintPath>packages\HslCommunication.10.6.1\lib\net451\HslCommunication.dll</HintPath>
     </Reference>
+    <Reference Include="IKapBoardClassLibrary, Version=1.8.5.2, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\x64\Debug\IKapBoardClassLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="IKapC.NET, Version=1.1.0.1, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\x64\Debug\IKapC.NET.dll</HintPath>
+    </Reference>
     <Reference Include="MvCamCtrl.Net, Version=4.0.0.4, Culture=neutral, PublicKeyToken=52fddfb3f94be800, processorArchitecture=AMD64">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>bin\x64\Debug\MvCamCtrl.Net.dll</HintPath>
@@ -167,6 +175,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Forms\示教器.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\示教器.designer.cs">
+      <DependentUpon>示教器.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\切换产品.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -252,11 +266,15 @@
     <Compile Include="Properties\AssemblyInfo.cs">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
+    <Compile Include="Utility\IKapLineCam.cs" />
     <Compile Include="Utility\LogHelper.cs" />
     <Compile Include="Utility\Parameters.cs" />
     <Compile Include="Utility\TcpClient.cs" />
     <Compile Include="Utility\TcpServer.cs" />
     <Compile Include="Utility\XMLHelper.cs" />
+    <EmbeddedResource Include="Forms\示教器.resx">
+      <DependentUpon>示教器.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\切换产品.resx">
       <DependentUpon>切换产品.cs</DependentUpon>
     </EmbeddedResource>

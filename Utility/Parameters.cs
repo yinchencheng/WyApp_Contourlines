@@ -156,11 +156,11 @@ namespace WY_App.Utility
                     decetionRect2[i].Row = 500;
                     decetionRect2[i].Colum = 500;
                     decetionRect2[i].Phi = 0;
-                    decetionRect2[i].Length1 = 100;
-                    decetionRect2[i].Length2 = 200;
-                    decetionRect2[i].阈值 = 15;
-                    decetionRect2[i].极性 = "negative";
-                    decetionRect2[i].simga = 1;
+                    decetionRect2[i].Length1 = 20;
+                    decetionRect2[i].Length2 = 10;
+                    decetionRect2[i].阈值 = 20;
+                    decetionRect2[i].极性 = "positive";
+                    decetionRect2[i].simga = 2;
                 }
             }
         }
@@ -187,6 +187,10 @@ namespace WY_App.Utility
 
             public int DetectionCricleNum;
 
+            public bool ContourLineEnabled;
+
+            public bool DefectionEnabled;
+
             /// <summary>
             ///Y方向放大比例
             /// </summary>
@@ -208,9 +212,11 @@ namespace WY_App.Utility
                 SaveCropImage = false;
                 CropImagelength = 500;
                 MeanImageEnabled = false;
+                ContourLineEnabled = false;
+                DefectionEnabled = false;
                 meanImageEnum = 0;
                 DetectionRect2Num = 40;
-                DetectionCricleNum = 0;
+                DetectionCricleNum = 0;             
             }
         }
         public static Specifications specifications = new Specifications();
@@ -342,13 +348,21 @@ namespace WY_App.Utility
 
                 ImagePath = @"D:\VisionDetect\InspectImage\";
                 ImageSavePath = @"D:\Image\";
-                productName = "55";
+                productName = "初始化"; 
                 DeviceID = "";
 ;           }
         }
 
         public static Commministion commministion = new Commministion();
-
+        public class DeviceName
+        {
+            public string DeviceID;
+            public DeviceName()
+            {
+                DeviceID = "";
+            }
+        }
+        public static DeviceName deviceName = new DeviceName();
         public class PLCParams
         {
             public string Trigger_Detection;

@@ -85,14 +85,10 @@ namespace WY_App
 
       
         private bool isNumOrAlp(string str)
-
         {
             string pattern = @"^[A-Za-z0-9]+$";  //@意思忽略转义，+匹配前面一次或多次，$匹配结尾
-
             Match match = Regex.Match(str, pattern);
-
             return match.Success;
-
         }
 
         private void btn_Close_System_Click(object sender, EventArgs e)

@@ -37,9 +37,9 @@
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.panel1 = new System.Windows.Forms.Panel();
             this.hWindowControl1 = new HalconDotNet.HWindowControl();
-            this.bunifuElipse1 = new Bunifu.Framework.UI.BunifuElipse(this.components);
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
+            this.bunifuElipse1 = new Bunifu.Framework.UI.BunifuElipse(this.components);
             this.tableLayoutPanel2.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
@@ -57,7 +57,7 @@
             this.btn_Close_System.FillPressColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
             this.btn_Close_System.FillSelectedColor = System.Drawing.Color.Red;
             this.btn_Close_System.Font = new System.Drawing.Font("楷体", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btn_Close_System.Location = new System.Drawing.Point(1883, 3);
+            this.btn_Close_System.Location = new System.Drawing.Point(1143, 3);
             this.btn_Close_System.MinimumSize = new System.Drawing.Size(1, 1);
             this.btn_Close_System.Name = "btn_Close_System";
             this.btn_Close_System.RectColor = System.Drawing.Color.Red;
@@ -81,7 +81,7 @@
             this.btn_Minimizid_System.FillPressColor = System.Drawing.Color.LightGray;
             this.btn_Minimizid_System.FillSelectedColor = System.Drawing.SystemColors.WindowFrame;
             this.btn_Minimizid_System.Font = new System.Drawing.Font("楷体", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btn_Minimizid_System.Location = new System.Drawing.Point(1823, 3);
+            this.btn_Minimizid_System.Location = new System.Drawing.Point(1083, 3);
             this.btn_Minimizid_System.MinimumSize = new System.Drawing.Size(1, 1);
             this.btn_Minimizid_System.Name = "btn_Minimizid_System";
             this.btn_Minimizid_System.Size = new System.Drawing.Size(52, 50);
@@ -112,7 +112,7 @@
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 1;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(1940, 57);
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(1200, 57);
             this.tableLayoutPanel2.TabIndex = 0;
             // 
             // panel4
@@ -121,7 +121,7 @@
             this.panel4.Location = new System.Drawing.Point(420, 0);
             this.panel4.Margin = new System.Windows.Forms.Padding(0);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(1400, 57);
+            this.panel4.Size = new System.Drawing.Size(660, 57);
             this.panel4.TabIndex = 11;
             // 
             // tableLayoutPanel1
@@ -139,7 +139,7 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 67F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(1940, 1100);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(1200, 900);
             this.tableLayoutPanel1.TabIndex = 2;
             // 
             // tableLayoutPanel3
@@ -156,7 +156,7 @@
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
             this.tableLayoutPanel3.RowCount = 1;
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel3.Size = new System.Drawing.Size(1940, 1033);
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(1200, 833);
             this.tableLayoutPanel3.TabIndex = 4;
             // 
             // panel1
@@ -166,7 +166,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(122, 3);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1477, 1027);
+            this.panel1.Size = new System.Drawing.Size(737, 827);
             this.panel1.TabIndex = 2;
             // 
             // hWindowControl1
@@ -178,14 +178,9 @@
             this.hWindowControl1.ImagePart = new System.Drawing.Rectangle(0, 0, 640, 480);
             this.hWindowControl1.Location = new System.Drawing.Point(0, 0);
             this.hWindowControl1.Name = "hWindowControl1";
-            this.hWindowControl1.Size = new System.Drawing.Size(1477, 1027);
+            this.hWindowControl1.Size = new System.Drawing.Size(737, 827);
             this.hWindowControl1.TabIndex = 2;
-            this.hWindowControl1.WindowSize = new System.Drawing.Size(1477, 1027);
-            // 
-            // bunifuElipse1
-            // 
-            this.bunifuElipse1.ElipseRadius = 5;
-            this.bunifuElipse1.TargetControl = this;
+            this.hWindowControl1.WindowSize = new System.Drawing.Size(737, 827);
             // 
             // pictureBox1
             // 
@@ -194,7 +189,7 @@
             this.pictureBox1.Location = new System.Drawing.Point(0, 0);
             this.pictureBox1.Margin = new System.Windows.Forms.Padding(0);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(1477, 1027);
+            this.pictureBox1.Size = new System.Drawing.Size(737, 827);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox1.TabIndex = 1;
             this.pictureBox1.TabStop = false;
@@ -227,14 +222,19 @@
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 60F));
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 60F));
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 60F));
-            this.tableLayoutPanel4.Size = new System.Drawing.Size(119, 1033);
+            this.tableLayoutPanel4.Size = new System.Drawing.Size(119, 833);
             this.tableLayoutPanel4.TabIndex = 3;
+            // 
+            // bunifuElipse1
+            // 
+            this.bunifuElipse1.ElipseRadius = 5;
+            this.bunifuElipse1.TargetControl = this;
             // 
             // FormCamera
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1940, 1100);
+            this.ClientSize = new System.Drawing.Size(1200, 900);
             this.Controls.Add(this.tableLayoutPanel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.MaximizeBox = false;

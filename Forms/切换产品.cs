@@ -119,6 +119,10 @@ namespace WY_App
                 Parameters.cursorLocation = new Parameters.CursorLocation();
                 XMLHelper.serialize<Parameters.CursorLocation>(Parameters.cursorLocation, Parameters.commministion.productName + "/CursorLocation.xml");
             }
+
+            HOperatorSet.ReadImage(out MainForm.hImage, Parameters.commministion.productName + "/N1.jpg");
+            HOperatorSet.GetImageSize(MainForm.hImage, out Halcon.hv_Width, out Halcon.hv_Height);//获取图片大小规格   
+            MainForm.grab.ConfigureFrameGrabber();
             this.Close();
         }
 
@@ -144,7 +148,7 @@ namespace WY_App
             //最后把book结点挂接在跟结点上，并保存整个文件
             root.AppendChild(xelKey);
             doc.Save("Parameter/ProductList.xml");
-            GetFilesAndDirs("55", productName);
+            GetFilesAndDirs("初始化", productName);
             MessageBox.Show("保存成功！", "温馨提示");
             this.Close();
         }

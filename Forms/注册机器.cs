@@ -38,10 +38,9 @@ namespace WY_App
 
         private void uiButton2_Click(object sender, EventArgs e)
         {
-
             TransfEvent(Deveice_ID.Text);
-            Parameters.commministion.DeviceID = Deveice_ID.Text;
-            XMLHelper.serialize<Parameters.Commministion>(Parameters.commministion, "Parameter/Commministion.xml");
+            Parameters.deviceName.DeviceID = Deveice_ID.Text;
+            XMLHelper.serialize<Parameters.DeviceName>(Parameters.deviceName, @"D:\\DeviceName.xml");
             this.Close();
         }
 
