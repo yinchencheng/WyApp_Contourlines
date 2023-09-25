@@ -6,6 +6,8 @@ using System.Net.Sockets;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows.Forms;
+using WY_App.UserControls;
 
 namespace WY_App.Utility
 {
@@ -37,9 +39,7 @@ namespace WY_App.Utility
                     socketWatch.Bind(point);
                     socketWatch.SendTimeout = 1000;
                     socketWatch.ReceiveTimeout = 1000;
-                    LogHelper.Log.WriteInfo(System.DateTime.Now.ToString() + ";TcpServerIP:" + Parameters.commministion.TcpServerIpAddress + "端口号:" + Parameters.commministion.TcpServerIpPort + "监听成功");
-                    MainForm.AlarmList.Add(System.DateTime.Now.ToString() + ";TcpServerIP:" + Parameters.commministion.TcpServerIpAddress + "端口号:" + Parameters.commministion.TcpServerIpPort + "监听成功");
-                    //开始监听：设置最大可以同时连接多少个请求
+                    LogHelper.WriteInfo( "TcpServerIP:" + Parameters.commministion.TcpServerIpAddress + "端口号:" + Parameters.commministion.TcpServerIpPort + "监听成功");                  
                     socketWatch.Listen(10);
 
                     //创建监听线程，防止界面卡顿
@@ -52,7 +52,7 @@ namespace WY_App.Utility
                 catch (Exception ex)
                 {
                     //TcpServerConnectResult = false;
-                    LogHelper.Log.WriteError(System.DateTime.Now.ToString() + ";TcpServerIP:" + Parameters.commministion.TcpServerIpAddress + "端口号:" + Parameters.commministion.TcpServerIpPort + "服务器创建失败！", ex.Message);
+                    LogHelper.WriteError("TcpServerIP:" + Parameters.commministion.TcpServerIpAddress + "端口号:" + Parameters.commministion.TcpServerIpPort + "服务器创建失败！"+ ex.Message);
                 }
             }
                  
@@ -74,8 +74,19 @@ namespace WY_App.Utility
                     }
                     TcpServerConnectResult = true;
                     TcpServerReceiveMsg = Encoding.UTF8.GetString(buffer, 0, count);
-                    LogHelper.Log.WriteInfo(System.DateTime.Now.ToString() + socketSend.RemoteEndPoint + ":" + TcpServerReceiveMsg);
-                    MainForm.AlarmList.Add(System.DateTime.Now.ToString() + socketSend.RemoteEndPoint + ":" + TcpServerReceiveMsg);
+                    if(TcpServerReceiveMsg=="20")
+                    {
+                        
+                    }
+                    if(TcpServerReceiveMsg == "21")
+                    {
+                        HslCommunication._NetworkTcpDevice.Write(Parameters.plcParams.WriteAdd[34], 1);
+                    }
+                    if (TcpServerReceiveMsg == "22")
+                    {
+                        HslCommunication._NetworkTcpDevice.Write(Parameters.plcParams.WriteAdd[34], 2);
+                    }
+                    LogHelper.WriteInfo(socketSend.RemoteEndPoint + ":" + TcpServerReceiveMsg);                   
                 }
                 catch (Exception)
                 {
@@ -94,8 +105,7 @@ namespace WY_App.Utility
                 {
                     //等待客户端的链接，并且创建一个用于通信的Socket
                     socketSend = socketWatch.Accept();
-                    LogHelper.Log.WriteInfo(System.DateTime.Now.ToString() + socketSend.RemoteEndPoint + ":" + "接入成功");
-                    MainForm.AlarmList.Add(System.DateTime.Now.ToString() + socketSend.RemoteEndPoint + ":" + "接入成功");
+                    LogHelper.WriteInfo(socketSend.RemoteEndPoint + ":" + "接入成功");                   
                     TcpServerConnectResult = true;
                     Thread th = new Thread(Recive);
                     th.IsBackground = true;
@@ -109,9 +119,20 @@ namespace WY_App.Utility
         }
         //此处为发送事件
         public static void tcp_Server_Send(string sendstr)
-        {           
-            byte[] buffer = System.Text.Encoding.UTF8.GetBytes(sendstr);
-            socketSend.Send(buffer);
+        {
+            try
+            {
+                LogHelper.WriteInfo(socketSend.RemoteEndPoint + ":" + "发送:" + sendstr);
+                byte[] buffer = System.Text.Encoding.UTF8.GetBytes(sendstr);
+                socketSend.Send(buffer);
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(socketSend.RemoteEndPoint + ":" + "发送失败，客户端未连接:" + sendstr, "客户端未连接提示", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1, MessageBoxOptions.ServiceNotification);
+                
+                LogHelper.WriteError(socketSend.RemoteEndPoint + ":" + "发送失败，客户端未连接:" + sendstr);
+            }
         }
         //防止线程间通讯报错
        

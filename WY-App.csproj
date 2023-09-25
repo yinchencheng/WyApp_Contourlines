@@ -9,7 +9,7 @@
     <OutputType>WinExe</OutputType>
     <RootNamespace>WY_App</RootNamespace>
     <AssemblyName>WY-App</AssemblyName>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
@@ -175,6 +175,24 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Forms\相机标定.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\相机标定.designer.cs">
+      <DependentUpon>相机标定.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\旋转标定.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\旋转标定.designer.cs">
+      <DependentUpon>旋转标定.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\九点标定.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\九点标定.designer.cs">
+      <DependentUpon>九点标定.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\示教器.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -246,6 +264,12 @@
     <Compile Include="UserControls\MessageShow.Designer.cs">
       <DependentUpon>MessageShow.cs</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\numControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\numControl.Designer.cs">
+      <DependentUpon>numControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\卡尺参数设置.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -272,6 +296,15 @@
     <Compile Include="Utility\TcpClient.cs" />
     <Compile Include="Utility\TcpServer.cs" />
     <Compile Include="Utility\XMLHelper.cs" />
+    <EmbeddedResource Include="Forms\相机标定.resx">
+      <DependentUpon>相机标定.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\旋转标定.resx">
+      <DependentUpon>旋转标定.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\九点标定.resx">
+      <DependentUpon>九点标定.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\示教器.resx">
       <DependentUpon>示教器.cs</DependentUpon>
     </EmbeddedResource>
@@ -313,6 +346,9 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <SubType>Designer</SubType>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\numControl.resx">
+      <DependentUpon>numControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\卡尺参数设置.resx">
       <DependentUpon>卡尺参数设置.cs</DependentUpon>

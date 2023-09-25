@@ -306,6 +306,7 @@
             this.Controls.Add(this.tableLayoutPanel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "登陆界面";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "FormLogin";
             this.Load += new System.EventHandler(this.登陆界面_Load);
             this.tableLayoutPanel1.ResumeLayout(false);

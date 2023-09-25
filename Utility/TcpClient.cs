@@ -28,23 +28,18 @@ namespace WY_App.Utility
                 IPAddress ip = IPAddress.Parse(Parameters.commministion.TcpClientIpAddress);
                 IPEndPoint point = new IPEndPoint(ip, Convert.ToInt32(Parameters.commministion.TcpClientIpPort));
                 socketSend.SendTimeout = 1000;
-                socketSend.ReceiveTimeout = 3000;
+                socketSend.ReceiveTimeout = 15000;
                 try
                 {
                     socketSend.Connect(point);
-                    LogHelper.Log.WriteInfo(System.DateTime.Now.ToString() + ":TcpClientIP:" + Parameters.commministion.TcpClientIpAddress +"Port:"+ Parameters.commministion.TcpClientIpPort+ "链接成功");
-                    string str = TcpClient.tcpClientSend("Tcp客户端接入");
-                    MainForm.AlarmList.Add(System.DateTime.Now.ToString() + ":TcpClientIP:" + Parameters.commministion.TcpClientIpAddress + "Port:" + Parameters.commministion.TcpClientIpPort + "链接成功");
+                    LogHelper.WriteInfo(System.DateTime.Now.ToString() + ":TcpClientIP:" + Parameters.commministion.TcpClientIpAddress +"Port:"+ Parameters.commministion.TcpClientIpPort+ "链接成功");
+                    //string str = TcpClient.tcpClientSend("Tcp客户端接入");
                     TcpClientConnectResult = true;
-                    Thread th = new Thread(ReciveMessagr);
-                    th.IsBackground = true;
-                    th.Start();
-
                 }
                 catch (Exception ex)
                 {
-                    LogHelper.Log.WriteError(System.DateTime.Now.ToString() + "TcpClientIP:" + Parameters.commministion.TcpClientIpAddress + "Port:" + Parameters.commministion.TcpClientIpPort +"链接失败:", ex.Message);
-                    MainForm.AlarmList.Add(System.DateTime.Now.ToString() + "TcpClientIP:" + Parameters.commministion.TcpClientIpAddress + "Port:" + Parameters.commministion.TcpClientIpPort + "链接失败:" + ex.Message);
+                    LogHelper.WriteError(System.DateTime.Now.ToString() + "TcpClientIP:" + Parameters.commministion.TcpClientIpAddress + "Port:" + Parameters.commministion.TcpClientIpPort +"链接失败:"+ex.Message);
+                   
                     TcpClientConnectResult = false;
                 }
             }          
@@ -52,14 +47,11 @@ namespace WY_App.Utility
 
         public static string tcpClientSend(string sendstr)
         {
-            //Task.Run(() => { });
             byte[] buffer = System.Text.Encoding.UTF8.GetBytes(sendstr);
             socketSend.Send(buffer);
-            LogHelper.Log.WriteInfo(System.DateTime.Now.ToString()+ socketSend.RemoteEndPoint + "发送数据:" + sendstr);
-            MainForm.AlarmList.Add(System.DateTime.Now.ToString() + socketSend.RemoteEndPoint + "发送数据:" + sendstr);
+            LogHelper.WriteInfo(System.DateTime.Now.ToString()+ socketSend.RemoteEndPoint + "发送数据:" + sendstr);
             reciveStr = Recive();
-            LogHelper.Log.WriteInfo(System.DateTime.Now.ToString() + socketSend.RemoteEndPoint + "接收数据:" + reciveStr);
-            MainForm.AlarmList.Add(System.DateTime.Now.ToString() + socketSend.RemoteEndPoint + "接收数据:" + reciveStr);
+            LogHelper.WriteInfo(System.DateTime.Now.ToString() + socketSend.RemoteEndPoint + "接收数据:" + reciveStr);
             return reciveStr;
 
         }
@@ -95,15 +87,6 @@ namespace WY_App.Utility
                         break;
                     }
                     string s = Encoding.UTF8.GetString(buffer, 0, r);
-                    if(s.Contains("OK"))
-                    {
-                        HslCommunication._NetworkTcpDevice.Write(Parameters.plcParams.Completion, 0);                      
-                    }
-                    else
-                    {
-                        HslCommunication._NetworkTcpDevice.Write(Parameters.plcParams.Completion, 1);
-                    }
-                    MainForm.AlarmList.Add(System.DateTime.Now.ToString() + socketSend.RemoteEndPoint + "接收数据:" + s);
                 }
                 catch (Exception)
                 {

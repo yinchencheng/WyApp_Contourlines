@@ -120,9 +120,9 @@ namespace WY_App
                 XMLHelper.serialize<Parameters.CursorLocation>(Parameters.cursorLocation, Parameters.commministion.productName + "/CursorLocation.xml");
             }
 
-            HOperatorSet.ReadImage(out MainForm.hImage, Parameters.commministion.productName + "/N1.jpg");
+            HOperatorSet.ReadImage(out MainForm.hImage, Parameters.commministion.productName + "/1.jpg");
             HOperatorSet.GetImageSize(MainForm.hImage, out Halcon.hv_Width, out Halcon.hv_Height);//获取图片大小规格   
-            MainForm.grab.ConfigureFrameGrabber();
+            //MainForm.grab.ConfigureFrameGrabber();
             this.Close();
         }
 

@@ -189,7 +189,6 @@
             // 
             // num_MeasureTransition
             // 
-            this.num_MeasureTransition.Enabled = false;
             this.num_MeasureTransition.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.num_MeasureTransition.FormattingEnabled = true;
             this.num_MeasureTransition.Items.AddRange(new object[] {
@@ -283,7 +282,7 @@
             0});
             this.num_MeasureLength1.Location = new System.Drawing.Point(71, 20);
             this.num_MeasureLength1.Maximum = new decimal(new int[] {
-            1000,
+            2000,
             0,
             0,
             0});
@@ -382,6 +381,7 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "卡尺设置";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "基准框";
             this.TopMost = true;
             this.Load += new System.EventHandler(this.卡尺工具设置_Load);

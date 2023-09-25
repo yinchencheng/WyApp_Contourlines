@@ -40,7 +40,8 @@ namespace WY_App
         public static List<string> AlarmList = new List<string>();
         Thread myThread;
         Thread MainThread;
-        Halcon halcon = new Halcon();
+        Thread ServerThread;
+        //Halcon halcon = new Halcon();
         HWindow hWindow=new HWindow();
 
         public static List<HObject> ho_Image = new List<HObject>();
@@ -58,7 +59,7 @@ namespace WY_App
         Location[] location;
         public static HObject hoRegions = new HObject();
         public static AutoResetEvent ImageEvent = new AutoResetEvent(false);
-        public static AutoResetEvent ImageWait = new AutoResetEvent(false);
+        public static AutoResetEvent ServerEvent = new AutoResetEvent(false);
         public static IKapLineCam grab;
         bool CamConnectResult = false;
         private delegate void SetTextValueCallBack(int i, HObject hObject, string path);
@@ -69,7 +70,15 @@ namespace WY_App
             InitializeComponent();  
             pictureBox1.Load(Application.StartupPath + "/image/logo.png");
             #region 读取配置文件
-           
+            try
+            {
+                Parameters.commministion = XMLHelper.BackSerialize<Parameters.Commministion>("Parameter/Commministion.xml");
+            }
+            catch
+            {
+                Parameters.commministion = new Parameters.Commministion();
+                XMLHelper.serialize<Parameters.Commministion>(Parameters.commministion, "Parameter/Commministion.xml");
+            }
             try
             {
                 Parameters.deviceName = XMLHelper.BackSerialize<Parameters.DeviceName>(@"D:\\DeviceName.xml");
@@ -135,16 +144,8 @@ namespace WY_App
                 Parameters.cursorLocation = new Parameters.CursorLocation();
                 XMLHelper.serialize<Parameters.CursorLocation>(Parameters.cursorLocation, Parameters.commministion.productName + "/CursorLocation.xml");
             }
-            try
-            {
-                Parameters.commministion = XMLHelper.BackSerialize<Parameters.Commministion>("Parameter/Commministion.xml");
-            }
-            catch
-            {
-                Parameters.commministion = new Parameters.Commministion();
-                XMLHelper.serialize<Parameters.Commministion>(Parameters.commministion, "Parameter/Commministion.xml");
-            }
-            HOperatorSet.ReadImage(out hImage, Parameters.commministion.productName + "/N1.jpg");
+           
+            HOperatorSet.ReadImage(out hImage, Parameters.commministion.productName + "/1.jpg");
             HOperatorSet.GetImageSize(MainForm.hImage, out Halcon.hv_Width, out Halcon.hv_Height);//获取图片大小规格   
             hWindow = hWindowControl1.HalconWindow;
             hWindow.SetPart(0, 0, -1, -1);
@@ -293,7 +294,7 @@ namespace WY_App
                             lab_log.Items.Add(AlarmList[0]);
                             AlarmList.RemoveAt(0);
                         }
-                        if (lab_log.Items.Count > 20)
+                        if (lab_log.Items.Count > 15)
                         {
                             lab_log.Items.RemoveAt(0);
                         }
@@ -316,6 +317,35 @@ namespace WY_App
             }
 
         }
+
+        private void ServerRun()
+        {
+            while (true)
+            {
+                //ServerEvent.WaitOne();
+                if (HslCommunication.plc_connect_result)
+                {
+                    Int16 uInt16 = HslCommunication._NetworkTcpDevice.ReadInt16(Parameters.plcParams.Trigger_Detection).Content;
+                    if (uInt16 == 3)
+                    {
+                        LogHelper.WriteInfo(Parameters.plcParams.Trigger_Detection + "型面触发" + uInt16);
+                        HslCommunication._NetworkTcpDevice.Write(Parameters.plcParams.Trigger_Detection, 0);
+                        if (TcpServer.TcpServerConnectResult)
+                        {
+                            TcpServer.tcp_Server_Send("T1");                           
+                        }
+                        else
+                        {
+                            LogHelper.WriteError("客户端未连接");
+                        }
+                    }
+                }
+                else
+                {
+                    LogHelper.WriteError("PLC未连接");
+                }
+            }
+        }
         bool m_Pause = true;
         bool DetectionResult = true;
         public static string productSN = "0000";
@@ -325,9 +355,10 @@ namespace WY_App
             {
                 if (m_Pause)
                 {
-                    Int16 uInt16 = HslCommunication._NetworkTcpDevice.ReadInt16(Parameters.plcParams.Trigger_Detection).Content; // 读取寄存器100的ushort值             
-                    //if (uInt16 == 1)
+                    Int16 uInt16 = HslCommunication._NetworkTcpDevice.ReadInt16(Parameters.plcParams.Trigger_Detection).Content;           
+                    if (uInt16 == 1)
                     {
+                        LogHelper.Log.WriteInfo("检测开始" );
                         DateTime dtNow = System.DateTime.Now;  // 获取系统当前时间
                         strDateTime = dtNow.ToString("yyyyMMddHHmmss");
                         strDateTimeDay = dtNow.ToString("yyyy-MM-dd");
@@ -340,33 +371,48 @@ namespace WY_App
                         }
                         if(CamConnectResult)
                         {
-                            ImageWait.Set();
                             ImageEvent.WaitOne();
+                            HOperatorSet.MirrorImage(hImage, out hImage, "column");
+                            HOperatorSet.GetImageSize(hImage, out Halcon.hv_Width, out Halcon.hv_Height);
+                            //HslCommunication._NetworkTcpDevice.Write(Parameters.plcParams.Trigger_Detection, 0);
                         }
                         if (Parameters.specifications.SaveOrigalImage)
                         {
                             setCallBack = SaveImages;
                             this.Invoke(setCallBack, 0, hImage, "IN-");
-                        }
-                        //HslCommunication._NetworkTcpDevice.Write(Parameters.plcParams.Trigger_Detection, 0);
-                        DetectionResult = true;
-                        HOperatorSet.GetImageSize(hImage, out Halcon.hv_Width, out Halcon. hv_Height);
+                        }                        
+                        DetectionResult = true;                       
                         HOperatorSet.DispObj(hImage, hWindow);
-                        HOperatorSet.SetPart(hWindow, 0, 0, -1, -1);                        
-                        if(detection(hWindow, hImage))
+                        HOperatorSet.SetPart(hWindow, 0, 0, -1, -1);
+                        DetectionResult = detection(hWindow, hImage);
+                        if (DetectionResult)
                         {
-
+                            HslCommunication._NetworkTcpDevice.Write(Parameters.plcParams.WriteAdd[35], 1);
+                        }
+                        else
+                        {
+                            HslCommunication._NetworkTcpDevice.Write(Parameters.plcParams.WriteAdd[35], 2);
                         }
                         if (Parameters.specifications.SaveDefeatImage)
                         {
                             HOperatorSet.DumpWindowImage(out hObjectOut, hWindow);
                             setCallBack = SaveImages;
                             this.Invoke(setCallBack, 0, hObjectOut, "OUT-");
-                        }                                               
+                        }
+                        if(TcpClient.TcpClientConnectResult)
+                        {
+                            string str = TcpClient.tcpClientSend("1");
+                            if (str == "")
+                            {
+
+                            }
+                        }
+                        
+                        
                         stopwatch.Stop(); //  停止监视
                         TimeSpan timespan = stopwatch.Elapsed; //  获取当前实例测量得出的总时间
                         double milliseconds = timespan.TotalMilliseconds;  //  总毫秒数           
-                        AlarmList.Add(System.DateTime.Now.ToString() + "检测时间:" + milliseconds.ToString());
+                        LogHelper.Log.WriteInfo("检测时间:" + milliseconds.ToString());
                         CleanFile(Parameters.commministion.ImageSavePath);
                     }
                 }
@@ -381,7 +427,7 @@ namespace WY_App
             {
                 System.IO.Directory.CreateDirectory(pathOut);//不存在就创建文件夹
             }
-            HOperatorSet.WriteImage(hObject, "jpeg", 0, pathOut + stfFileNameOut + ".jpeg");
+            HOperatorSet.WriteImage(hObject, "jpg", 0, pathOut + stfFileNameOut + ".jpg");
         }
         private static void CleanFile(String dir)
         {
@@ -418,7 +464,7 @@ namespace WY_App
                 //Parameter.specifications.右短端.value = 10;
                 //XMLHelper.serialize<Parameter.Specifications>(Parameter.specifications, "Specifications.xml");
                 myThread.Abort();
-                LogHelper.Log.WriteInfo(System.DateTime.Now.ToString() + "软件关闭。");
+                LogHelper.WriteInfo(System.DateTime.Now.ToString() + "软件关闭。");
                 this.Close();
             }
         }
@@ -426,8 +472,7 @@ namespace WY_App
         private void btn_Minimizid_System_Click(object sender, EventArgs e)
         {
             WindowState = FormWindowState.Minimized;
-            LogHelper.Log.WriteInfo(System.DateTime.Now.ToString() + "窗体最小化。");
-            MainForm.AlarmList.Add(System.DateTime.Now.ToString() + "窗体最小化。");
+            LogHelper.WriteInfo(System.DateTime.Now.ToString() + "窗体最小化。");
         }
 
         private void Form1_SizeChanged(object sender, EventArgs e)
@@ -435,8 +480,7 @@ namespace WY_App
             if (this.WindowState == FormWindowState.Minimized)
             {
                 this.Hide();//隐藏主窗体  
-                LogHelper.Log.WriteInfo(System.DateTime.Now.ToString() + "主窗体隐藏。");
-                MainForm.AlarmList.Add(System.DateTime.Now.ToString() + "主窗体隐藏。");
+                LogHelper.WriteInfo(System.DateTime.Now.ToString() + "主窗体隐藏。");               
             }
         }
 
@@ -445,8 +489,7 @@ namespace WY_App
             if (e.Button == MouseButtons.Left)//当鼠标点击为左键时  
             {
                 this.Show();//显示主窗体  
-                LogHelper.Log.WriteInfo(System.DateTime.Now.ToString() + "主窗体恢复。");
-                MainForm.AlarmList.Add(System.DateTime.Now.ToString() + "主窗体恢复。");
+                LogHelper.WriteInfo(System.DateTime.Now.ToString() + "主窗体恢复。");
                 this.WindowState = FormWindowState.Normal;//主窗体的大小为默认  
             }
         }
@@ -528,8 +571,7 @@ namespace WY_App
             {
                 IKapLineCam.StartGrabImage(grab);
             }
-            LogHelper.Log.WriteInfo(System.DateTime.Now.ToString() + "初始化完成");
-            MainForm.AlarmList.Add(System.DateTime.Now.ToString() + "初始化完成");
+            LogHelper.WriteInfo(System.DateTime.Now.ToString() + "初始化完成");       
         }
 
         #region 点击panel控件移动窗口
@@ -573,22 +615,18 @@ namespace WY_App
 
 
         private void btn_Start_Click(object sender, EventArgs e)
-        {
-            //if (!Halcon.CamConnect)
-            //{
-            //    MessageBox.Show("相机链接异常，请检查!");
-            //    return;
-            //}           
-            //if (HslCommunication.plc_connect_result)
-            //{
-            //    HslCommunication._NetworkTcpDevice.Write(Parameters.plcParams.StartAdd, 1);
-            //    HslCommunication._NetworkTcpDevice.Write(Parameters.plcParams.Trigger_Detection, 0);
-            //}
-            //else
-            //{
-            //    MessageBox.Show("PLC链接异常，请检查!");
-            //    return;
-            //}
+        {  
+            if (HslCommunication.plc_connect_result)
+            {
+                OperateResult _connected = HslCommunication._NetworkTcpDevice.Write(Parameters.plcParams.StartAdd, 1);
+                LogHelper.WriteInfo(Parameters.plcParams.StartAdd + "写入1"+ _connected.IsSuccess);
+                HslCommunication._NetworkTcpDevice.Write(Parameters.plcParams.Trigger_Detection, 0);
+            }
+            else
+            {
+                MessageBox.Show("PLC链接异常，请检查!");
+                return;
+            }
             if (!CamConnectResult)
             {
                 if (MessageBox.Show("相机未连接，启动本地测试？", "开始检测提示", MessageBoxButtons.OKCancel) == DialogResult.Cancel)
@@ -606,10 +644,13 @@ namespace WY_App
             btn_Login.Enabled = false;
             btn_Cam1.Enabled = false;
             btn_Close_System.Enabled = false;
-            btn_changeProduct.Enabled = false;          
+            btn_changeProduct.Enabled = false;
             MainThread = new Thread(MainRun);
             MainThread.IsBackground = true;
-            MainThread.Start();       
+            MainThread.Start();
+            ServerThread = new Thread(ServerRun);
+            ServerThread.IsBackground = true;
+            ServerThread.Start();
         }
 
 
@@ -635,7 +676,11 @@ namespace WY_App
             if (MainThread != null)
             {
                 MainThread.Abort();
-            }           
+            }
+            if (ServerThread != null)
+            {
+                ServerThread.Abort();
+            }
         }
 
         private void btn_Connutius_Click(object sender, EventArgs e)
@@ -668,7 +713,7 @@ namespace WY_App
                 {
                     System.IO.Directory.CreateDirectory(pathOut);//不存在就创建文件夹
                 }
-                HOperatorSet.WriteImage(hObjectOut, "jpeg", 0, pathOut + stfFileNameOut + ".jpeg");
+                HOperatorSet.WriteImage(hObjectOut, "jpg", 0, pathOut + stfFileNameOut + ".jpg");
             }
             if (Parameters.specifications.SaveOrigalImage)
             {
@@ -678,7 +723,7 @@ namespace WY_App
                 {
                     System.IO.Directory.CreateDirectory(pathIn);//不存在就创建文件夹
                 }
-                HOperatorSet.WriteImage(hObjectIn, "jpeg", 0, pathIn + stfFileNameIn + ".jpeg");
+                HOperatorSet.WriteImage(hObjectIn, "jpg", 0, pathIn + stfFileNameIn + ".jpg");
             }
 
             return 0;
@@ -778,34 +823,75 @@ namespace WY_App
             flg.TransfEvent += Product_TransfEvent;
             flg.ShowDialog();
             lab_Product.Text = Product;
+            hWindow.SetPart(0, 0, -1, -1);
+            HOperatorSet.DispObj(hImage, hWindow);
         }
         private delegate void InvokeHandler();
         private void btn_SpecicationSetting_Click(object sender, EventArgs e)
         {
-            示教器 flg = new 示教器();
-            flg.ShowDialog();
+            if (HslCommunication.plc_connect_result)
+            {
+                示教器 flg = new 示教器();
+                flg.ShowDialog();
+            }
+               else
+            {
+                MessageBox.Show("PLC未连接，无法打开示教器!");
+            }
         }
 
         private bool detection(HWindow hWindow,HObject hImage  )
         {
             string time = "";
-            相机检测设置.Detection(hWindow, hImage, ref location, ref time);
-            this.Invoke(new InvokeHandler(delegate ()
+            Location offSet = new Location();
+            List<Location> locationsResult = new List<Location>();
+            if(!相机检测设置.Detection(hWindow, hImage,ref offSet, ref locationsResult, ref time))
             {
-                DataGridViewRow[] dtRows = new DataGridViewRow[Parameters.specifications.DetectionRect2Num];
-                for (int i = 0; i < Parameters.specifications.DetectionRect2Num; i++)
+                return false;
+            }
+            this.Invoke(new InvokeHandler(delegate ()
+            {             
+                for (int i = 0; i < locationsResult.Count; i++)
                 {
-                    dtRows[i] = new DataGridViewRow();
-                    dtRows[i].CreateCells(uiDataGridView1);
-                    dtRows[i].Cells[0].Value = location[i].Length1.ToString("0.0000");
-                    dtRows[i].Cells[1].Value = location[i].Length2.ToString("0.0000");
-                    dtRows[i].Cells[2].Value = location[i].Length3.ToString("0.0000");
-                    dtRows[i].Cells[3].Value = location[i].Length4.ToString("0.0000");
-                    
-                    
+                    if(Parameters.cursorLocation.Location[i].Length1 - locationsResult[i].Length1>1)
+                    {
+                        uiDataGridView1.Rows[i].Cells[0].Style.BackColor = Color.Red;
+                    }
+                    else
+                    {
+                        uiDataGridView1.Rows[i].Cells[0].Style.BackColor = Color.Black;
+                    }
+                    uiDataGridView1.Rows[i].Cells[0].Value = (Parameters.cursorLocation.Location[i].Length1 - locationsResult[i].Length1).ToString("0.0");
+                    if (Parameters.cursorLocation.Location[i].Length2 - locationsResult[i].Length2 > 1)
+                    {
+                        uiDataGridView1.Rows[i].Cells[1].Style.BackColor = Color.Red;
+                    }
+                    else
+                    {
+                        uiDataGridView1.Rows[i].Cells[1].Style.BackColor = Color.Black;
+                    }
+                    uiDataGridView1.Rows[i].Cells[1].Value = (Parameters.cursorLocation.Location[i].Length2 - locationsResult[i].Length2).ToString("0.0");
+                    if (Parameters.cursorLocation.Location[i].Length3 - locationsResult[i].Length3 > 1)
+                    {
+                        uiDataGridView1.Rows[i].Cells[2].Style.BackColor = Color.Red;
+                    }
+                    else
+                    {
+                        uiDataGridView1.Rows[i].Cells[2].Style.BackColor = Color.Black;
+                    }
+                    uiDataGridView1.Rows[i].Cells[2].Value = (Parameters.cursorLocation.Location[i].Length3 - locationsResult[i].Length3).ToString("0.0");
+                    if (Parameters.cursorLocation.Location[i].Length4 - locationsResult[i].Length4 > 1)
+                    {
+                        uiDataGridView1.Rows[i].Cells[3].Style.BackColor = Color.Red;
+                    }
+                    else
+                    {
+                        uiDataGridView1.Rows[i].Cells[3].Style.BackColor = Color.Black;
+                    }
+                    uiDataGridView1.Rows[i].Cells[3].Value = (Parameters.cursorLocation.Location[i].Length4 - locationsResult[i].Length4).ToString("0.0");                    
                 }
-                uiDataGridView1.Rows.AddRange(dtRows);
-                相机检测设置.WriteCsv(location);
+
+                相机检测设置.WriteCsv(locationsResult);
             }));
             return true;
         }

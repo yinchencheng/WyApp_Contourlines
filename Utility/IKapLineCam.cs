@@ -157,7 +157,6 @@ namespace WY_App.Utility
          * @param[in] pParam：Input parameter. */
         public void OnFrameReadyFunc(IntPtr pParam)
         {
-            MainForm.ImageWait.WaitOne();
             LogHelper.WriteInfo("Grab frame ready");
             IntPtr hDev = (IntPtr)pParam;
             IntPtr pUserBuffer = IntPtr.Zero;
@@ -174,6 +173,8 @@ namespace WY_App.Utility
                 IKapBoard.IKapGetInfo(hDev, (uint)INFO_ID.IKP_IMAGE_WIDTH, ref nFrameWidht);
                 IKapBoard.IKapGetInfo(hDev, (uint)INFO_ID.IKP_IMAGE_HEIGHT, ref nFrameHeight);
                 IKapBoard.IKapGetBufferAddress(hDev, m_nCurFrameIndex, ref pUserBuffer);
+                Halcon.hv_Width = nFrameWidht;
+                Halcon.hv_Height = nFrameHeight;
                 HOperatorSet.GenImage1(out MainForm.hImage, "byte", nFrameWidht, nFrameHeight, pUserBuffer);
                 MainForm.ImageEvent.Set();
                 //IKapBoard.IKapSaveBuffer(hDev,m_nCurFrameIndex,m_strFileName,(int)ImageCompressionFalg.IKP_DEFAULT_COMPRESSION);

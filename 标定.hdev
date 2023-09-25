@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<hdevelop file_version="1.2" halcon_version="22.11.0.0">
+<procedure name="main">
+<interface/>
+<body>
+<l>dev_open_window (0, 0, 768, 512, 'black', WindowHandle)</l>
+<l>read_image (Image, 'D:/DATA/2023-09-05/0000/IN-0CAM-0000-20230905145754.jpeg')</l>
+<l>draw_rectangle1 (WindowHandle, Row1, Column1, Row2, Column2)</l>
+<l>gen_rectangle1 (Rectangle, Row1, Column1, Row2, Column2)</l>
+<l>reduce_domain (Image, Rectangle, ImageReduced)</l>
+<l>threshold (ImageReduced, Region, 0, 10)</l>
+<l>area_center (Region, Area, Row, Column)</l>
+<c></c>
+<l>*Row := [0,100.5,100,3]</l>
+<l>*Col := [4,0,100,99.4]</l>
+<l>*gen_contour_polygon_xld (Contour, Row, Col)</l>
+<l>*fit_circle_contour_xld (Contour, 'geotukey', -1, 0, 0, 3, 2, Row_C, Column_C, Radius_C, StartPhi_C, EndPhi_C, PointOrder_C)</l>
+<l>*dev_set_color ('blue')</l>
+<l>*gen_circle_contour_xld (ContCircle, Row_C, Column_C, Radius_C, 0, 4 * acos(0), 'positive', 1)</l>
+<c></c>
+<c></c>
+</body>
+<docu id="main">
+<parameters/>
+</docu>
+</procedure>
+</hdevelop>

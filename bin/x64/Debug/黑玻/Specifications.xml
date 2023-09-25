@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<Specifications xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <检测矩形>
+    <Row1>2687.9422110552764</Row1>
+    <Colum1>4039.0388471177944</Colum1>
+    <Row2>16909.047738693469</Row2>
+    <Colum2>13965.936090225563</Colum2>
+    <Length1>0</Length1>
+    <Length2>0</Length2>
+    <阈值>0</阈值>
+    <simga>0</simga>
+  </检测矩形>
+  <SaveOrigalImage>true</SaveOrigalImage>
+  <SaveDefeatImage>false</SaveDefeatImage>
+  <SaveCropImage>false</SaveCropImage>
+  <CropImagelength>500</CropImagelength>
+  <MeanImageEnabled>true</MeanImageEnabled>
+  <ImageVerifyEnabled>false</ImageVerifyEnabled>
+  <DetectionRect2Num>37</DetectionRect2Num>
+  <DetectionCricleNum>0</DetectionCricleNum>
+  <ContourLineEnabled>true</ContourLineEnabled>
+  <DefectionEnabled>false</DefectionEnabled>
+  <DefectionAbled>false</DefectionAbled>
+  <PixelResolutionRow>0.0827</PixelResolutionRow>
+  <PixelResolutionColum>0.0783</PixelResolutionColum>
+  <meanImageEnum>0</meanImageEnum>
+</Specifications>

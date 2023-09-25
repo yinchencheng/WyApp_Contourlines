@@ -3,16 +3,16 @@
   <LogLevel>Debug</LogLevel>
   <LogFileExistDay>7</LogFileExistDay>
   <PlcEnable>true</PlcEnable>
-  <PlcType>Melsec.MelsecMcNet</PlcType>
-  <PlcIpAddress>127.0.0.1</PlcIpAddress>
-  <PlcIpPort>6000</PlcIpPort>
+  <PlcType>InovanceTcpNet</PlcType>
+  <PlcIpAddress>192.168.1.10</PlcIpAddress>
+  <PlcIpPort>502</PlcIpPort>
   <PlcDevice>0x01</PlcDevice>
   <TcpClientEnable>false</TcpClientEnable>
-  <TcpClientIpAddress>127.0.0.1</TcpClientIpAddress>
-  <TcpClientIpPort>9600</TcpClientIpPort>
-  <TcpServerEnable>false</TcpServerEnable>
-  <TcpServerIpAddress>192.168.3.20</TcpServerIpAddress>
-  <TcpServerIpPort>580</TcpServerIpPort>
+  <TcpClientIpAddress>192.168.1.15</TcpClientIpAddress>
+  <TcpClientIpPort>502</TcpClientIpPort>
+  <TcpServerEnable>true</TcpServerEnable>
+  <TcpServerIpAddress>127.0.0.1</TcpServerIpAddress>
+  <TcpServerIpPort>9600</TcpServerIpPort>
   <ImagePath>D:\VisionDetect\InspectImage\</ImagePath>
   <ImageSavePath>D:\DATA\</ImageSavePath>
   <productName>初始化</productName>

@@ -1,26 +1,27 @@
 <?xml version="1.0"?>
 <Specifications xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <检测矩形>
-    <Row1>771.31208053691273</Row1>
-    <Colum1>4871.6826484018266</Colum1>
-    <Row2>14775.786353467562</Row2>
-    <Colum2>15102.331050228311</Colum2>
+    <Row1>2064.9205607476633</Row1>
+    <Colum1>2240.7075471698113</Colum1>
+    <Row2>14625.668224299065</Row2>
+    <Colum2>12768.372117400419</Colum2>
     <Length1>0</Length1>
     <Length2>0</Length2>
     <阈值>0</阈值>
     <simga>0</simga>
   </检测矩形>
-  <SaveOrigalImage>false</SaveOrigalImage>
+  <SaveOrigalImage>true</SaveOrigalImage>
   <SaveDefeatImage>false</SaveDefeatImage>
   <SaveCropImage>false</SaveCropImage>
   <CropImagelength>500</CropImagelength>
   <MeanImageEnabled>false</MeanImageEnabled>
   <ImageVerifyEnabled>false</ImageVerifyEnabled>
-  <DetectionRect2Num>46</DetectionRect2Num>
+  <DetectionRect2Num>37</DetectionRect2Num>
   <DetectionCricleNum>0</DetectionCricleNum>
   <ContourLineEnabled>true</ContourLineEnabled>
   <DefectionEnabled>false</DefectionEnabled>
-  <PixelResolutionRow>0.01</PixelResolutionRow>
-  <PixelResolutionColum>0.01</PixelResolutionColum>
+  <DefectionAbled>false</DefectionAbled>
+  <PixelResolutionRow>0.083</PixelResolutionRow>
+  <PixelResolutionColum>0.083</PixelResolutionColum>
   <meanImageEnum>0</meanImageEnum>
 </Specifications>

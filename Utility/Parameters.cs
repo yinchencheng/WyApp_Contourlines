@@ -90,6 +90,7 @@ namespace WY_App.Utility
             public double Length2;
             public double Length3;
             public double Length4;
+            public double Phi;
         }
         public class CursorLocation
         {
@@ -103,6 +104,7 @@ namespace WY_App.Utility
                     Location[i].Length1 = 0;
                     Location[i].Length2 = 0;
                     Location[i].Length3 = 0;
+                    Location[i].Length4 = 0;
                 }
             }
         }
@@ -141,8 +143,11 @@ namespace WY_App.Utility
             public Rect2[] decetionRect2 = new Rect2[100];
             public Cricle[] decetionCircle = new Cricle[4];
             public Cricle BasePoint = new Cricle();
+            public Rect1 BasePhi = new Rect1();
+            public int 分割阈值=new int();
             public DetectionSpec()
-            {                
+            {
+                分割阈值 = 60;
                 for (int i = 0; i < 3; i++)
                 {
                     baseRect1[i].Row1 = 100;
@@ -156,10 +161,10 @@ namespace WY_App.Utility
                     decetionRect2[i].Row = 500;
                     decetionRect2[i].Colum = 500;
                     decetionRect2[i].Phi = 0;
-                    decetionRect2[i].Length1 = 20;
+                    decetionRect2[i].Length1 = 100;
                     decetionRect2[i].Length2 = 10;
                     decetionRect2[i].阈值 = 20;
-                    decetionRect2[i].极性 = "positive";
+                    decetionRect2[i].极性 = "all";
                     decetionRect2[i].simga = 2;
                 }
             }
@@ -190,7 +195,7 @@ namespace WY_App.Utility
             public bool ContourLineEnabled;
 
             public bool DefectionEnabled;
-
+            public bool DefectionAbled;
             /// <summary>
             ///Y方向放大比例
             /// </summary>
@@ -214,6 +219,7 @@ namespace WY_App.Utility
                 MeanImageEnabled = false;
                 ContourLineEnabled = false;
                 DefectionEnabled = false;
+                DefectionAbled = false;
                 meanImageEnum = 0;
                 DetectionRect2Num = 40;
                 DetectionCricleNum = 0;             
@@ -371,14 +377,28 @@ namespace WY_App.Utility
             public string StartAdd;
             public string SNReadAdd;
 
+            public string[] ReadAdd = new string[100];
+            public string[] WriteAdd = new string[100];
+            public int[] WriteValue = new int[100];
+
+
             public PLCParams()
             {
+
                 Trigger_Detection = "D100";
                 Completion = "D100";
                 HeartBeatAdd = "D102";
                 HeartBeatAdd = "D104";
                 SNReadAdd = "D106";
-        }
+                for (int i = 0; i < 100; i++) 
+                {
+                    ReadAdd[i] = "D" + i * 2 + 200;
+                    WriteAdd[i] = "D" + i * 2 + 400;
+                    WriteValue[i] = 0;
+                }
+
+
+            }
         }
 
         public class Counts

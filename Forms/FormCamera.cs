@@ -57,5 +57,10 @@ namespace WY_App
         {
             this.Close();
         }
+
+        private void tableLayoutPanel3_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
     }
 }

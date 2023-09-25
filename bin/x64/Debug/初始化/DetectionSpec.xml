@@ -2,1051 +2,1051 @@
 <DetectionSpec xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <baseRect1>
     <Rect1>
-      <Row1>9943.57158836689</Row1>
-      <Colum1>14578.641552511415</Colum1>
-      <Row2>11285.853467561521</Row2>
-      <Colum2>14466.422374429223</Colum2>
+      <Row1>8476.1355140186915</Row1>
+      <Colum1>10793.361635220126</Colum1>
+      <Row2>11392.023364485982</Row2>
+      <Colum2>10278.141509433963</Colum2>
       <Length1>1000</Length1>
       <Length2>20</Length2>
-      <阈值>5</阈值>
-      <极性 />
-      <simga>10</simga>
+      <阈值>15</阈值>
+      <极性>all</极性>
+      <simga>2</simga>
     </Rect1>
     <Rect1>
-      <Row1>14149.388143176733</Row1>
-      <Colum1>11997.600456621005</Colum1>
-      <Row2>14261.244966442953</Row2>
-      <Colum2>13568.668949771689</Colum2>
+      <Row1>14102.303738317756</Row1>
+      <Colum1>5452.2463312368973</Colum1>
+      <Row2>13840.621495327103</Row2>
+      <Colum2>8766.8291404612155</Colum2>
       <Length1>1000</Length1>
-      <Length2>10</Length2>
-      <阈值>20</阈值>
-      <极性 />
-      <simga>1</simga>
+      <Length2>20</Length2>
+      <阈值>12</阈值>
+      <极性>all</极性>
+      <simga>2</simga>
     </Rect1>
     <Rect1>
-      <Row1>2012.9228187919464</Row1>
-      <Colum1>10183.390410958906</Colum1>
-      <Row2>2214.2651006711412</Row2>
-      <Colum2>12502.586757990866</Colum2>
+      <Row1>3317.2570093457944</Row1>
+      <Colum1>10913.57966457023</Colum1>
+      <Row2>3317.2570093457944</Row2>
+      <Colum2>11737.931865828092</Colum2>
       <Length1>1000</Length1>
-      <Length2>10</Length2>
-      <阈值>10</阈值>
-      <极性 />
-      <simga>1</simga>
+      <Length2>20</Length2>
+      <阈值>12</阈值>
+      <极性>all</极性>
+      <simga>2</simga>
     </Rect1>
   </baseRect1>
   <decetionRect2>
     <Rect2>
-      <Row>1524.6999999999998</Row>
-      <Colum>5963.0999999999995</Colum>
-      <Phi>1.9974238199216481</Phi>
-      <Length1>20</Length1>
-      <Length2>10</Length2>
+      <Row>3361.9824517755737</Row>
+      <Colum>10739.314865882925</Colum>
+      <Phi>-1.8928451468713161</Phi>
+      <Length1>100</Length1>
+      <Length2>20</Length2>
       <阈值>20</阈值>
-      <极性>positive</极性>
+      <极性>all</极性>
       <simga>2</simga>
     </Rect2>
     <Rect2>
-      <Row>1625.5</Row>
-      <Colum>6839.5</Colum>
-      <Phi>7.7712025465475447</Phi>
-      <Length1>20</Length1>
-      <Length2>10</Length2>
+      <Row>3386.0175482244263</Row>
+      <Colum>11722.685134117075</Colum>
+      <Phi>-2.03796829276071</Phi>
+      <Length1>100</Length1>
+      <Length2>20</Length2>
       <阈值>20</阈值>
-      <极性>positive</极性>
+      <极性>all</极性>
       <simga>2</simga>
     </Rect2>
     <Rect2>
-      <Row>1731.5</Row>
-      <Colum>7723.5</Colum>
-      <Phi>7.7311426553719738</Phi>
-      <Length1>20</Length1>
+      <Row>4065.314865882925</Row>
+      <Colum>11946.017548224427</Colum>
+      <Phi>-2.1220332735405605</Phi>
+      <Length1>100</Length1>
+      <Length2>20</Length2>
+      <阈值>20</阈值>
+      <极性>all</极性>
+      <simga>2</simga>
+    </Rect2>
+    <Rect2>
+      <Row>4701.2999999999993</Row>
+      <Colum>11537.3</Colum>
+      <Phi>-2.1191666493307642</Phi>
+      <Length1>100</Length1>
+      <Length2>20</Length2>
+      <阈值>20</阈值>
+      <极性>all</极性>
+      <simga>2</simga>
+    </Rect2>
+    <Rect2>
+      <Row>5478.685134117075</Row>
+      <Colum>11271.982451775573</Colum>
+      <Phi>-2.159235526038779</Phi>
+      <Length1>100</Length1>
+      <Length2>20</Length2>
+      <阈值>20</阈值>
+      <极性>all</极性>
+      <simga>2</simga>
+    </Rect2>
+    <Rect2>
+      <Row>6303.5</Row>
+      <Colum>11051.5</Colum>
+      <Phi>-2.2341593196393394</Phi>
+      <Length1>100</Length1>
+      <Length2>20</Length2>
+      <阈值>20</阈值>
+      <极性>all</极性>
+      <simga>2</simga>
+    </Rect2>
+    <Rect2>
+      <Row>7126.4557086014529</Row>
+      <Colum>10831.270013263276</Colum>
+      <Phi>-2.3492668927865727</Phi>
+      <Length1>100</Length1>
+      <Length2>20</Length2>
+      <阈值>20</阈值>
+      <极性>all</极性>
+      <simga>2</simga>
+    </Rect2>
+    <Rect2>
+      <Row>7948.5</Row>
+      <Colum>10610.5</Colum>
+      <Phi>-2.541248248673702</Phi>
+      <Length1>100</Length1>
+      <Length2>20</Length2>
+      <阈值>20</阈值>
+      <极性>all</极性>
+      <simga>2</simga>
+    </Rect2>
+    <Rect2>
+      <Row>8771.314865882925</Row>
+      <Colum>10390.017548224427</Colum>
+      <Phi>-2.8837780221858575</Phi>
+      <Length1>100</Length1>
+      <Length2>20</Length2>
+      <阈值>20</阈值>
+      <极性>all</极性>
+      <simga>2</simga>
+    </Rect2>
+    <Rect2>
+      <Row>9593.685134117075</Row>
+      <Colum>10169.982451775573</Colum>
+      <Phi>2.857668612136488</Phi>
+      <Length1>100</Length1>
+      <Length2>20</Length2>
+      <阈值>20</阈值>
+      <极性>all</极性>
+      <simga>2</simga>
+    </Rect2>
+    <Rect2>
+      <Row>10418.314865882925</Row>
+      <Colum>9949.0175482244267</Colum>
+      <Phi>2.3263327819678885</Phi>
+      <Length1>100</Length1>
+      <Length2>20</Length2>
+      <阈值>20</阈值>
+      <极性>all</极性>
+      <simga>2</simga>
+    </Rect2>
+    <Rect2>
+      <Row>11240.314865882925</Row>
+      <Colum>9730.0175482244267</Colum>
+      <Phi>1.99946457508183</Phi>
+      <Length1>100</Length1>
+      <Length2>20</Length2>
+      <阈值>20</阈值>
+      <极性>all</极性>
+      <simga>2</simga>
+    </Rect2>
+    <Rect2>
+      <Row>12060.455708601454</Row>
+      <Colum>9509.2700132632744</Colum>
+      <Phi>1.8151862647634684</Phi>
+      <Length1>100</Length1>
+      <Length2>20</Length2>
+      <阈值>20</阈值>
+      <极性>all</极性>
+      <simga>2</simga>
+    </Rect2>
+    <Rect2>
+      <Row>12821.7</Row>
+      <Colum>9227.7</Colum>
+      <Phi>1.68972688057725</Phi>
+      <Length1>100</Length1>
+      <Length2>20</Length2>
+      <阈值>20</阈值>
+      <极性>all</极性>
+      <simga>2</simga>
+    </Rect2>
+    <Rect2>
+      <Row>13443.685134117075</Row>
+      <Colum>8804.9824517755733</Colum>
+      <Phi>1.5733818524437313</Phi>
+      <Length1>100</Length1>
+      <Length2>20</Length2>
+      <阈值>20</阈值>
+      <极性>all</极性>
+      <simga>2</simga>
+    </Rect2>
+    <Rect2>
+      <Row>13711.5</Row>
+      <Colum>8055.5</Colum>
+      <Phi>1.4088212697291136</Phi>
+      <Length1>100</Length1>
+      <Length2>20</Length2>
+      <阈值>20</阈值>
+      <极性>all</极性>
+      <simga>2</simga>
+    </Rect2>
+    <Rect2>
+      <Row>13694.017548224427</Row>
+      <Colum>7073.685134117075</Colum>
+      <Phi>1.2057874509171913</Phi>
+      <Length1>100</Length1>
+      <Length2>20</Length2>
+      <阈值>20</阈值>
+      <极性>all</极性>
+      <simga>2</simga>
+    </Rect2>
+    <Rect2>
+      <Row>13672.5</Row>
+      <Colum>6090.5</Colum>
+      <Phi>1.027871929620999</Phi>
+      <Length1>100</Length1>
+      <Length2>20</Length2>
+      <阈值>20</阈值>
+      <极性>all</极性>
+      <simga>2</simga>
+    </Rect2>
+    <Rect2>
+      <Row>13649.5</Row>
+      <Colum>5096.5</Colum>
+      <Phi>0.87830780687014343</Phi>
+      <Length1>100</Length1>
+      <Length2>20</Length2>
+      <阈值>20</阈值>
+      <极性>all</极性>
+      <simga>2</simga>
+    </Rect2>
+    <Rect2>
+      <Row>13626.5</Row>
+      <Colum>4104.5</Colum>
+      <Phi>0.75744022057135385</Phi>
+      <Length1>100</Length1>
+      <Length2>20</Length2>
+      <阈值>20</阈值>
+      <极性>all</极性>
+      <simga>2</simga>
+    </Rect2>
+    <Rect2>
+      <Row>13558.685134117075</Row>
+      <Colum>3167.0175482244263</Colum>
+      <Phi>0.65993391306724336</Phi>
+      <Length1>100</Length1>
+      <Length2>20</Length2>
+      <阈值>20</阈值>
+      <极性>all</极性>
+      <simga>2</simga>
+    </Rect2>
+    <Rect2>
+      <Row>12755.455708601454</Row>
+      <Colum>3397.2700132632763</Colum>
+      <Phi>0.58356149744378383</Phi>
+      <Length1>100</Length1>
+      <Length2>20</Length2>
+      <阈值>20</阈值>
+      <极性>all</极性>
+      <simga>2</simga>
+    </Rect2>
+    <Rect2>
+      <Row>11964.685134117075</Row>
+      <Colum>3651.9824517755737</Colum>
+      <Phi>0.49450683867763767</Phi>
+      <Length1>100</Length1>
+      <Length2>20</Length2>
+      <阈值>20</阈值>
+      <极性>all</极性>
+      <simga>2</simga>
+    </Rect2>
+    <Rect2>
+      <Row>11183.7</Row>
+      <Colum>3915.7000000000003</Colum>
+      <Phi>0.38759430533477074</Phi>
+      <Length1>100</Length1>
+      <Length2>20</Length2>
+      <阈值>20</阈值>
+      <极性>all</极性>
+      <simga>2</simga>
+    </Rect2>
+    <Rect2>
+      <Row>10420.455708601454</Row>
+      <Colum>4197.2700132632763</Colum>
+      <Phi>0.26111083547727132</Phi>
+      <Length1>100</Length1>
+      <Length2>20</Length2>
+      <阈值>20</阈值>
+      <极性>all</极性>
+      <simga>2</simga>
+    </Rect2>
+    <Rect2>
+      <Row>9682.3</Row>
+      <Colum>4504.2999999999993</Colum>
+      <Phi>0.11376662905456382</Phi>
+      <Length1>100</Length1>
+      <Length2>20</Length2>
+      <阈值>20</阈值>
+      <极性>all</极性>
+      <simga>2</simga>
+    </Rect2>
+    <Rect2>
+      <Row>8971.314865882925</Row>
+      <Colum>4838.0175482244267</Colum>
+      <Phi>-0.055767865549631812</Phi>
+      <Length1>100</Length1>
+      <Length2>20</Length2>
+      <阈值>20</阈值>
+      <极性>all</极性>
+      <simga>2</simga>
+    </Rect2>
+    <Rect2>
+      <Row>8298.314865882925</Row>
+      <Colum>5210.0175482244267</Colum>
+      <Phi>-0.24441450922471683</Phi>
+      <Length1>100</Length1>
+      <Length2>20</Length2>
+      <阈值>20</阈值>
+      <极性>all</极性>
+      <simga>2</simga>
+    </Rect2>
+    <Rect2>
+      <Row>7669.3</Row>
+      <Colum>5626.3</Colum>
+      <Phi>-0.44812756802426879</Phi>
+      <Length1>100</Length1>
+      <Length2>20</Length2>
+      <阈值>20</阈值>
+      <极性>all</极性>
+      <simga>2</simga>
+    </Rect2>
+    <Rect2>
+      <Row>7090.314865882925</Row>
+      <Colum>6092.0175482244267</Colum>
+      <Phi>-0.6611148828326131</Phi>
+      <Length1>100</Length1>
+      <Length2>20</Length2>
+      <阈值>20</阈值>
+      <极性>all</极性>
+      <simga>2</simga>
+    </Rect2>
+    <Rect2>
+      <Row>6554.0175482244267</Row>
+      <Colum>6601.314865882925</Colum>
+      <Phi>-0.877351762780594</Phi>
+      <Length1>100</Length1>
+      <Length2>20</Length2>
+      <阈值>20</阈值>
+      <极性>all</极性>
+      <simga>2</simga>
+    </Rect2>
+    <Rect2>
+      <Row>6046.9824517755733</Row>
+      <Colum>7138.685134117075</Colum>
+      <Phi>-1.0863312795839737</Phi>
+      <Length1>100</Length1>
+      <Length2>20</Length2>
+      <阈值>20</阈值>
+      <极性>all</极性>
+      <simga>2</simga>
+    </Rect2>
+    <Rect2>
+      <Row>5560.3</Row>
+      <Colum>7697.3</Colum>
+      <Phi>-1.2775389183877603</Phi>
+      <Length1>100</Length1>
+      <Length2>20</Length2>
+      <阈值>20</阈值>
+      <极性>all</极性>
+      <simga>2</simga>
+    </Rect2>
+    <Rect2>
+      <Row>5091.0175482244267</Row>
+      <Colum>8273.314865882925</Colum>
+      <Phi>-1.4445133724911075</Phi>
+      <Length1>100</Length1>
+      <Length2>20</Length2>
+      <阈值>20</阈值>
+      <极性>all</极性>
+      <simga>2</simga>
+    </Rect2>
+    <Rect2>
+      <Row>4636.2999999999993</Row>
+      <Colum>8863.3</Colum>
+      <Phi>-1.5860085268079285</Phi>
+      <Length1>100</Length1>
+      <Length2>20</Length2>
+      <阈值>20</阈值>
+      <极性>all</极性>
+      <simga>2</simga>
+    </Rect2>
+    <Rect2>
+      <Row>4189.2999999999993</Row>
+      <Colum>9461.3</Colum>
+      <Phi>-1.703399314022243</Phi>
+      <Length1>100</Length1>
+      <Length2>20</Length2>
+      <阈值>20</阈值>
+      <极性>all</极性>
+      <simga>2</simga>
+    </Rect2>
+    <Rect2>
+      <Row>3749.7000000000003</Row>
+      <Colum>10066.7</Colum>
+      <Phi>-1.8005165783473904</Phi>
+      <Length1>100</Length1>
+      <Length2>20</Length2>
+      <阈值>20</阈值>
+      <极性>all</极性>
+      <simga>2</simga>
+    </Rect2>
+    <Rect2>
+      <Row>500</Row>
+      <Colum>500</Colum>
+      <Phi>0</Phi>
+      <Length1>100</Length1>
       <Length2>10</Length2>
-      <阈值>15</阈值>
-      <极性>negative</极性>
-      <simga>1</simga>
+      <阈值>20</阈值>
+      <极性>all</极性>
+      <simga>2</simga>
     </Rect2>
     <Rect2>
-      <Row>1823.5</Row>
-      <Colum>8583.5</Colum>
-      <Phi>7.7712025465475447</Phi>
-      <Length1>20</Length1>
+      <Row>500</Row>
+      <Colum>500</Colum>
+      <Phi>0</Phi>
+      <Length1>100</Length1>
       <Length2>10</Length2>
-      <阈值>15</阈值>
-      <极性>negative</极性>
-      <simga>1</simga>
+      <阈值>20</阈值>
+      <极性>all</极性>
+      <simga>2</simga>
     </Rect2>
     <Rect2>
-      <Row>1913.5</Row>
-      <Colum>9463.5</Colum>
-      <Phi>7.7712025465475447</Phi>
-      <Length1>20</Length1>
+      <Row>500</Row>
+      <Colum>500</Colum>
+      <Phi>0</Phi>
+      <Length1>100</Length1>
       <Length2>10</Length2>
-      <阈值>15</阈值>
-      <极性>negative</极性>
-      <simga>1</simga>
+      <阈值>20</阈值>
+      <极性>all</极性>
+      <simga>2</simga>
     </Rect2>
     <Rect2>
-      <Row>2003.5</Row>
-      <Colum>10331.5</Colum>
-      <Phi>7.7544972869520219</Phi>
-      <Length1>20</Length1>
+      <Row>500</Row>
+      <Colum>500</Colum>
+      <Phi>0</Phi>
+      <Length1>100</Length1>
       <Length2>10</Length2>
-      <阈值>15</阈值>
-      <极性>negative</极性>
-      <simga>1</simga>
+      <阈值>20</阈值>
+      <极性>all</极性>
+      <simga>2</simga>
     </Rect2>
     <Rect2>
-      <Row>2092.5</Row>
-      <Colum>11214.5</Colum>
-      <Phi>7.8153846281766883</Phi>
-      <Length1>20</Length1>
+      <Row>500</Row>
+      <Colum>500</Colum>
+      <Phi>0</Phi>
+      <Length1>100</Length1>
       <Length2>10</Length2>
-      <阈值>15</阈值>
-      <极性>negative</极性>
-      <simga>1</simga>
+      <阈值>20</阈值>
+      <极性>all</极性>
+      <simga>2</simga>
     </Rect2>
     <Rect2>
-      <Row>2174.9824517755737</Row>
-      <Colum>12106.314865882925</Colum>
-      <Phi>7.6998352042955451</Phi>
-      <Length1>20</Length1>
+      <Row>500</Row>
+      <Colum>500</Colum>
+      <Phi>0</Phi>
+      <Length1>100</Length1>
       <Length2>10</Length2>
-      <阈值>15</阈值>
-      <极性>negative</极性>
-      <simga>1</simga>
+      <阈值>20</阈值>
+      <极性>all</极性>
+      <simga>2</simga>
     </Rect2>
     <Rect2>
-      <Row>2254.7299867367237</Row>
-      <Colum>12972.455708601454</Colum>
-      <Phi>7.7708404020861046</Phi>
-      <Length1>20</Length1>
+      <Row>500</Row>
+      <Colum>500</Colum>
+      <Phi>0</Phi>
+      <Length1>100</Length1>
       <Length2>10</Length2>
-      <阈值>15</阈值>
-      <极性>negative</极性>
-      <simga>1</simga>
+      <阈值>20</阈值>
+      <极性>all</极性>
+      <simga>2</simga>
     </Rect2>
     <Rect2>
-      <Row>2537.7000000000003</Row>
-      <Colum>13607.3</Colum>
-      <Phi>7.0216950503759392</Phi>
-      <Length1>20</Length1>
+      <Row>500</Row>
+      <Colum>500</Colum>
+      <Phi>0</Phi>
+      <Length1>100</Length1>
       <Length2>10</Length2>
-      <阈值>15</阈值>
-      <极性>negative</极性>
-      <simga>1</simga>
+      <阈值>20</阈值>
+      <极性>all</极性>
+      <simga>2</simga>
     </Rect2>
     <Rect2>
-      <Row>3282.685134117075</Row>
-      <Colum>13768.982451775573</Colum>
-      <Phi>6.1412882525753467</Phi>
-      <Length1>20</Length1>
+      <Row>500</Row>
+      <Colum>500</Colum>
+      <Phi>0</Phi>
+      <Length1>100</Length1>
       <Length2>10</Length2>
-      <阈值>15</阈值>
-      <极性>negative</极性>
-      <simga>1</simga>
+      <阈值>20</阈值>
+      <极性>all</极性>
+      <simga>2</simga>
     </Rect2>
     <Rect2>
-      <Row>4158.5</Row>
-      <Colum>13698.5</Colum>
-      <Phi>6.1837009601569957</Phi>
-      <Length1>20</Length1>
+      <Row>500</Row>
+      <Colum>500</Colum>
+      <Phi>0</Phi>
+      <Length1>100</Length1>
       <Length2>10</Length2>
-      <阈值>15</阈值>
-      <极性>negative</极性>
-      <simga>1</simga>
+      <阈值>20</阈值>
+      <极性>all</极性>
+      <simga>2</simga>
     </Rect2>
     <Rect2>
-      <Row>4941.685134117075</Row>
-      <Colum>13525.982451775573</Colum>
-      <Phi>5.5643553075582037</Phi>
-      <Length1>20</Length1>
+      <Row>500</Row>
+      <Colum>500</Colum>
+      <Phi>0</Phi>
+      <Length1>100</Length1>
       <Length2>10</Length2>
-      <阈值>15</阈值>
-      <极性>negative</极性>
-      <simga>1</simga>
+      <阈值>20</阈值>
+      <极性>all</极性>
+      <simga>2</simga>
     </Rect2>
     <Rect2>
-      <Row>5554.314865882925</Row>
-      <Colum>13138.017548224427</Colum>
-      <Phi>5.88181466728274</Phi>
-      <Length1>20</Length1>
+      <Row>500</Row>
+      <Colum>500</Colum>
+      <Phi>0</Phi>
+      <Length1>100</Length1>
       <Length2>10</Length2>
-      <阈值>15</阈值>
-      <极性>negative</极性>
-      <simga>1</simga>
+      <阈值>20</阈值>
+      <极性>all</极性>
+      <simga>2</simga>
     </Rect2>
     <Rect2>
-      <Row>6351.5</Row>
-      <Colum>12947.5</Colum>
-      <Phi>6.2831853071795862</Phi>
-      <Length1>20</Length1>
+      <Row>500</Row>
+      <Colum>500</Colum>
+      <Phi>0</Phi>
+      <Length1>100</Length1>
       <Length2>10</Length2>
-      <阈值>15</阈值>
-      <极性>negative</极性>
-      <simga>1</simga>
+      <阈值>20</阈值>
+      <极性>all</极性>
+      <simga>2</simga>
     </Rect2>
     <Rect2>
-      <Row>7207.5442913985471</Row>
-      <Colum>13047.270013263276</Colum>
-      <Phi>6.5787008044880224</Phi>
-      <Length1>20</Length1>
+      <Row>500</Row>
+      <Colum>500</Colum>
+      <Phi>0</Phi>
+      <Length1>100</Length1>
       <Length2>10</Length2>
-      <阈值>15</阈值>
-      <极性>negative</极性>
-      <simga>1</simga>
+      <阈值>20</阈值>
+      <极性>all</极性>
+      <simga>2</simga>
     </Rect2>
     <Rect2>
-      <Row>7873.314865882925</Row>
-      <Colum>13379.982451775573</Colum>
-      <Phi>6.8835179341631179</Phi>
-      <Length1>20</Length1>
+      <Row>500</Row>
+      <Colum>500</Colum>
+      <Phi>0</Phi>
+      <Length1>100</Length1>
       <Length2>10</Length2>
-      <阈值>15</阈值>
-      <极性>negative</极性>
-      <simga>1</simga>
+      <阈值>20</阈值>
+      <极性>all</极性>
+      <simga>2</simga>
     </Rect2>
     <Rect2>
-      <Row>8457.7</Row>
-      <Colum>13795.3</Colum>
-      <Phi>7.0685834705770345</Phi>
-      <Length1>20</Length1>
+      <Row>500</Row>
+      <Colum>500</Colum>
+      <Phi>0</Phi>
+      <Length1>100</Length1>
       <Length2>10</Length2>
-      <阈值>15</阈值>
-      <极性>negative</极性>
-      <simga>1</simga>
+      <阈值>20</阈值>
+      <极性>all</极性>
+      <simga>2</simga>
     </Rect2>
     <Rect2>
-      <Row>9043.3</Row>
-      <Colum>14207.7</Colum>
-      <Phi>7.0216950503760156</Phi>
-      <Length1>20</Length1>
+      <Row>500</Row>
+      <Colum>500</Colum>
+      <Phi>0</Phi>
+      <Length1>100</Length1>
       <Length2>10</Length2>
-      <阈值>15</阈值>
-      <极性>negative</极性>
-      <simga>1</simga>
+      <阈值>20</阈值>
+      <极性>all</极性>
+      <simga>2</simga>
     </Rect2>
     <Rect2>
-      <Row>9646.5442913985462</Row>
-      <Colum>14604.270013263274</Colum>
-      <Phi>6.5354480112324049</Phi>
-      <Length1>20</Length1>
+      <Row>500</Row>
+      <Colum>500</Colum>
+      <Phi>0</Phi>
+      <Length1>100</Length1>
       <Length2>10</Length2>
-      <阈值>15</阈值>
-      <极性>negative</极性>
-      <simga>1</simga>
+      <阈值>20</阈值>
+      <极性>all</极性>
+      <simga>2</simga>
     </Rect2>
     <Rect2>
-      <Row>10472.5</Row>
-      <Colum>14546.5</Colum>
-      <Phi>6.2064134159098883</Phi>
-      <Length1>20</Length1>
+      <Row>500</Row>
+      <Colum>500</Colum>
+      <Phi>0</Phi>
+      <Length1>100</Length1>
       <Length2>10</Length2>
-      <阈值>15</阈值>
-      <极性>negative</极性>
-      <simga>1</simga>
+      <阈值>20</阈值>
+      <极性>all</极性>
+      <simga>2</simga>
     </Rect2>
     <Rect2>
-      <Row>11333.314865882925</Row>
-      <Colum>14469.017548224427</Colum>
-      <Phi>6.0857897473297058</Phi>
-      <Length1>20</Length1>
+      <Row>500</Row>
+      <Colum>500</Colum>
+      <Phi>0</Phi>
+      <Length1>100</Length1>
       <Length2>10</Length2>
-      <阈值>15</阈值>
-      <极性>negative</极性>
-      <simga>1</simga>
+      <阈值>20</阈值>
+      <极性>all</极性>
+      <simga>2</simga>
     </Rect2>
     <Rect2>
-      <Row>12079.544291398546</Row>
-      <Colum>14235.729986736726</Colum>
-      <Phi>5.9876698098714831</Phi>
-      <Length1>20</Length1>
+      <Row>500</Row>
+      <Colum>500</Colum>
+      <Phi>0</Phi>
+      <Length1>100</Length1>
       <Length2>10</Length2>
-      <阈值>15</阈值>
-      <极性>negative</极性>
-      <simga>1</simga>
+      <阈值>20</阈值>
+      <极性>all</极性>
+      <simga>2</simga>
     </Rect2>
     <Rect2>
-      <Row>12913.7</Row>
-      <Colum>14152.1</Colum>
-      <Phi>6.37199524248428</Phi>
-      <Length1>20</Length1>
+      <Row>500</Row>
+      <Colum>500</Colum>
+      <Phi>0</Phi>
+      <Length1>100</Length1>
       <Length2>10</Length2>
-      <阈值>15</阈值>
-      <极性>negative</极性>
-      <simga>1</simga>
+      <阈值>20</阈值>
+      <极性>all</极性>
+      <simga>2</simga>
     </Rect2>
     <Rect2>
-      <Row>13694.685134117075</Row>
-      <Colum>14334.017548224427</Colum>
-      <Phi>6.6845559470764329</Phi>
-      <Length1>20</Length1>
+      <Row>500</Row>
+      <Colum>500</Colum>
+      <Phi>0</Phi>
+      <Length1>100</Length1>
       <Length2>10</Length2>
-      <阈值>15</阈值>
-      <极性>negative</极性>
-      <simga>1</simga>
+      <阈值>20</阈值>
+      <极性>all</极性>
+      <simga>2</simga>
     </Rect2>
     <Rect2>
-      <Row>14307.729986736726</Row>
-      <Colum>14101.544291398546</Colum>
-      <Phi>4.8318179064030993</Phi>
-      <Length1>20</Length1>
+      <Row>500</Row>
+      <Colum>500</Colum>
+      <Phi>0</Phi>
+      <Length1>100</Length1>
       <Length2>10</Length2>
-      <阈值>15</阈值>
-      <极性>negative</极性>
-      <simga>1</simga>
+      <阈值>20</阈值>
+      <极性>all</极性>
+      <simga>2</simga>
     </Rect2>
     <Rect2>
-      <Row>14242.5</Row>
-      <Colum>13324.5</Colum>
-      <Phi>4.629609892957868</Phi>
-      <Length1>20</Length1>
+      <Row>500</Row>
+      <Colum>500</Colum>
+      <Phi>0</Phi>
+      <Length1>100</Length1>
       <Length2>10</Length2>
-      <阈值>15</阈值>
-      <极性>negative</极性>
-      <simga>1</simga>
+      <阈值>20</阈值>
+      <极性>all</极性>
+      <simga>2</simga>
     </Rect2>
     <Rect2>
-      <Row>14161.270013263274</Row>
-      <Colum>12493.544291398546</Colum>
-      <Phi>4.5609079360844973</Phi>
-      <Length1>20</Length1>
+      <Row>500</Row>
+      <Colum>500</Colum>
+      <Phi>0</Phi>
+      <Length1>100</Length1>
       <Length2>10</Length2>
-      <阈值>15</阈值>
-      <极性>negative</极性>
-      <simga>1</simga>
+      <阈值>20</阈值>
+      <极性>all</极性>
+      <simga>2</simga>
     </Rect2>
     <Rect2>
-      <Row>14073.5</Row>
-      <Colum>11619.5</Colum>
-      <Phi>4.629609892957868</Phi>
-      <Length1>20</Length1>
+      <Row>500</Row>
+      <Colum>500</Colum>
+      <Phi>0</Phi>
+      <Length1>100</Length1>
       <Length2>10</Length2>
-      <阈值>15</阈值>
-      <极性>negative</极性>
-      <simga>1</simga>
+      <阈值>20</阈值>
+      <极性>all</极性>
+      <simga>2</simga>
     </Rect2>
     <Rect2>
-      <Row>13983.270013263274</Row>
-      <Colum>10743.544291398546</Colum>
-      <Phi>4.5609079360844973</Phi>
-      <Length1>20</Length1>
+      <Row>500</Row>
+      <Colum>500</Colum>
+      <Phi>0</Phi>
+      <Length1>100</Length1>
       <Length2>10</Length2>
-      <阈值>15</阈值>
-      <极性>negative</极性>
-      <simga>1</simga>
+      <阈值>20</阈值>
+      <极性>all</极性>
+      <simga>2</simga>
     </Rect2>
     <Rect2>
-      <Row>13688.314865882925</Row>
-      <Colum>10050.982451775573</Colum>
-      <Phi>3.6848295259760508</Phi>
-      <Length1>20</Length1>
+      <Row>500</Row>
+      <Colum>500</Colum>
+      <Phi>0</Phi>
+      <Length1>100</Length1>
       <Length2>10</Length2>
-      <阈值>15</阈值>
-      <极性>negative</极性>
-      <simga>1</simga>
+      <阈值>20</阈值>
+      <极性>all</极性>
+      <simga>2</simga>
     </Rect2>
     <Rect2>
-      <Row>13078.5</Row>
-      <Colum>9664.5</Colum>
-      <Phi>3.6663884252401271</Phi>
-      <Length1>20</Length1>
+      <Row>500</Row>
+      <Colum>500</Colum>
+      <Phi>0</Phi>
+      <Length1>100</Length1>
       <Length2>10</Length2>
-      <阈值>15</阈值>
-      <极性>negative</极性>
-      <simga>1</simga>
+      <阈值>20</阈值>
+      <极性>all</极性>
+      <simga>2</simga>
     </Rect2>
     <Rect2>
-      <Row>12459.5</Row>
-      <Colum>9283.5</Colum>
-      <Phi>3.6663884252401271</Phi>
-      <Length1>20</Length1>
+      <Row>500</Row>
+      <Colum>500</Colum>
+      <Phi>0</Phi>
+      <Length1>100</Length1>
       <Length2>10</Length2>
-      <阈值>15</阈值>
-      <极性>negative</极性>
-      <simga>1</simga>
+      <阈值>20</阈值>
+      <极性>all</极性>
+      <simga>2</simga>
     </Rect2>
     <Rect2>
-      <Row>11833.5</Row>
-      <Colum>8909.5</Colum>
-      <Phi>3.7295952571378272</Phi>
-      <Length1>20</Length1>
+      <Row>500</Row>
+      <Colum>500</Colum>
+      <Phi>0</Phi>
+      <Length1>100</Length1>
       <Length2>10</Length2>
-      <阈值>15</阈值>
-      <极性>negative</极性>
-      <simga>1</simga>
+      <阈值>20</阈值>
+      <极性>all</极性>
+      <simga>2</simga>
     </Rect2>
     <Rect2>
-      <Row>11199.314865882925</Row>
-      <Colum>8543.9824517755733</Colum>
-      <Phi>3.65852838861826</Phi>
-      <Length1>20</Length1>
+      <Row>500</Row>
+      <Colum>500</Colum>
+      <Phi>0</Phi>
+      <Length1>100</Length1>
       <Length2>10</Length2>
-      <阈值>15</阈值>
-      <极性>negative</极性>
-      <simga>1</simga>
+      <阈值>20</阈值>
+      <极性>all</极性>
+      <simga>2</simga>
     </Rect2>
     <Rect2>
-      <Row>10551.685134117075</Row>
-      <Colum>8191.0175482244267</Colum>
-      <Phi>3.6052402625905993</Phi>
-      <Length1>20</Length1>
+      <Row>500</Row>
+      <Colum>500</Colum>
+      <Phi>0</Phi>
+      <Length1>100</Length1>
       <Length2>10</Length2>
-      <阈值>15</阈值>
-      <极性>negative</极性>
-      <simga>1</simga>
+      <阈值>20</阈值>
+      <极性>all</极性>
+      <simga>2</simga>
     </Rect2>
     <Rect2>
-      <Row>9890.314865882925</Row>
-      <Colum>7852.9824517755733</Colum>
-      <Phi>3.6052402625905993</Phi>
-      <Length1>20</Length1>
+      <Row>500</Row>
+      <Colum>500</Colum>
+      <Phi>0</Phi>
+      <Length1>100</Length1>
       <Length2>10</Length2>
-      <阈值>15</阈值>
-      <极性>negative</极性>
-      <simga>1</simga>
+      <阈值>20</阈值>
+      <极性>all</极性>
+      <simga>2</simga>
     </Rect2>
     <Rect2>
-      <Row>9210.685134117075</Row>
-      <Colum>7532.0175482244267</Colum>
-      <Phi>3.5409398948010393</Phi>
-      <Length1>20</Length1>
+      <Row>500</Row>
+      <Colum>500</Colum>
+      <Phi>0</Phi>
+      <Length1>100</Length1>
       <Length2>10</Length2>
-      <阈值>15</阈值>
-      <极性>negative</极性>
-      <simga>1</simga>
+      <阈值>20</阈值>
+      <极性>all</极性>
+      <simga>2</simga>
     </Rect2>
     <Rect2>
-      <Row>8503.685134117075</Row>
-      <Colum>7239.0175482244267</Colum>
-      <Phi>3.5429632934866397</Phi>
-      <Length1>20</Length1>
+      <Row>500</Row>
+      <Colum>500</Colum>
+      <Phi>0</Phi>
+      <Length1>100</Length1>
       <Length2>10</Length2>
-      <阈值>15</阈值>
-      <极性>negative</极性>
-      <simga>1</simga>
+      <阈值>20</阈值>
+      <极性>all</极性>
+      <simga>2</simga>
     </Rect2>
     <Rect2>
-      <Row>7772.5</Row>
-      <Colum>6970.5</Colum>
-      <Phi>3.374156727940322</Phi>
-      <Length1>20</Length1>
+      <Row>500</Row>
+      <Colum>500</Colum>
+      <Phi>0</Phi>
+      <Length1>100</Length1>
       <Length2>10</Length2>
-      <阈值>15</阈值>
-      <极性>negative</极性>
-      <simga>1</simga>
+      <阈值>20</阈值>
+      <极性>all</极性>
+      <simga>2</simga>
     </Rect2>
     <Rect2>
-      <Row>7011.4557086014529</Row>
-      <Colum>6731.7299867367237</Colum>
-      <Phi>3.4371081508982297</Phi>
-      <Length1>20</Length1>
+      <Row>500</Row>
+      <Colum>500</Colum>
+      <Phi>0</Phi>
+      <Length1>100</Length1>
       <Length2>10</Length2>
-      <阈值>15</阈值>
-      <极性>negative</极性>
-      <simga>1</simga>
+      <阈值>20</阈值>
+      <极性>all</极性>
+      <simga>2</simga>
     </Rect2>
     <Rect2>
-      <Row>6219.5</Row>
-      <Colum>6523.5</Colum>
-      <Phi>3.374156727940322</Phi>
-      <Length1>20</Length1>
+      <Row>500</Row>
+      <Colum>500</Colum>
+      <Phi>0</Phi>
+      <Length1>100</Length1>
       <Length2>10</Length2>
-      <阈值>15</阈值>
-      <极性>negative</极性>
-      <simga>1</simga>
+      <阈值>20</阈值>
+      <极性>all</极性>
+      <simga>2</simga>
     </Rect2>
     <Rect2>
-      <Row>5400.4557086014529</Row>
-      <Colum>6342.7299867367237</Colum>
-      <Phi>3.3938553576429173</Phi>
-      <Length1>20</Length1>
+      <Row>500</Row>
+      <Colum>500</Colum>
+      <Phi>0</Phi>
+      <Length1>100</Length1>
       <Length2>10</Length2>
-      <阈值>15</阈值>
-      <极性>negative</极性>
-      <simga>1</simga>
+      <阈值>20</阈值>
+      <极性>all</极性>
+      <simga>2</simga>
     </Rect2>
     <Rect2>
-      <Row>4556.4557086014529</Row>
-      <Colum>6186.7299867367237</Colum>
-      <Phi>3.2930736978903119</Phi>
-      <Length1>20</Length1>
+      <Row>500</Row>
+      <Colum>500</Colum>
+      <Phi>0</Phi>
+      <Length1>100</Length1>
       <Length2>10</Length2>
-      <阈值>15</阈值>
-      <极性>negative</极性>
-      <simga>1</simga>
+      <阈值>20</阈值>
+      <极性>all</极性>
+      <simga>2</simga>
     </Rect2>
     <Rect2>
-      <Row>3690.314865882925</Row>
-      <Colum>6054.9824517755733</Colum>
-      <Phi>3.338988213439674</Phi>
-      <Length1>20</Length1>
+      <Row>500</Row>
+      <Colum>500</Colum>
+      <Phi>0</Phi>
+      <Length1>100</Length1>
       <Length2>10</Length2>
-      <阈值>15</阈值>
-      <极性>negative</极性>
-      <simga>1</simga>
+      <阈值>20</阈值>
+      <极性>all</极性>
+      <simga>2</simga>
     </Rect2>
     <Rect2>
-      <Row>2810.4557086014534</Row>
-      <Colum>5938.7299867367237</Colum>
-      <Phi>3.2930736978903252</Phi>
-      <Length1>20</Length1>
+      <Row>500</Row>
+      <Colum>500</Colum>
+      <Phi>0</Phi>
+      <Length1>100</Length1>
       <Length2>10</Length2>
-      <阈值>15</阈值>
-      <极性>negative</极性>
-      <simga>1</simga>
+      <阈值>20</阈值>
+      <极性>all</极性>
+      <simga>2</simga>
     </Rect2>
     <Rect2>
-      <Row>1917.5</Row>
-      <Colum>5839.5</Colum>
-      <Phi>3.2243717410166144</Phi>
-      <Length1>20</Length1>
+      <Row>500</Row>
+      <Colum>500</Colum>
+      <Phi>0</Phi>
+      <Length1>100</Length1>
       <Length2>10</Length2>
-      <阈值>15</阈值>
-      <极性>negative</极性>
-      <simga>1</simga>
+      <阈值>20</阈值>
+      <极性>all</极性>
+      <simga>2</simga>
     </Rect2>
     <Rect2>
       <Row>500</Row>
       <Colum>500</Colum>
       <Phi>0</Phi>
       <Length1>100</Length1>
-      <Length2>200</Length2>
-      <阈值>15</阈值>
-      <极性>negative</极性>
-      <simga>1</simga>
+      <Length2>10</Length2>
+      <阈值>20</阈值>
+      <极性>all</极性>
+      <simga>2</simga>
     </Rect2>
     <Rect2>
       <Row>500</Row>
       <Colum>500</Colum>
       <Phi>0</Phi>
       <Length1>100</Length1>
-      <Length2>200</Length2>
-      <阈值>15</阈值>
-      <极性>negative</极性>
-      <simga>1</simga>
+      <Length2>10</Length2>
+      <阈值>20</阈值>
+      <极性>all</极性>
+      <simga>2</simga>
     </Rect2>
     <Rect2>
       <Row>500</Row>
       <Colum>500</Colum>
       <Phi>0</Phi>
       <Length1>100</Length1>
-      <Length2>200</Length2>
-      <阈值>15</阈值>
-      <极性>negative</极性>
-      <simga>1</simga>
+      <Length2>10</Length2>
+      <阈值>20</阈值>
+      <极性>all</极性>
+      <simga>2</simga>
     </Rect2>
     <Rect2>
       <Row>500</Row>
       <Colum>500</Colum>
       <Phi>0</Phi>
       <Length1>100</Length1>
-      <Length2>200</Length2>
-      <阈值>15</阈值>
-      <极性>negative</极性>
-      <simga>1</simga>
+      <Length2>10</Length2>
+      <阈值>20</阈值>
+      <极性>all</极性>
+      <simga>2</simga>
     </Rect2>
     <Rect2>
       <Row>500</Row>
       <Colum>500</Colum>
       <Phi>0</Phi>
       <Length1>100</Length1>
-      <Length2>200</Length2>
-      <阈值>15</阈值>
-      <极性>negative</极性>
-      <simga>1</simga>
+      <Length2>10</Length2>
+      <阈值>20</阈值>
+      <极性>all</极性>
+      <simga>2</simga>
     </Rect2>
     <Rect2>
       <Row>500</Row>
       <Colum>500</Colum>
       <Phi>0</Phi>
       <Length1>100</Length1>
-      <Length2>200</Length2>
-      <阈值>15</阈值>
-      <极性>negative</极性>
-      <simga>1</simga>
+      <Length2>10</Length2>
+      <阈值>20</阈值>
+      <极性>all</极性>
+      <simga>2</simga>
     </Rect2>
     <Rect2>
       <Row>500</Row>
       <Colum>500</Colum>
       <Phi>0</Phi>
       <Length1>100</Length1>
-      <Length2>200</Length2>
-      <阈值>15</阈值>
-      <极性>negative</极性>
-      <simga>1</simga>
+      <Length2>10</Length2>
+      <阈值>20</阈值>
+      <极性>all</极性>
+      <simga>2</simga>
     </Rect2>
     <Rect2>
       <Row>500</Row>
       <Colum>500</Colum>
       <Phi>0</Phi>
       <Length1>100</Length1>
-      <Length2>200</Length2>
-      <阈值>15</阈值>
-      <极性>negative</极性>
-      <simga>1</simga>
+      <Length2>10</Length2>
+      <阈值>20</阈值>
+      <极性>all</极性>
+      <simga>2</simga>
     </Rect2>
     <Rect2>
       <Row>500</Row>
       <Colum>500</Colum>
       <Phi>0</Phi>
       <Length1>100</Length1>
-      <Length2>200</Length2>
-      <阈值>15</阈值>
-      <极性>negative</极性>
-      <simga>1</simga>
+      <Length2>10</Length2>
+      <阈值>20</阈值>
+      <极性>all</极性>
+      <simga>2</simga>
     </Rect2>
     <Rect2>
       <Row>500</Row>
       <Colum>500</Colum>
       <Phi>0</Phi>
       <Length1>100</Length1>
-      <Length2>200</Length2>
-      <阈值>15</阈值>
-      <极性>negative</极性>
-      <simga>1</simga>
+      <Length2>10</Length2>
+      <阈值>20</阈值>
+      <极性>all</极性>
+      <simga>2</simga>
     </Rect2>
     <Rect2>
       <Row>500</Row>
       <Colum>500</Colum>
       <Phi>0</Phi>
       <Length1>100</Length1>
-      <Length2>200</Length2>
-      <阈值>15</阈值>
-      <极性>negative</极性>
-      <simga>1</simga>
+      <Length2>10</Length2>
+      <阈值>20</阈值>
+      <极性>all</极性>
+      <simga>2</simga>
     </Rect2>
     <Rect2>
       <Row>500</Row>
       <Colum>500</Colum>
       <Phi>0</Phi>
       <Length1>100</Length1>
-      <Length2>200</Length2>
-      <阈值>15</阈值>
-      <极性>negative</极性>
-      <simga>1</simga>
+      <Length2>10</Length2>
+      <阈值>20</阈值>
+      <极性>all</极性>
+      <simga>2</simga>
     </Rect2>
     <Rect2>
       <Row>500</Row>
       <Colum>500</Colum>
       <Phi>0</Phi>
       <Length1>100</Length1>
-      <Length2>200</Length2>
-      <阈值>15</阈值>
-      <极性>negative</极性>
-      <simga>1</simga>
+      <Length2>10</Length2>
+      <阈值>20</阈值>
+      <极性>all</极性>
+      <simga>2</simga>
     </Rect2>
     <Rect2>
       <Row>500</Row>
       <Colum>500</Colum>
       <Phi>0</Phi>
       <Length1>100</Length1>
-      <Length2>200</Length2>
-      <阈值>15</阈值>
-      <极性>negative</极性>
-      <simga>1</simga>
+      <Length2>10</Length2>
+      <阈值>20</阈值>
+      <极性>all</极性>
+      <simga>2</simga>
     </Rect2>
     <Rect2>
       <Row>500</Row>
       <Colum>500</Colum>
       <Phi>0</Phi>
       <Length1>100</Length1>
-      <Length2>200</Length2>
-      <阈值>15</阈值>
-      <极性>negative</极性>
-      <simga>1</simga>
+      <Length2>10</Length2>
+      <阈值>20</阈值>
+      <极性>all</极性>
+      <simga>2</simga>
     </Rect2>
     <Rect2>
       <Row>500</Row>
       <Colum>500</Colum>
       <Phi>0</Phi>
       <Length1>100</Length1>
-      <Length2>200</Length2>
-      <阈值>15</阈值>
-      <极性>negative</极性>
-      <simga>1</simga>
+      <Length2>10</Length2>
+      <阈值>20</阈值>
+      <极性>all</极性>
+      <simga>2</simga>
     </Rect2>
     <Rect2>
       <Row>500</Row>
       <Colum>500</Colum>
       <Phi>0</Phi>
       <Length1>100</Length1>
-      <Length2>200</Length2>
-      <阈值>15</阈值>
-      <极性>negative</极性>
-      <simga>1</simga>
+      <Length2>10</Length2>
+      <阈值>20</阈值>
+      <极性>all</极性>
+      <simga>2</simga>
     </Rect2>
     <Rect2>
       <Row>500</Row>
       <Colum>500</Colum>
       <Phi>0</Phi>
       <Length1>100</Length1>
-      <Length2>200</Length2>
-      <阈值>15</阈值>
-      <极性>negative</极性>
-      <simga>1</simga>
-    </Rect2>
-    <Rect2>
-      <Row>500</Row>
-      <Colum>500</Colum>
-      <Phi>0</Phi>
-      <Length1>100</Length1>
-      <Length2>200</Length2>
-      <阈值>15</阈值>
-      <极性>negative</极性>
-      <simga>1</simga>
-    </Rect2>
-    <Rect2>
-      <Row>500</Row>
-      <Colum>500</Colum>
-      <Phi>0</Phi>
-      <Length1>100</Length1>
-      <Length2>200</Length2>
-      <阈值>15</阈值>
-      <极性>negative</极性>
-      <simga>1</simga>
-    </Rect2>
-    <Rect2>
-      <Row>500</Row>
-      <Colum>500</Colum>
-      <Phi>0</Phi>
-      <Length1>100</Length1>
-      <Length2>200</Length2>
-      <阈值>15</阈值>
-      <极性>negative</极性>
-      <simga>1</simga>
-    </Rect2>
-    <Rect2>
-      <Row>500</Row>
-      <Colum>500</Colum>
-      <Phi>0</Phi>
-      <Length1>100</Length1>
-      <Length2>200</Length2>
-      <阈值>15</阈值>
-      <极性>negative</极性>
-      <simga>1</simga>
-    </Rect2>
-    <Rect2>
-      <Row>500</Row>
-      <Colum>500</Colum>
-      <Phi>0</Phi>
-      <Length1>100</Length1>
-      <Length2>200</Length2>
-      <阈值>15</阈值>
-      <极性>negative</极性>
-      <simga>1</simga>
-    </Rect2>
-    <Rect2>
-      <Row>500</Row>
-      <Colum>500</Colum>
-      <Phi>0</Phi>
-      <Length1>100</Length1>
-      <Length2>200</Length2>
-      <阈值>15</阈值>
-      <极性>negative</极性>
-      <simga>1</simga>
-    </Rect2>
-    <Rect2>
-      <Row>500</Row>
-      <Colum>500</Colum>
-      <Phi>0</Phi>
-      <Length1>100</Length1>
-      <Length2>200</Length2>
-      <阈值>15</阈值>
-      <极性>negative</极性>
-      <simga>1</simga>
-    </Rect2>
-    <Rect2>
-      <Row>500</Row>
-      <Colum>500</Colum>
-      <Phi>0</Phi>
-      <Length1>100</Length1>
-      <Length2>200</Length2>
-      <阈值>15</阈值>
-      <极性>negative</极性>
-      <simga>1</simga>
-    </Rect2>
-    <Rect2>
-      <Row>500</Row>
-      <Colum>500</Colum>
-      <Phi>0</Phi>
-      <Length1>100</Length1>
-      <Length2>200</Length2>
-      <阈值>15</阈值>
-      <极性>negative</极性>
-      <simga>1</simga>
-    </Rect2>
-    <Rect2>
-      <Row>500</Row>
-      <Colum>500</Colum>
-      <Phi>0</Phi>
-      <Length1>100</Length1>
-      <Length2>200</Length2>
-      <阈值>15</阈值>
-      <极性>negative</极性>
-      <simga>1</simga>
-    </Rect2>
-    <Rect2>
-      <Row>500</Row>
-      <Colum>500</Colum>
-      <Phi>0</Phi>
-      <Length1>100</Length1>
-      <Length2>200</Length2>
-      <阈值>15</阈值>
-      <极性>negative</极性>
-      <simga>1</simga>
-    </Rect2>
-    <Rect2>
-      <Row>500</Row>
-      <Colum>500</Colum>
-      <Phi>0</Phi>
-      <Length1>100</Length1>
-      <Length2>200</Length2>
-      <阈值>15</阈值>
-      <极性>negative</极性>
-      <simga>1</simga>
-    </Rect2>
-    <Rect2>
-      <Row>500</Row>
-      <Colum>500</Colum>
-      <Phi>0</Phi>
-      <Length1>100</Length1>
-      <Length2>200</Length2>
-      <阈值>15</阈值>
-      <极性>negative</极性>
-      <simga>1</simga>
-    </Rect2>
-    <Rect2>
-      <Row>500</Row>
-      <Colum>500</Colum>
-      <Phi>0</Phi>
-      <Length1>100</Length1>
-      <Length2>200</Length2>
-      <阈值>15</阈值>
-      <极性>negative</极性>
-      <simga>1</simga>
-    </Rect2>
-    <Rect2>
-      <Row>500</Row>
-      <Colum>500</Colum>
-      <Phi>0</Phi>
-      <Length1>100</Length1>
-      <Length2>200</Length2>
-      <阈值>15</阈值>
-      <极性>negative</极性>
-      <simga>1</simga>
-    </Rect2>
-    <Rect2>
-      <Row>500</Row>
-      <Colum>500</Colum>
-      <Phi>0</Phi>
-      <Length1>100</Length1>
-      <Length2>200</Length2>
-      <阈值>15</阈值>
-      <极性>negative</极性>
-      <simga>1</simga>
-    </Rect2>
-    <Rect2>
-      <Row>500</Row>
-      <Colum>500</Colum>
-      <Phi>0</Phi>
-      <Length1>100</Length1>
-      <Length2>200</Length2>
-      <阈值>15</阈值>
-      <极性>negative</极性>
-      <simga>1</simga>
-    </Rect2>
-    <Rect2>
-      <Row>500</Row>
-      <Colum>500</Colum>
-      <Phi>0</Phi>
-      <Length1>100</Length1>
-      <Length2>200</Length2>
-      <阈值>15</阈值>
-      <极性>negative</极性>
-      <simga>1</simga>
-    </Rect2>
-    <Rect2>
-      <Row>500</Row>
-      <Colum>500</Colum>
-      <Phi>0</Phi>
-      <Length1>100</Length1>
-      <Length2>200</Length2>
-      <阈值>15</阈值>
-      <极性>negative</极性>
-      <simga>1</simga>
-    </Rect2>
-    <Rect2>
-      <Row>500</Row>
-      <Colum>500</Colum>
-      <Phi>0</Phi>
-      <Length1>100</Length1>
-      <Length2>200</Length2>
-      <阈值>15</阈值>
-      <极性>negative</极性>
-      <simga>1</simga>
-    </Rect2>
-    <Rect2>
-      <Row>500</Row>
-      <Colum>500</Colum>
-      <Phi>0</Phi>
-      <Length1>100</Length1>
-      <Length2>200</Length2>
-      <阈值>15</阈值>
-      <极性>negative</极性>
-      <simga>1</simga>
-    </Rect2>
-    <Rect2>
-      <Row>500</Row>
-      <Colum>500</Colum>
-      <Phi>0</Phi>
-      <Length1>100</Length1>
-      <Length2>200</Length2>
-      <阈值>15</阈值>
-      <极性>negative</极性>
-      <simga>1</simga>
-    </Rect2>
-    <Rect2>
-      <Row>500</Row>
-      <Colum>500</Colum>
-      <Phi>0</Phi>
-      <Length1>100</Length1>
-      <Length2>200</Length2>
-      <阈值>15</阈值>
-      <极性>negative</极性>
-      <simga>1</simga>
-    </Rect2>
-    <Rect2>
-      <Row>500</Row>
-      <Colum>500</Colum>
-      <Phi>0</Phi>
-      <Length1>100</Length1>
-      <Length2>200</Length2>
-      <阈值>15</阈值>
-      <极性>negative</极性>
-      <simga>1</simga>
-    </Rect2>
-    <Rect2>
-      <Row>500</Row>
-      <Colum>500</Colum>
-      <Phi>0</Phi>
-      <Length1>100</Length1>
-      <Length2>200</Length2>
-      <阈值>15</阈值>
-      <极性>negative</极性>
-      <simga>1</simga>
-    </Rect2>
-    <Rect2>
-      <Row>500</Row>
-      <Colum>500</Colum>
-      <Phi>0</Phi>
-      <Length1>100</Length1>
-      <Length2>200</Length2>
-      <阈值>15</阈值>
-      <极性>negative</极性>
-      <simga>1</simga>
-    </Rect2>
-    <Rect2>
-      <Row>500</Row>
-      <Colum>500</Colum>
-      <Phi>0</Phi>
-      <Length1>100</Length1>
-      <Length2>200</Length2>
-      <阈值>15</阈值>
-      <极性>negative</极性>
-      <simga>1</simga>
-    </Rect2>
-    <Rect2>
-      <Row>500</Row>
-      <Colum>500</Colum>
-      <Phi>0</Phi>
-      <Length1>100</Length1>
-      <Length2>200</Length2>
-      <阈值>15</阈值>
-      <极性>negative</极性>
-      <simga>1</simga>
-    </Rect2>
-    <Rect2>
-      <Row>500</Row>
-      <Colum>500</Colum>
-      <Phi>0</Phi>
-      <Length1>100</Length1>
-      <Length2>200</Length2>
-      <阈值>15</阈值>
-      <极性>negative</极性>
-      <simga>1</simga>
-    </Rect2>
-    <Rect2>
-      <Row>500</Row>
-      <Colum>500</Colum>
-      <Phi>0</Phi>
-      <Length1>100</Length1>
-      <Length2>200</Length2>
-      <阈值>15</阈值>
-      <极性>negative</极性>
-      <simga>1</simga>
-    </Rect2>
-    <Rect2>
-      <Row>500</Row>
-      <Colum>500</Colum>
-      <Phi>0</Phi>
-      <Length1>100</Length1>
-      <Length2>200</Length2>
-      <阈值>15</阈值>
-      <极性>negative</极性>
-      <simga>1</simga>
-    </Rect2>
-    <Rect2>
-      <Row>500</Row>
-      <Colum>500</Colum>
-      <Phi>0</Phi>
-      <Length1>100</Length1>
-      <Length2>200</Length2>
-      <阈值>15</阈值>
-      <极性>negative</极性>
-      <simga>1</simga>
-    </Rect2>
-    <Rect2>
-      <Row>500</Row>
-      <Colum>500</Colum>
-      <Phi>0</Phi>
-      <Length1>100</Length1>
-      <Length2>200</Length2>
-      <阈值>15</阈值>
-      <极性>negative</极性>
-      <simga>1</simga>
-    </Rect2>
-    <Rect2>
-      <Row>500</Row>
-      <Colum>500</Colum>
-      <Phi>0</Phi>
-      <Length1>100</Length1>
-      <Length2>200</Length2>
-      <阈值>15</阈值>
-      <极性>negative</极性>
-      <simga>1</simga>
-    </Rect2>
-    <Rect2>
-      <Row>500</Row>
-      <Colum>500</Colum>
-      <Phi>0</Phi>
-      <Length1>100</Length1>
-      <Length2>200</Length2>
-      <阈值>15</阈值>
-      <极性>negative</极性>
-      <simga>1</simga>
+      <Length2>10</Length2>
+      <阈值>20</阈值>
+      <极性>all</极性>
+      <simga>2</simga>
     </Rect2>
   </decetionRect2>
   <decetionCircle>
     <Cricle>
-      <Row>1566.037688442211</Row>
-      <Colum>5236.9226804123709</Colum>
-      <Radius>42.6370971303529</Radius>
+      <Row>0</Row>
+      <Colum>0</Colum>
+      <Radius>0</Radius>
     </Cricle>
     <Cricle>
-      <Row>3902.6373534338359</Row>
-      <Colum>4774.6134020618556</Colum>
-      <Radius>37.863367400139175</Radius>
+      <Row>0</Row>
+      <Colum>0</Colum>
+      <Radius>0</Radius>
     </Cricle>
     <Cricle>
       <Row>0</Row>
@@ -1060,8 +1060,19 @@
     </Cricle>
   </decetionCircle>
   <BasePoint>
-    <Row>14328.659226266118</Row>
-    <Colum>14212.066714044391</Colum>
-    <Radius>-0.097576050226857156</Radius>
+    <Row>13733.738676430554</Row>
+    <Colum>9062.371026220897</Colum>
+    <Radius>-1.8322326228932733</Radius>
   </BasePoint>
+  <BasePhi>
+    <Row1>13733.738676430554</Row1>
+    <Colum1>9062.371026220897</Colum1>
+    <Row2>3387.309879332548</Row2>
+    <Colum2>11830.6622369374</Colum2>
+    <Length1>0</Length1>
+    <Length2>0</Length2>
+    <阈值>0</阈值>
+    <simga>0</simga>
+  </BasePhi>
+  <分割阈值>49</分割阈值>
 </DetectionSpec>

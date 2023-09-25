@@ -97,24 +97,43 @@ namespace WY_App
                         _connected = _NetworkTcpDevice.ConnectServer();
                         plc_connect_result = _connected.IsSuccess;
                     }
-                    //汇川PLC Inovance.InovanceSerialOverTcp通讯
-                    else if ("Inovance.InovanceSerialOverTcp".Equals(Parameters.commministion.PlcType))
+                    //汇川PLC InovanceSerialOverTcp通讯
+                    else if ("InovanceSerialOverTcp".Equals(Parameters.commministion.PlcType))
                     {
                         InovanceSerialOverTcp Client = new InovanceSerialOverTcp();
                         Client.IpAddress = Parameters.commministion.PlcIpAddress;
                         Client.Port = Parameters.commministion.PlcIpPort;
                         Client.DataFormat = DataFormat.ABCD;
+                        Client.Station = 0x01;
+                        Client.Series = InovanceSeries.H5U;
+                        Client.AddressStartWithZero = true;
                         _NetworkTcpDevice = Client;
                         _connected = _NetworkTcpDevice.ConnectServer();
                         plc_connect_result = _connected.IsSuccess;
                     }
-                    //ModbusTcp通讯
+                    //汇川PLC InovanceTcpNet通讯
+                    else if ("InovanceTcpNet".Equals(Parameters.commministion.PlcType))
+                    {
+                        InovanceTcpNet Client = new InovanceTcpNet();
+                        Client.IpAddress = Parameters.commministion.PlcIpAddress;
+                        Client.Port = Parameters.commministion.PlcIpPort;
+                        Client.DataFormat = DataFormat.CDAB;
+                        Client.Station = 0x01;
+                        Client.Series = InovanceSeries.H5U;
+                        Client.AddressStartWithZero = true;
+                        _NetworkTcpDevice = Client;
+                        _connected = _NetworkTcpDevice.ConnectServer();
+                        plc_connect_result = _connected.IsSuccess;
+                    }
+                    //ModbusTcpNet通讯
                     else if ("ModbusTcpNet".Equals(Parameters.commministion.PlcType))
                     {
                         ModbusTcpNet Client = new ModbusTcpNet();
                         Client.IpAddress = Parameters.commministion.PlcIpAddress;
                         Client.Port = Parameters.commministion.PlcIpPort;
+                        Client.DataFormat = DataFormat.CDAB;
                         Client.Station = 0x01;
+                        Client.AddressStartWithZero = true;
                         _NetworkTcpDevice = Client;
                         _connected = _NetworkTcpDevice.ConnectServer();
                         plc_connect_result = _connected.IsSuccess;

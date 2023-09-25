@@ -23,24 +23,45 @@ namespace WY_App.Utility
                 }
             }
         }
-       
-        
-       
-        public class Motor
+
+        public struct Position
         {
-            public int HighSpeed;
-            public int GoHomeSpeed;
-            public int FirstPosition;
-            public int HandStep;
-            public int AutoStep;
-            public Motor()
+            public double X;
+
+            public double Y;
+
+            public double R;
+
+            public double Z;
+
+            public double U;
+        }
+
+        public class Standardization
+        {
+            public Position[] pixelCoordinates;
+            public Position[] worldCoordinate;
+
+
+            public Standardization()
             {
-                HighSpeed = 1000;
-                GoHomeSpeed = 2000;
-                FirstPosition = 50;
-                HandStep = 200;
-                AutoStep = 300;
-            }
+                pixelCoordinates = new Position[9];
+                worldCoordinate = new Position[9];
+                for (int i = 0; i < 9; i++)
+                {
+                    pixelCoordinates[i].X = 0;
+                    pixelCoordinates[i].Y = 0;
+                    pixelCoordinates[i].R = 0;
+                    pixelCoordinates[i].Z = 0;
+                    pixelCoordinates[i].U = 0;
+
+                    worldCoordinate[i].X = 0;
+                    worldCoordinate[i].Y = 0;
+                    worldCoordinate[i].R = 0;
+                    worldCoordinate[i].Z = 0;
+                    worldCoordinate[i].U = 0;
+                }
+            }                     
         }
     }
 }

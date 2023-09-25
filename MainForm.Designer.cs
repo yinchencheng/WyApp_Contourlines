@@ -69,13 +69,13 @@
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
             this.hWindowControl1 = new HalconDotNet.HWindowControl();
-            this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
+            this.tableLayoutPanel6 = new System.Windows.Forms.TableLayoutPanel();
+            this.lab_log = new System.Windows.Forms.ListBox();
             this.uiDataGridView1 = new Sunny.UI.UIDataGridView();
             this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.lab_log = new System.Windows.Forms.ListBox();
             this.messageShow1 = new WY_App.UserControls.MessageShow();
             this.messageShow2 = new WY_App.UserControls.MessageShow();
             this.messageShow3 = new WY_App.UserControls.MessageShow();
@@ -88,7 +88,7 @@
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
             this.tableLayoutPanel4.SuspendLayout();
-            this.tableLayoutPanel5.SuspendLayout();
+            this.tableLayoutPanel6.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.uiDataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -99,39 +99,36 @@
             // 
             // tableLayoutPanel2
             // 
-            this.tableLayoutPanel2.ColumnCount = 14;
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 60F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 60F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 60F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 60F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 60F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 60F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 60F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 60F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 60F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 60F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 58.29858F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 41.70142F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 60F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 74F));
+            this.tableLayoutPanel2.ColumnCount = 11;
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 50F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 50F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 50F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 50F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 50F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 50F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 50F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 50F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 50F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 50F));
             this.tableLayoutPanel2.Controls.Add(this.btn_Connutius, 0, 0);
             this.tableLayoutPanel2.Controls.Add(this.btn_Start, 0, 0);
-            this.tableLayoutPanel2.Controls.Add(this.btn_Close_System, 13, 0);
+            this.tableLayoutPanel2.Controls.Add(this.btn_Close_System, 10, 0);
             this.tableLayoutPanel2.Controls.Add(this.btn_Stop, 1, 0);
-            this.tableLayoutPanel2.Controls.Add(this.btn_Minimizid_System, 12, 0);
+            this.tableLayoutPanel2.Controls.Add(this.btn_Minimizid_System, 9, 0);
             this.tableLayoutPanel2.Controls.Add(this.btn_Login, 3, 0);
-            this.tableLayoutPanel2.Controls.Add(this.pictureBox1, 11, 0);
+            this.tableLayoutPanel2.Controls.Add(this.pictureBox1, 8, 0);
             this.tableLayoutPanel2.Controls.Add(this.btn_changeProduct, 4, 0);
             this.tableLayoutPanel2.Controls.Add(this.btn_Cam1, 6, 0);
             this.tableLayoutPanel2.Controls.Add(this.btn_Connect, 5, 0);
             this.tableLayoutPanel2.Controls.Add(this.btn_MotorSetting, 7, 0);
             this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel2.Location = new System.Drawing.Point(0, 10);
-            this.tableLayoutPanel2.Margin = new System.Windows.Forms.Padding(0, 10, 0, 0);
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(0, 5);
+            this.tableLayoutPanel2.Margin = new System.Windows.Forms.Padding(0, 5, 0, 0);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 1;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(1200, 57);
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(960, 55);
             this.tableLayoutPanel2.TabIndex = 0;
             // 
             // btn_Connutius
@@ -145,7 +142,7 @@
             this.btn_Connutius.Location = new System.Drawing.Point(63, 3);
             this.btn_Connutius.MinimumSize = new System.Drawing.Size(1, 1);
             this.btn_Connutius.Name = "btn_Connutius";
-            this.btn_Connutius.Size = new System.Drawing.Size(54, 50);
+            this.btn_Connutius.Size = new System.Drawing.Size(54, 52);
             this.btn_Connutius.Style = Sunny.UI.UIStyle.Custom;
             this.btn_Connutius.TabIndex = 15;
             this.btn_Connutius.Text = "暂停";
@@ -170,7 +167,7 @@
             this.btn_Start.RectHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(203)))), ((int)(((byte)(83)))));
             this.btn_Start.RectPressColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(152)))), ((int)(((byte)(32)))));
             this.btn_Start.RectSelectedColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(152)))), ((int)(((byte)(32)))));
-            this.btn_Start.Size = new System.Drawing.Size(54, 50);
+            this.btn_Start.Size = new System.Drawing.Size(54, 52);
             this.btn_Start.Style = Sunny.UI.UIStyle.Custom;
             this.btn_Start.TabIndex = 8;
             this.btn_Start.Text = "启动";
@@ -189,7 +186,7 @@
             this.btn_Close_System.FillSelectedColor = System.Drawing.Color.Red;
             this.btn_Close_System.Font = new System.Drawing.Font("楷体", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btn_Close_System.ForeDisableColor = System.Drawing.Color.Silver;
-            this.btn_Close_System.Location = new System.Drawing.Point(1128, 3);
+            this.btn_Close_System.Location = new System.Drawing.Point(906, 3);
             this.btn_Close_System.MinimumSize = new System.Drawing.Size(1, 1);
             this.btn_Close_System.Name = "btn_Close_System";
             this.btn_Close_System.Radius = 10;
@@ -198,7 +195,7 @@
             this.btn_Close_System.RectHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
             this.btn_Close_System.RectPressColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
             this.btn_Close_System.RectSelectedColor = System.Drawing.Color.Red;
-            this.btn_Close_System.Size = new System.Drawing.Size(51, 50);
+            this.btn_Close_System.Size = new System.Drawing.Size(51, 49);
             this.btn_Close_System.Style = Sunny.UI.UIStyle.Custom;
             this.btn_Close_System.TabIndex = 0;
             this.btn_Close_System.Text = "×";
@@ -223,7 +220,7 @@
             this.btn_Stop.RectHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(115)))), ((int)(((byte)(115)))));
             this.btn_Stop.RectPressColor = System.Drawing.Color.FromArgb(((int)(((byte)(184)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.btn_Stop.RectSelectedColor = System.Drawing.Color.FromArgb(((int)(((byte)(184)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.btn_Stop.Size = new System.Drawing.Size(54, 50);
+            this.btn_Stop.Size = new System.Drawing.Size(54, 52);
             this.btn_Stop.Style = Sunny.UI.UIStyle.Custom;
             this.btn_Stop.TabIndex = 10;
             this.btn_Stop.Text = "停止";
@@ -242,11 +239,11 @@
             this.btn_Minimizid_System.FillSelectedColor = System.Drawing.SystemColors.WindowFrame;
             this.btn_Minimizid_System.Font = new System.Drawing.Font("楷体", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btn_Minimizid_System.ForeDisableColor = System.Drawing.Color.Silver;
-            this.btn_Minimizid_System.Location = new System.Drawing.Point(1068, 3);
+            this.btn_Minimizid_System.Location = new System.Drawing.Point(850, 3);
             this.btn_Minimizid_System.MinimumSize = new System.Drawing.Size(1, 1);
             this.btn_Minimizid_System.Name = "btn_Minimizid_System";
             this.btn_Minimizid_System.Radius = 10;
-            this.btn_Minimizid_System.Size = new System.Drawing.Size(52, 50);
+            this.btn_Minimizid_System.Size = new System.Drawing.Size(50, 49);
             this.btn_Minimizid_System.Style = Sunny.UI.UIStyle.Custom;
             this.btn_Minimizid_System.TabIndex = 1;
             this.btn_Minimizid_System.Text = "-";
@@ -271,7 +268,7 @@
             this.btn_Login.RectHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(175)))), ((int)(((byte)(83)))));
             this.btn_Login.RectPressColor = System.Drawing.Color.FromArgb(((int)(((byte)(176)))), ((int)(((byte)(124)))), ((int)(((byte)(32)))));
             this.btn_Login.RectSelectedColor = System.Drawing.Color.FromArgb(((int)(((byte)(176)))), ((int)(((byte)(124)))), ((int)(((byte)(32)))));
-            this.btn_Login.Size = new System.Drawing.Size(54, 50);
+            this.btn_Login.Size = new System.Drawing.Size(54, 52);
             this.btn_Login.Style = Sunny.UI.UIStyle.Custom;
             this.btn_Login.TabIndex = 17;
             this.btn_Login.Text = "登录";
@@ -281,10 +278,10 @@
             // pictureBox1
             // 
             this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pictureBox1.Location = new System.Drawing.Point(871, 0);
+            this.pictureBox1.Location = new System.Drawing.Point(480, 0);
             this.pictureBox1.Margin = new System.Windows.Forms.Padding(0);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(194, 57);
+            this.pictureBox1.Size = new System.Drawing.Size(367, 50);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox1.TabIndex = 18;
             this.pictureBox1.TabStop = false;
@@ -309,7 +306,7 @@
             this.btn_changeProduct.RectHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(115)))), ((int)(((byte)(115)))));
             this.btn_changeProduct.RectPressColor = System.Drawing.Color.FromArgb(((int)(((byte)(184)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.btn_changeProduct.RectSelectedColor = System.Drawing.Color.FromArgb(((int)(((byte)(184)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.btn_changeProduct.Size = new System.Drawing.Size(54, 50);
+            this.btn_changeProduct.Size = new System.Drawing.Size(54, 52);
             this.btn_changeProduct.Style = Sunny.UI.UIStyle.Custom;
             this.btn_changeProduct.TabIndex = 19;
             this.btn_changeProduct.Text = "切换";
@@ -336,7 +333,7 @@
             this.btn_Cam1.RectHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(163)))), ((int)(((byte)(163)))), ((int)(((byte)(163)))));
             this.btn_Cam1.RectPressColor = System.Drawing.Color.FromArgb(((int)(((byte)(112)))), ((int)(((byte)(112)))), ((int)(((byte)(112)))));
             this.btn_Cam1.RectSelectedColor = System.Drawing.Color.FromArgb(((int)(((byte)(112)))), ((int)(((byte)(112)))), ((int)(((byte)(112)))));
-            this.btn_Cam1.Size = new System.Drawing.Size(54, 50);
+            this.btn_Cam1.Size = new System.Drawing.Size(54, 52);
             this.btn_Cam1.Style = Sunny.UI.UIStyle.Custom;
             this.btn_Cam1.TabIndex = 14;
             this.btn_Cam1.Text = "检测";
@@ -362,7 +359,7 @@
             this.btn_Connect.RectHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(133)))), ((int)(((byte)(97)))), ((int)(((byte)(198)))));
             this.btn_Connect.RectPressColor = System.Drawing.Color.FromArgb(((int)(((byte)(82)))), ((int)(((byte)(46)))), ((int)(((byte)(147)))));
             this.btn_Connect.RectSelectedColor = System.Drawing.Color.FromArgb(((int)(((byte)(82)))), ((int)(((byte)(46)))), ((int)(((byte)(147)))));
-            this.btn_Connect.Size = new System.Drawing.Size(54, 50);
+            this.btn_Connect.Size = new System.Drawing.Size(54, 52);
             this.btn_Connect.Style = Sunny.UI.UIStyle.Custom;
             this.btn_Connect.TabIndex = 6;
             this.btn_Connect.Text = "通讯";
@@ -388,7 +385,7 @@
             this.btn_MotorSetting.RectHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(171)))), ((int)(((byte)(160)))));
             this.btn_MotorSetting.RectPressColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(120)))), ((int)(((byte)(109)))));
             this.btn_MotorSetting.RectSelectedColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(120)))), ((int)(((byte)(109)))));
-            this.btn_MotorSetting.Size = new System.Drawing.Size(54, 50);
+            this.btn_MotorSetting.Size = new System.Drawing.Size(54, 52);
             this.btn_MotorSetting.Style = Sunny.UI.UIStyle.Custom;
             this.btn_MotorSetting.TabIndex = 12;
             this.btn_MotorSetting.Text = "示教";
@@ -415,9 +412,9 @@
             this.lab_Cam1,
             this.toolStripStatusLabel2,
             this.lab_Time});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 878);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 1178);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(1200, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(960, 22);
             this.statusStrip1.TabIndex = 3;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -525,7 +522,7 @@
             // toolStripStatusLabel2
             // 
             this.toolStripStatusLabel2.Name = "toolStripStatusLabel2";
-            this.toolStripStatusLabel2.Size = new System.Drawing.Size(769, 17);
+            this.toolStripStatusLabel2.Size = new System.Drawing.Size(529, 17);
             this.toolStripStatusLabel2.Spring = true;
             this.toolStripStatusLabel2.Text = "toolStripStatusLabel2";
             // 
@@ -542,19 +539,20 @@
             this.tableLayoutPanel1.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.tableLayoutPanel1.ColumnCount = 1;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Controls.Add(this.statusStrip1, 0, 2);
+            this.tableLayoutPanel1.Controls.Add(this.statusStrip1, 0, 3);
             this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel2, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel3, 0, 1);
+            this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel6, 0, 2);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 3;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 67F));
+            this.tableLayoutPanel1.RowCount = 4;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 60F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 283F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 8F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(1200, 900);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(960, 1200);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // tableLayoutPanel3
@@ -563,27 +561,25 @@
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel3.Controls.Add(this.tableLayoutPanel4, 0, 0);
             this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel3.Location = new System.Drawing.Point(3, 70);
+            this.tableLayoutPanel3.Location = new System.Drawing.Point(3, 63);
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
             this.tableLayoutPanel3.RowCount = 1;
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel3.Size = new System.Drawing.Size(1194, 805);
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(954, 829);
             this.tableLayoutPanel3.TabIndex = 4;
             // 
             // tableLayoutPanel4
             // 
-            this.tableLayoutPanel4.ColumnCount = 2;
+            this.tableLayoutPanel4.ColumnCount = 1;
             this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 362F));
             this.tableLayoutPanel4.Controls.Add(this.hWindowControl1, 0, 0);
-            this.tableLayoutPanel4.Controls.Add(this.tableLayoutPanel5, 1, 0);
             this.tableLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel4.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel4.Margin = new System.Windows.Forms.Padding(0);
             this.tableLayoutPanel4.Name = "tableLayoutPanel4";
             this.tableLayoutPanel4.RowCount = 1;
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel4.Size = new System.Drawing.Size(1194, 805);
+            this.tableLayoutPanel4.Size = new System.Drawing.Size(954, 829);
             this.tableLayoutPanel4.TabIndex = 7;
             // 
             // hWindowControl1
@@ -595,24 +591,37 @@
             this.hWindowControl1.Location = new System.Drawing.Point(0, 0);
             this.hWindowControl1.Margin = new System.Windows.Forms.Padding(0);
             this.hWindowControl1.Name = "hWindowControl1";
-            this.hWindowControl1.Size = new System.Drawing.Size(832, 805);
+            this.hWindowControl1.Size = new System.Drawing.Size(954, 829);
             this.hWindowControl1.TabIndex = 4;
-            this.hWindowControl1.WindowSize = new System.Drawing.Size(832, 805);
+            this.hWindowControl1.WindowSize = new System.Drawing.Size(954, 829);
             // 
-            // tableLayoutPanel5
+            // tableLayoutPanel6
             // 
-            this.tableLayoutPanel5.ColumnCount = 1;
-            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel5.Controls.Add(this.uiDataGridView1, 0, 0);
-            this.tableLayoutPanel5.Controls.Add(this.lab_log, 0, 1);
-            this.tableLayoutPanel5.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel5.Location = new System.Drawing.Point(835, 3);
-            this.tableLayoutPanel5.Name = "tableLayoutPanel5";
-            this.tableLayoutPanel5.RowCount = 2;
-            this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 77.61601F));
-            this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 22.38399F));
-            this.tableLayoutPanel5.Size = new System.Drawing.Size(356, 799);
-            this.tableLayoutPanel5.TabIndex = 5;
+            this.tableLayoutPanel6.ColumnCount = 2;
+            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 61.21593F));
+            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 38.78407F));
+            this.tableLayoutPanel6.Controls.Add(this.lab_log, 1, 0);
+            this.tableLayoutPanel6.Controls.Add(this.uiDataGridView1, 0, 0);
+            this.tableLayoutPanel6.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel6.Location = new System.Drawing.Point(3, 898);
+            this.tableLayoutPanel6.Name = "tableLayoutPanel6";
+            this.tableLayoutPanel6.RowCount = 1;
+            this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel6.Size = new System.Drawing.Size(954, 277);
+            this.tableLayoutPanel6.TabIndex = 5;
+            // 
+            // lab_log
+            // 
+            this.lab_log.BackColor = System.Drawing.Color.Black;
+            this.lab_log.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.lab_log.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lab_log.ForeColor = System.Drawing.Color.White;
+            this.lab_log.FormattingEnabled = true;
+            this.lab_log.ItemHeight = 12;
+            this.lab_log.Location = new System.Drawing.Point(587, 3);
+            this.lab_log.Name = "lab_log";
+            this.lab_log.Size = new System.Drawing.Size(364, 271);
+            this.lab_log.TabIndex = 7;
             // 
             // uiDataGridView1
             // 
@@ -648,7 +657,6 @@
             dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.White;
             dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.uiDataGridView1.DefaultCellStyle = dataGridViewCellStyle3;
-            this.uiDataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.uiDataGridView1.EnableHeadersVisualStyles = false;
             this.uiDataGridView1.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.uiDataGridView1.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(18)))), ((int)(((byte)(58)))), ((int)(((byte)(92)))));
@@ -677,7 +685,7 @@
             this.uiDataGridView1.SelectedIndex = -1;
             this.uiDataGridView1.ShowGridLine = true;
             this.uiDataGridView1.ShowRect = false;
-            this.uiDataGridView1.Size = new System.Drawing.Size(356, 620);
+            this.uiDataGridView1.Size = new System.Drawing.Size(584, 277);
             this.uiDataGridView1.StripeEvenColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(24)))), ((int)(((byte)(24)))));
             this.uiDataGridView1.StripeOddColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(24)))), ((int)(((byte)(24)))));
             this.uiDataGridView1.Style = Sunny.UI.UIStyle.Black;
@@ -707,19 +715,6 @@
             this.Column7.HeaderText = "线距离";
             this.Column7.Name = "Column7";
             this.Column7.Width = 76;
-            // 
-            // lab_log
-            // 
-            this.lab_log.BackColor = System.Drawing.Color.Black;
-            this.lab_log.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.lab_log.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lab_log.ForeColor = System.Drawing.Color.White;
-            this.lab_log.FormattingEnabled = true;
-            this.lab_log.ItemHeight = 12;
-            this.lab_log.Location = new System.Drawing.Point(3, 623);
-            this.lab_log.Name = "lab_log";
-            this.lab_log.Size = new System.Drawing.Size(350, 173);
-            this.lab_log.TabIndex = 7;
             // 
             // messageShow1
             // 
@@ -773,14 +768,13 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1200, 900);
+            this.ClientSize = new System.Drawing.Size(960, 1200);
             this.Controls.Add(this.tableLayoutPanel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "领先光学";
-            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.tableLayoutPanel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
@@ -790,7 +784,7 @@
             this.tableLayoutPanel1.PerformLayout();
             this.tableLayoutPanel3.ResumeLayout(false);
             this.tableLayoutPanel4.ResumeLayout(false);
-            this.tableLayoutPanel5.ResumeLayout(false);
+            this.tableLayoutPanel6.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.uiDataGridView1)).EndInit();
             this.ResumeLayout(false);
 
@@ -837,13 +831,13 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel4;
         private HalconDotNet.HWindowControl hWindowControl1;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel2;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel5;
         private Sunny.UI.UIDataGridView uiDataGridView1;
         private System.Windows.Forms.ListBox lab_log;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column5;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column6;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column7;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel6;
     }
 }
 

@@ -247,6 +247,7 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "切换产品";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "基准框";
             this.TopMost = true;
             this.Load += new System.EventHandler(this.切换产品_Load);

@@ -212,7 +212,7 @@ namespace WY_App.Utility
             //添加测量对象
             HOperatorSet.SetMetrologyModelImageSize(hv_MetrologyHandle, hv_Width, hv_Height);
             hv_Index.Dispose();
-            HOperatorSet.AddMetrologyObjectGeneric(hv_MetrologyHandle, "circle", hv_shapeParam, length, 3, 1, 20, new HTuple(), new HTuple(), out hv_Index);
+            HOperatorSet.AddMetrologyObjectGeneric(hv_MetrologyHandle, "circle", hv_shapeParam, length, 3, 1, 15, new HTuple(), new HTuple(), out hv_Index);
             //执行测量，获取边缘点集
             HOperatorSet.SetColor(hWindow, "yellow");
             HOperatorSet.ApplyMetrologyModel(hImage, hv_MetrologyHandle);
@@ -336,7 +336,7 @@ namespace WY_App.Utility
         /// <param name="Decetionrect2"></param>
         /// <param name="rect2Result"></param>
         /// <returns></returns>
-        public static bool DetectionMeasurePos(uint i,HWindow hWindow, HObject hImage,HRect1 hRect1, Rect2 Decetionrect2,ref Location rect2Result)
+        public static bool DetectionMeasurePos(int i,HWindow hWindow, HObject hImage,HRect1 hRect1, Rect2 Decetionrect2,ref Location rect2Result)
         {
             
             HOperatorSet.SetColor(hWindow, "green");
@@ -380,7 +380,7 @@ namespace WY_App.Utility
                 HOperatorSet.SetTposition(hWindow, hv_RowEdge1, hv_ColumnEdge1);
                 HOperatorSet.WriteString(hWindow, "点:" + i);
                 HOperatorSet.SetTposition(hWindow, 200 * i, 100);
-                HOperatorSet.WriteString(hWindow, "点:" + i+ "DY:" + rect2Result.Length1.ToString("0.000")+ "DX:" + rect2Result.Length2.ToString("0.000")+ "PO:" + rect2Result.Length3.ToString("0.000")+ "PL:" + rect2Result.Length4.ToString("0.000"));                
+                //HOperatorSet.WriteString(hWindow, "点:" + i+ "DY:" + rect2Result.Length1.ToString("0.000")+ "DX:" + rect2Result.Length2.ToString("0.000")+ "PO:" + rect2Result.Length3.ToString("0.000")+ "PL:" + rect2Result.Length4.ToString("0.000"));                
             }
             catch
             {
@@ -406,8 +406,121 @@ namespace WY_App.Utility
             hv_Distance.Dispose();
             return true;
         }
+        public static bool DetectionLocation(HWindow hv_ExpDefaultWinHandle, HObject ho_Image, HObject ho_SmoothedContours, HRect1 hRect1, ref List<Location> rect2Result)
+        {
+            HObject  ho_SortedContours;
+            HObject ho_Bisection_Contour;
 
-        public static bool DetectionLinePos( HWindow hv_ExpDefaultWinHandle, HObject ho_Image, HObject ho_SmoothedContours, HRect1 hRect1, ref Location[] rect2Result)
+            HTuple hv_Row3 = new HTuple();
+            HTuple hv_Column3 = new HTuple(), hv_Phi = new HTuple();
+            HTuple hv_Length1 = new HTuple(), hv_Length2 = new HTuple();
+            HTuple hv_Row = new HTuple(), hv_Col = new HTuple(), hv_contourNum = new HTuple();
+            HTuple hv_Index = new HTuple(), hv_beginPoint = new HTuple();
+            HTuple hv_Rowx = new HTuple(), hv_Colx = new HTuple();
+            HTuple hv_Length = new HTuple(), hv_Angle = new HTuple();
+            HOperatorSet.GenEmptyObj(out ho_SortedContours);
+            HOperatorSet.GenEmptyObj(out ho_Bisection_Contour);
+            HOperatorSet.SetLineWidth(hv_ExpDefaultWinHandle, 1);
+            
+            hv_Row.Dispose(); hv_Col.Dispose();
+            HOperatorSet.GetContourXld(ho_SmoothedContours, out hv_Row, out hv_Col);
+            ho_Bisection_Contour.Dispose();
+            HOperatorSet.GenEmptyObj(out ho_Bisection_Contour);
+            if ((int)(new HTuple((new HTuple(hv_Row.TupleLength())).TupleLess(Parameters.specifications.DetectionRect2Num))) != 0)
+            {
+                ho_SortedContours.Dispose();
+                ho_Bisection_Contour.Dispose();
+
+                hv_Row3.Dispose();
+                hv_Column3.Dispose();
+                hv_Phi.Dispose();
+                hv_Length1.Dispose();
+                hv_Length2.Dispose();
+                hv_Row.Dispose();
+                hv_Col.Dispose();
+                hv_contourNum.Dispose();
+                hv_Index.Dispose();
+                hv_beginPoint.Dispose();
+                hv_Rowx.Dispose();
+                hv_Colx.Dispose();
+                hv_Length.Dispose();
+                hv_Angle.Dispose();
+
+                return false;
+            }
+            hv_contourNum.Dispose();
+            using (HDevDisposeHelper dh = new HDevDisposeHelper())
+            {
+                hv_contourNum = (new HTuple(hv_Row.TupleLength()
+                    )) / Parameters.specifications.DetectionRect2Num;
+            }
+            for (hv_Index = 0; (int)hv_Index <= (int)(Parameters.specifications.DetectionRect2Num - 1); hv_Index = (int)hv_Index + 1)
+            {
+                hv_beginPoint.Dispose();
+                using (HDevDisposeHelper dh = new HDevDisposeHelper())
+                {
+                    hv_beginPoint = (hv_Index * hv_contourNum) - 1;
+                }
+                if ((int)(new HTuple(hv_beginPoint.TupleLess(0))) != 0)
+                {
+                    hv_beginPoint.Dispose();
+                    hv_beginPoint = 0;
+                }
+                using (HDevDisposeHelper dh = new HDevDisposeHelper())
+                {
+                    HOperatorSet.SetColor(hv_ExpDefaultWinHandle, "red");
+                    HOperatorSet.DispCross(hv_ExpDefaultWinHandle, hv_Row.TupleSelect(hv_beginPoint),
+                        hv_Col.TupleSelect(hv_beginPoint), 60, 0);
+
+                    Parameters.detectionSpec.decetionRect2[hv_Index].Row = hv_Row.TupleSelect(hv_beginPoint);
+                    Parameters.detectionSpec.decetionRect2[hv_Index].Colum = hv_Col.TupleSelect(hv_beginPoint);
+                    HTuple phi;
+                    HOperatorSet.AngleLx(Parameters.detectionSpec.decetionRect2[hv_Index].Row, Parameters.detectionSpec.decetionRect2[hv_Index].Colum,9192.16, 8793.99, out phi);
+
+                    Parameters.detectionSpec.decetionRect2[hv_Index].Phi = phi;
+                    phi.Dispose();
+                    Parameters.detectionSpec.decetionRect2[hv_Index].Length1 = 100;
+                    Parameters.detectionSpec.decetionRect2[hv_Index].Length2 = 20;
+
+                    Location location = new Location();
+
+                    location.Row = hv_Row.TupleSelect(hv_beginPoint).D * Parameters.specifications.PixelResolutionRow;
+                    location.Colum = hv_Col.TupleSelect(hv_beginPoint).D * Parameters.specifications.PixelResolutionColum;
+                    location.Length1 = Math.Abs(hv_Row.TupleSelect(hv_beginPoint).D - hRect1.Row1.D) * Parameters.specifications.PixelResolutionRow;
+                    location.Length2 = Math.Abs(hv_Col.TupleSelect(hv_beginPoint).D - hRect1.Colum1.D) * Parameters.specifications.PixelResolutionColum;
+                    location.Length3 = Math.Sqrt(location.Length1 * location.Length1 + location.Length2 * location.Length2);
+                    HTuple Length4 = new HTuple();
+                    HOperatorSet.DistancePl(hv_Row.TupleSelect(hv_beginPoint), hv_Col.TupleSelect(hv_beginPoint), hRect1.Row1, hRect1.Colum1, hRect1.Row2, hRect1.Colum2, out Length4);
+                    location.Length4 = Length4.D * Parameters.specifications.PixelResolutionColum;
+                    rect2Result.Add(location);
+                    
+                    HOperatorSet.SetColor(hv_ExpDefaultWinHandle, "green");
+                    HOperatorSet.SetTposition(hv_ExpDefaultWinHandle, hv_Row.TupleSelect(hv_beginPoint), hv_Col.TupleSelect(hv_beginPoint));
+                    HOperatorSet.WriteString(hv_ExpDefaultWinHandle, "点:" + (hv_Index.D + 1));
+                    HOperatorSet.SetTposition(hv_ExpDefaultWinHandle, 250 * (hv_Index + 1), 100);
+                    //HOperatorSet.WriteString(hv_ExpDefaultWinHandle, "点:" + (hv_Index+1) + "DY:" + rect2Result[hv_Index].Length1.ToString("0.000") + "DX:" + rect2Result[hv_Index].Length2.ToString("0.000") + "PO:" + rect2Result[hv_Index].Length3.ToString("0.000") + "PL:" + rect2Result[hv_Index].Length4.ToString("0.000"));
+                }
+           
+            }
+            
+            hv_Row3.Dispose();
+            hv_Column3.Dispose();
+            hv_Phi.Dispose();
+            hv_Length1.Dispose();
+            hv_Length2.Dispose();
+            hv_Row.Dispose();
+            hv_Col.Dispose();
+            hv_contourNum.Dispose();
+            hv_Index.Dispose();
+            hv_beginPoint.Dispose();
+            hv_Rowx.Dispose();
+            hv_Colx.Dispose();
+            hv_Length.Dispose();
+            hv_Angle.Dispose();
+            return true;
+
+        }
+        public static bool DetectionLinePos( HWindow hv_ExpDefaultWinHandle, HObject ho_Image, HObject ho_SmoothedContours, HRect1 hRect1, ref List<Location> rect2Result)
         {
             HOperatorSet.SetColor(hv_ExpDefaultWinHandle, "green");
             HOperatorSet.SetDraw(hv_ExpDefaultWinHandle, "margin");
@@ -435,7 +548,6 @@ namespace WY_App.Utility
             HOperatorSet.SetDraw(hv_ExpDefaultWinHandle, "margin");
             HTuple end_val23 = Parameters.specifications.DetectionRect2Num;
             HTuple step_val23 = 1;
-            rect2Result = new Location[end_val23+1];
             try
             {
                 for (hv_Index = 0; hv_Index.Continue(end_val23, step_val23); hv_Index = hv_Index.TupleAdd(step_val23))
@@ -454,22 +566,23 @@ namespace WY_App.Utility
                         Parameters.detectionSpec.decetionRect2[hv_Index].Row = hv_Row.TupleSelect(hv_Number * hv_Index);
                         Parameters.detectionSpec.decetionRect2[hv_Index].Colum = hv_Col.TupleSelect(hv_Number * hv_Index);
                         Parameters.detectionSpec.decetionRect2[hv_Index].Phi = (hv_Angles.TupleSelect(hv_Number * hv_Index)) + ((new HTuple(90)).TupleRad());
-                        Parameters.detectionSpec.decetionRect2[hv_Index].Length1 = 20;
+                        Parameters.detectionSpec.decetionRect2[hv_Index].Length1 = 30;
                         Parameters.detectionSpec.decetionRect2[hv_Index].Length2 = 10;
                     }
                     hv_RowEdge.Dispose(); hv_ColumnEdge.Dispose(); hv_Amplitude.Dispose(); hv_Distance.Dispose();
                     HOperatorSet.MeasurePos(ho_Image, hv_MeasureHandle, Parameters.detectionSpec.decetionRect2[0].simga, Parameters.detectionSpec.decetionRect2[0].阈值, Parameters.detectionSpec.decetionRect2[0].极性, "first",
                         out hv_RowEdge, out hv_ColumnEdge, out hv_Amplitude, out hv_Distance);
-                    
+                    Location location = new Location();
 
-                    rect2Result[hv_Index].Row = hv_RowEdge.D * Parameters.specifications.PixelResolutionRow;
-                    rect2Result[hv_Index].Colum = hv_ColumnEdge.D * Parameters.specifications.PixelResolutionColum;
-                    rect2Result[hv_Index].Length1 = Math.Abs(hv_RowEdge.D - hRect1.Row1.D) * Parameters.specifications.PixelResolutionRow;
-                    rect2Result[hv_Index].Length2 = Math.Abs(hv_ColumnEdge.D - hRect1.Colum1.D) * Parameters.specifications.PixelResolutionColum;
-                    rect2Result[hv_Index].Length3 = Math.Sqrt(rect2Result[hv_Index].Length1 * rect2Result[hv_Index].Length1 + rect2Result[hv_Index].Length2 * rect2Result[hv_Index].Length2);
+                    location.Row = hv_RowEdge.D * Parameters.specifications.PixelResolutionRow;
+                    location.Colum = hv_ColumnEdge.D * Parameters.specifications.PixelResolutionColum;
+                    location.Length1 = Math.Abs(hv_RowEdge.D - hRect1.Row1.D) * Parameters.specifications.PixelResolutionRow;
+                    location.Length2 = Math.Abs(hv_ColumnEdge.D - hRect1.Colum1.D) * Parameters.specifications.PixelResolutionColum;
+                    location.Length3 = Math.Sqrt(location.Length1 * location.Length1 + location.Length2 * location.Length2);
                     HTuple Length4 = new HTuple();
                     HOperatorSet.DistancePl(hv_RowEdge, hv_ColumnEdge, hRect1.Row1, hRect1.Colum1, hRect1.Row2, hRect1.Colum2, out Length4);
-                    rect2Result[hv_Index].Length4 = Length4.D * Parameters.specifications.PixelResolutionColum;
+                    location.Length4 = Length4.D * Parameters.specifications.PixelResolutionColum;
+                    rect2Result.Add(location);
                     using (HDevDisposeHelper dh = new HDevDisposeHelper())
                     {
                         HOperatorSet.SetColor(hv_ExpDefaultWinHandle, "red");
@@ -698,7 +811,8 @@ namespace WY_App.Utility
                 HOperatorSet.SetMetrologyModelImageSize(hv_MetrologyHandle, hv_Width, hv_Height);
                 hv_Index.Dispose();
                 HOperatorSet.AddMetrologyObjectGeneric(hv_MetrologyHandle, "line", hv_shapeParam, rect1.baseRect1[BaseNum].Length1, rect1.baseRect1[BaseNum].Length2, rect1.baseRect1[BaseNum].simga, rect1.baseRect1[BaseNum].阈值, new HTuple(), new HTuple(), out hv_Index);
-
+                HOperatorSet.SetMetrologyObjectParam(hv_MetrologyHandle, "all", "measure_transition", rect1.baseRect1[BaseNum].极性);
+                HOperatorSet.SetMetrologyObjectParam(hv_MetrologyHandle, "all", "num_measures", 20);
                 //执行测量，获取边缘点集
                 HOperatorSet.SetColor(hWindow, "yellow");
                 HOperatorSet.ApplyMetrologyModel(hImage, hv_MetrologyHandle);
